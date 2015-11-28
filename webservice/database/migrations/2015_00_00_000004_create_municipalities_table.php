@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of SmartGas.
+ * This file is part of SmartGas, an iOS app to find the best gas station nearby.
  *
  * (c) Fábio Santos <ffsantos92@gmail.com>
  * (c) Mateus Silva <mateusgsilva_@hotmail.com>
@@ -26,7 +26,7 @@ class CreateMunicipalitiesTable extends Migration
 
             $table->integer('district_id')->unsigned();
             $table->foreign('district_id')->references('id')->on('districts');
-            
+
             $table->timestamps();
         });
     }
