@@ -1,8 +1,7 @@
 <?php
 
 /*
- * This file is part of SmartGas,
- * an iOS app to find the best gas station nearby.
+ * This file is part of SmartGas, an iOS app to find the best gas station nearby.
  *
  * (c) Fábio Santos <ffsantos92@gmail.com>
  * (c) Mateus Silva <mateusgsilva_@hotmail.com>

@@ -11,6 +11,10 @@ import Foundation
 
 class Archiver {
     
+//    IMPORTANT:
+//    Optimize save process because image save is an heavy process
+//
+    
     func writeVehicle(vehicle: Vehicle) {
         //Need a review
         guard let arrayVehicle = NSUserDefaults().dataForKey("vehiclesArray") else {
@@ -27,13 +31,9 @@ class Archiver {
     }
     
     
-    func saveToNSUserDefaults(data: AnyObject, key: String) {
-        
-        let nsArrayVehicle = NSKeyedArchiver.archivedDataWithRootObject(data)
-        NSUserDefaults().setObject(nsArrayVehicle, forKey: key)
+    func updateVehicle(vehicles: [Vehicle]) {
+        saveToNSUserDefaults(vehicles, key: "vehiclesArray")
     }
-    
-    
     
     func readVehicle() -> [Vehicle] {
         
@@ -44,5 +44,13 @@ class Archiver {
         }
         
         return NSKeyedUnarchiver.unarchiveObjectWithData(arrayOfObjectsUnarchivedData) as? [Vehicle] ?? vehicleArray
+    }
+    
+    
+    //Helper funcs
+    private func saveToNSUserDefaults(data: AnyObject, key: String) {
+        
+        let nsArrayVehicle = NSKeyedArchiver.archivedDataWithRootObject(data)
+        NSUserDefaults().setObject(nsArrayVehicle, forKey: key)
     }
 }

@@ -20,6 +20,7 @@
 		698849261C00CC4700B7247B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 698849241C00CC4700B7247B /* LaunchScreen.storyboard */; };
 		698849281C00CC9500B7247B /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698849271C00CC9500B7247B /* Vehicle.swift */; };
 		6988492F1C00DA8600B7247B /* CreateVehicleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6988492E1C00DA8600B7247B /* CreateVehicleTableViewController.swift */; };
+		699A3D9A1C0A3797006917D0 /* FuelTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699A3D991C0A3796006917D0 /* FuelTypeTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		698849251C00CC4700B7247B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		698849271C00CC9500B7247B /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		6988492E1C00DA8600B7247B /* CreateVehicleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateVehicleTableViewController.swift; sourceTree = "<group>"; };
+		699A3D991C0A3796006917D0 /* FuelTypeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelTypeTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 		6988492B1C00CCC600B7247B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				699A3D991C0A3796006917D0 /* FuelTypeTableViewController.swift */,
 				692190881BFFFFEB00C581F2 /* FuelTableViewController.swift */,
 				6988492E1C00DA8600B7247B /* CreateVehicleTableViewController.swift */,
 				692EC6E81C07CB6500EEC1FA /* VehicleTableViewController.swift */,
@@ -299,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				692EC6EB1C07D24300EEC1FA /* VehicleTableViewCell.swift in Sources */,
+				699A3D9A1C0A3797006917D0 /* FuelTypeTableViewController.swift in Sources */,
 				698849281C00CC9500B7247B /* Vehicle.swift in Sources */,
 				69087FEB1C07B6AA007DAD29 /* Archiver.swift in Sources */,
 				693648211BFCEB8E00C7EC8F /* ViewController.swift in Sources */,
