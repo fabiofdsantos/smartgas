@@ -10,17 +10,15 @@ import UIKit
 
 class VehicleTableViewCell: UITableViewCell {
     @IBOutlet weak var vehicleImageView: UIImageView!
-    @IBOutlet weak var makeLabel: UILabel!
-    @IBOutlet weak var modelLabel: UILabel!
+    @IBOutlet weak var makeModelLabel: UILabel!
     @IBOutlet weak var fuelLabel: UILabel!
     @IBOutlet weak var consumeLabel: UILabel!
     
     func setVehicle (vehicle:Vehicle) {
         self.vehicleImageView.image = vehicle.image
-        /*self.makeLabel.text = vehicle.make
-        self.modelLabel.text = vehicle.model
+        self.makeModelLabel.text = vehicle.make + " " + vehicle.model
         self.fuelLabel.text = vehicle.fuel
-        self.consumeLabel.text = "\(vehicle.consume)"*/
+        self.consumeLabel.text = "\(vehicle.consume)"
     }
     
     
