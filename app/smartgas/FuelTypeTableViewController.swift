@@ -1,22 +1,17 @@
 //
-//  VehicleTableViewController.swift
+//  FuelTypeTableViewController.swift
 //  smartgas
 //
-//  Created by Mateus Silva on 26/11/15.
+//  Created by Mateus Silva on 28/11/15.
 //  Copyright © 2015 Mateus Silva. All rights reserved.
 //
 
 import UIKit
 
-class VehicleTableViewController: UITableViewController {
-    
-    var vehicles:[Vehicle]?
+class FuelTypeTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //Add working edit button to the left of the navigation bar
-        navigationItem.leftBarButtonItem = editButtonItem()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -29,15 +24,6 @@ class VehicleTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        self.vehicles = Archiver().readVehicle()
-        
-        //Review
-        NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-            self.tableView.reloadData()
-        })
-    }
 
     // MARK: - Table view data source
 
@@ -48,47 +34,29 @@ class VehicleTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return vehicles?.count ?? 0
+        return 3
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let section = indexPath.section
+        let numberOfRows = tableView.numberOfRowsInSection(section)
+        for row in 0..<numberOfRows {
+            if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: section)) {
+                cell.accessoryType = row == indexPath.row ? .Checkmark : .None
+            }
+        }
+        tableView.reloadData();
     }
 
-    
+    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("vehicleCell", forIndexPath: indexPath) as! VehicleTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
 
-        let vehicle = vehicles![indexPath.row]
-        cell.setVehicle(vehicle)
+        // Configure the cell...
 
         return cell
     }
-    
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        switch editingStyle {
-            case .Delete:
-                // remove the deleted item from the model
-                self.vehicles!.removeAtIndex(indexPath.row)
-                
-                // remove the deleted item from the `UITableView`
-                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            
-            default:
-                return
-        }
-    }
-    
-    override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
-        // remove the dragged row's model
-        let val = self.vehicles!.removeAtIndex(sourceIndexPath.row)
-        
-        // insert it into the new position
-        self.vehicles!.insert(val, atIndex: destinationIndexPath.row)
-    }
-
-    
-    
-    //Review
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        Archiver().updateVehicle(vehicles!)
-    }
+    */
 
     /*
     // Override to support conditional editing of the table view.
