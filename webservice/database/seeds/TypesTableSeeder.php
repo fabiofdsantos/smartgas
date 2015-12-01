@@ -20,18 +20,17 @@ class TypesTableSeeder extends Seeder
         DB::table('types')->delete();
 
         $types = [
-            ['value' => 'Gasóleo simples'],
-            ['value' => 'Gasóleo'],
-            ['value' => 'Gasóleo especial'],
-            ['value' => 'Gasóleo colorido'],
-            ['value' => 'Gasolina simples 95'],
-            ['value' => 'Gasolina 95'],
-            ['value' => 'Gasolina especial 95'],
-            ['value' => 'Gasolina 98'],
-            ['value' => 'Gasolina especial 98'],
-            ['value' => 'GPL'],
-            ['value' => 'GNC'],
-            ['value' => 'GNL'],
+            ['value' => 'Diesel simple'],
+            ['value' => 'Diesel'],
+            ['value' => 'Diesel special'],
+            ['value' => 'Diesel colorful'],
+            ['value' => 'Gasoline simple 95'],
+            ['value' => 'Gasoline 95'],
+            ['value' => 'Gasoline special 95'],
+            ['value' => 'Gasoline 98'],
+            ['value' => 'Gasoline special 98'],
+            ['value' => 'LPG'],
+            ['value' => 'LNG'],
         ];
 
         DB::table('types')->insert($types);
