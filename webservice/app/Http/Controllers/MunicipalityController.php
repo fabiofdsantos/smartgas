@@ -13,7 +13,7 @@
 
 namespace App\Http\Controllers;
 
-class MunicipalitiesController extends Controller
+class MunicipalityController extends Controller
 {
     /**
      * Display a listing of the resource.
