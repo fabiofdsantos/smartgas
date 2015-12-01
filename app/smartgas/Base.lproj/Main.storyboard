@@ -133,16 +133,16 @@
         <scene sceneID="rQo-e3-hOh">
             <objects>
                 <tableViewController title="Fuel Type" id="hzp-Go-v4b" customClass="FuelTypeTableViewController" customModule="smartgas" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="MuY-xL-MyX">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="MuY-xL-MyX">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection id="Ub2-fA-Mfb">
+                            <tableViewSection id="mIt-cA-dL8">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="364-yA-iru" style="IBUITableViewCellStyleDefault" id="fnt-8g-1cw">
-                                        <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="99" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fnt-8g-1cw" id="n4x-N8-YUW">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -162,7 +162,7 @@
                                         <animations/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Rlz-BX-xcF" style="IBUITableViewCellStyleDefault" id="Rqo-LQ-C9K">
-                                        <rect key="frame" x="0.0" y="108" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="143" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rqo-LQ-C9K" id="QNf-Ix-7nB">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -182,7 +182,7 @@
                                         <animations/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="fcg-qw-tCp" style="IBUITableViewCellStyleDefault" id="DeH-QX-ZTD">
-                                        <rect key="frame" x="0.0" y="152" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="187" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DeH-QX-ZTD" id="WFF-ap-vxW">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -209,7 +209,7 @@
                             <outlet property="delegate" destination="hzp-Go-v4b" id="4O9-Q4-6ic"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="LQ5-bO-11L"/>
+                    <navigationItem key="navigationItem" title="Fuel Type" id="LQ5-bO-11L"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="noZ-Xc-G3L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

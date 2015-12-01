@@ -43,6 +43,9 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
     @IBOutlet weak var makeTextField: UITextField!
     @IBOutlet weak var modelTextField: UITextField!
     @IBOutlet weak var carImageView: UIImageView!
+    @IBOutlet weak var fuelTypeLabel: UILabel!
+    
+    var vehicle: Vehicle = Vehicle()
     
 
     @IBAction func cancelBarButton(sender: UIBarButtonItem) {
@@ -50,7 +53,19 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
     }
     
     @IBAction func saveBarButton(sender: UIBarButtonItem) {
-        Archiver().writeVehicle(Vehicle(make: makeTextField.text!, model: modelTextField.text!, image: carImageView.image!))
+        if let makeTF = makeTextField.text {
+            vehicle.make = makeTF
+        }
+        
+        if let modelTF = modelTextField.text {
+            vehicle.model = modelTF
+        }
+        
+        if let imageIV = carImageView.image {
+            vehicle.image = imageIV
+        }
+        
+        Archiver().writeVehicle(vehicle)
         
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -73,16 +88,25 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("\(indexPath.section)" + "-" + "\(indexPath.row)")
-        
         let tableCell = tableView.cellForRowAtIndexPath(indexPath)
-        
-        
+            
         for view in tableCell!.contentView.subviews {
             if let textField = view as? UITextField {
                 textField.select(textField)
-                print("Selected")
             }
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let nextView:FuelTypeTableViewController = segue.destinationViewController as! FuelTypeTableViewController {
+            nextView.fuelType = vehicle.fuel
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        print(vehicle.fuel)
+        if let fuelTL = vehicle.fuel {
+            fuelTypeLabel.text = fuelTL
         }
     }
 
