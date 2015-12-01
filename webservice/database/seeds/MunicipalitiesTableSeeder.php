@@ -11,24 +11,20 @@
  * file that was distributed with this source code.
  */
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class MunicipalitiesTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run()
     {
-        Model::unguard();
+        DB::table('municipalities')->delete();
 
-        $this->call('BrandsTableSeeder');
-        $this->call('TypesTableSeeder');
-        $this->call('DistrictsTableSeeder');
-        $this->call('MunicipalitiesTableSeeder');
-        $this->call('StationsTableSeeder');
+        $leiria_district_id = app('db')->table('districts')->where('value', 'Leiria')->pluck('id');
 
-        Model::reguard();
+        $municipalities = [
+            ['value' => 'Leiria', 'district_id' => $leiria_district_id],
+        ];
+
+        DB::table('municipalities')->insert($municipalities);
     }
 }

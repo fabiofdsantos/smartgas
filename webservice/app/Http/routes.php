@@ -14,3 +14,18 @@
 $app->get('/', function () use ($app) {
     return $app->welcome();
 });
+
+/* Brands */
+$app->get('brands', 'BrandController@index');
+
+/* Districts */
+$app->get('districts', 'DistrictController@index');
+
+/* Municipalities */
+$app->get('municipalities', 'MunicipalityController@index');
+
+/* Stations */
+$app->get('stations', 'StationController@index');
+
+/* Types */
+$app->get('types', 'TypeController@index');
