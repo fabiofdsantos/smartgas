@@ -9,6 +9,13 @@
 import UIKit
 
 class CreateVehicleTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    @IBOutlet weak var makeTextField: UITextField!
+    @IBOutlet weak var modelTextField: UITextField!
+    @IBOutlet weak var carImageView: UIImageView!
+    @IBOutlet weak var fuelTypeLabel: UILabel!
+    
+    var vehicle: Vehicle = Vehicle()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,13 +47,6 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
         return 0
     }
     */
-    @IBOutlet weak var makeTextField: UITextField!
-    @IBOutlet weak var modelTextField: UITextField!
-    @IBOutlet weak var carImageView: UIImageView!
-    @IBOutlet weak var fuelTypeLabel: UILabel!
-    
-    var vehicle: Vehicle = Vehicle()
-    
 
     @IBAction func cancelBarButton(sender: UIBarButtonItem) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -98,8 +98,9 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print("prepareForSegue")
         if let nextView:FuelTypeTableViewController = segue.destinationViewController as! FuelTypeTableViewController {
-            nextView.fuelType = vehicle.fuel
+            nextView.vehicle = vehicle
         }
     }
     

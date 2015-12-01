@@ -10,10 +10,24 @@ import UIKit
 
 class FuelTypeTableViewController: UITableViewController {
     
-    var fuelType:String?
+    var vehicle:Vehicle?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /*if let fuel = vehicle?.fuel {
+            let sections = tableView.numberOfSections
+            for section in 1...sections {
+                let numberOfRows = tableView.numberOfRowsInSection(section)
+                for row in 0..<numberOfRows {
+                    if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: section)) {
+                        if cell.textLabel!.text == fuel {
+                            cell.accessoryType = .Checkmark
+                        }
+                    }
+                }
+            }
+        }*/
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -46,23 +60,14 @@ class FuelTypeTableViewController: UITableViewController {
             if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: section)) {
                 cell.accessoryType = row == indexPath.row ? .Checkmark : .None
                 if cell.accessoryType == .Checkmark {
-                    print(cell.textLabel?.text)
-                    fuelType = cell.textLabel?.text
+                    if let fuelText = cell.textLabel?.text {
+                        vehicle?.fuel = fuelText
+                    }
                 }
             }
         }
         tableView.reloadData();
     }
-    
-    override func viewWillDisappear(animated: Bool) {
-        /*if let destView: CreateVehicleTableViewController = navigationController?.parentViewController as! CreateVehicleTableViewController {
-            destView.vehicle.fuel = fuelType
-            print("WORKS!!!")
-        }*/
-        print("viewWill")
-    }
-    
-    
 
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
