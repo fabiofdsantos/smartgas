@@ -31,7 +31,7 @@ class CreateStationsTable extends Migration
             $table->integer('brand_id')->unsigned();
             $table->foreign('brand_id')->references('id')->on('brands');
 
-            $table->integer('schedule_id')->unsigned();
+            $table->integer('schedule_id')->unsigned()->nullable();
             $table->foreign('schedule_id')->references('id')->on('schedules');
 
             $table->integer('district_id')->unsigned();
