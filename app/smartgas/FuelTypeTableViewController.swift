@@ -15,20 +15,6 @@ class FuelTypeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*if let fuel = vehicle?.fuel {
-            let sections = tableView.numberOfSections
-            for section in 1...sections {
-                let numberOfRows = tableView.numberOfRowsInSection(section)
-                for row in 0..<numberOfRows {
-                    if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: section)) {
-                        if cell.textLabel!.text == fuel {
-                            cell.accessoryType = .Checkmark
-                        }
-                    }
-                }
-            }
-        }*/
-        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -50,7 +36,7 @@ class FuelTypeTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 3
+        return FuelTypes.count()
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -69,15 +55,17 @@ class FuelTypeTableViewController: UITableViewController {
         tableView.reloadData();
     }
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("fuelTypeCell", forIndexPath: indexPath) as! FuelTypeTableViewCell
+        
+        let fuelType = FuelTypes.allValues()[indexPath.row]
+        cell.setFuel(fuelType)
+        if vehicle?.fuel == FuelTypes.allValues()[indexPath.row] {
+            cell.accessoryType = .Checkmark
+        }
+        
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.

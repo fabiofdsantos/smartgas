@@ -98,14 +98,12 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("prepareForSegue")
         if let nextView:FuelTypeTableViewController = segue.destinationViewController as! FuelTypeTableViewController {
             nextView.vehicle = vehicle
         }
     }
     
     override func viewWillAppear(animated: Bool) {
-        print(vehicle.fuel)
         if let fuelTL = vehicle.fuel {
             fuelTypeLabel.text = fuelTL
         }
