@@ -375,7 +375,6 @@
         <!--Fuel-->
         <scene sceneID="CYO-rq-Qhk">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="p1n-M6-Cba" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="QtO-bC-KHH" customClass="FuelStationTableViewController" customModule="smartgas" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="151" sectionHeaderHeight="28" sectionFooterHeight="28" id="g66-0S-qdS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
@@ -466,13 +465,13 @@
                     <tabBarItem key="tabBarItem" title="Fuel" image="fuelIcon" selectedImage="fuelIconFilled" id="42i-4l-3y8" userLabel="Tab Bar Fuel"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p1n-M6-Cba" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-830" y="-491"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="IQI-1U-Tvh">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4ap-Hn-ca8" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController id="Pv5-06-Sep" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="zau-hw-THy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -485,6 +484,7 @@
                         <segue destination="uOd-dm-x1j" kind="relationship" relationship="viewControllers" id="nov-0S-lgM"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4ap-Hn-ca8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1703" y="-102"/>
         </scene>
