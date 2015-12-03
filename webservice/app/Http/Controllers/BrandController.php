@@ -24,6 +24,6 @@ class BrandController extends Controller
     {
         $brands = app('db')->table('brands')->get();
 
-        return response()->json($brands);
+        return response()->json(['brands' => $brands], 200);
     }
 }
