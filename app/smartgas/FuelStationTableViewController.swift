@@ -9,9 +9,11 @@
 import UIKit
 import CoreLocation
 
-class FuelStationTableViewController: UITableViewController {
+class FuelStationTableViewController: UITableViewController, CLLocationManagerDelegate {
     
     var fuelStations:[FuelStation]?
+    let locationManager = CLLocationManager()
+    var currentLocation = CLLocationCoordinate2D()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +58,25 @@ class FuelStationTableViewController: UITableViewController {
         
         return cell
     }
+    
+    func locationInit() {
+        locationManager.delegate = self
+        UIDevice.currentDevice().batteryMonitoringEnabled = true
+        if UIDevice.currentDevice().batteryState == UIDeviceBatteryState.Charging || UIDevice.currentDevice().batteryState == UIDeviceBatteryState.Full {
+            locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        } else {
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        }
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.requestWhenInUseAuthorization()
+    }
+    
+    
+    /*
+    *Criar evento para trocar tipo de localizaçao consoante a mudança do estado de bateria
+    */
+    
+    
 
     /*
     // Override to support conditional editing of the table view.

@@ -11,7 +11,7 @@ import Foundation
 class FuelStationClient {
     
     static func getAllFuelStations(completionHandler: ([FuelStation]?) -> Void) {
-        guard let url = NSURL(string: "https://maps.googleapis.com/maps/api/geocode/json?address=2420-337") else {
+        guard let url = NSURL(string: "http://46.101.79.241/stations") else {
             return
         }
         
@@ -30,9 +30,7 @@ class FuelStationClient {
             if let jsonResponse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary {
                 var fuelStations = [FuelStation]()
                 
-                print ("parse")
-                
-                if let jsonSearch = jsonResponse.objectForKey("") as? NSArray {
+                if let jsonSearch = jsonResponse.objectForKey("stations") as? NSArray {
                     for (var i = 0; i < jsonSearch.count; i++) {
                         if let jsonFuelStation = jsonSearch.objectAtIndex(i) as? NSDictionary {
                             let title = jsonFuelStation.objectForKey("title") as! String
