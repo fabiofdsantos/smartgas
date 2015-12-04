@@ -22,8 +22,8 @@ class StationsTableSeeder extends Seeder
         $stations = [
             'title'           => 'E.S. Leiria Sul',
             'address'         => 'Rot. Variante 2400-140 - Leiria - Qtª da Taborda',
-            'latitude'        => '39.73564',
-            'longitude'       => '-8.79968',
+            'latitude'        => 39.73564,
+            'longitude'       => -8.79968,
             'brand_id'        => app('db')->table('brands')->where('value', 'Repsol')->pluck('id'),
             'schedule_id'     => null,
             'district_id'     => app('db')->table('districts')->where('value', 'Leiria')->pluck('id'),
