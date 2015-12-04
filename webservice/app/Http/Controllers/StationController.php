@@ -24,6 +24,6 @@ class StationController extends Controller
     {
         $stations = app('db')->table('stations')->get();
 
-        return response()->json($stations);
+        return response()->json(['stations' => $stations], 200);
     }
 }

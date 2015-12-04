@@ -24,6 +24,6 @@ class TypeController extends Controller
     {
         $types = app('db')->table('types')->get();
 
-        return response()->json($types);
+        return response()->json(['types' => $types], 200);
     }
 }
