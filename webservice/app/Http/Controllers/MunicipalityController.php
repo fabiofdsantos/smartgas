@@ -24,7 +24,6 @@ class MunicipalityController extends Controller
     {
         $municipalities = app('db')->table('municipalities')->get();
 
-        return response()->json(['municipalities' => $municipalities], 200, [], JSON_NUMERIC
-_CHECK);
+        return response()->json(['municipalities' => $municipalities], 200, [], JSON_NUMERIC_CHECK);
     }
 }
