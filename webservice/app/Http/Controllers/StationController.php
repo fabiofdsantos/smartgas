@@ -24,6 +24,7 @@ class StationController extends Controller
     {
         $stations = app('db')->table('stations')->get();
 
-        return response()->json(['stations' => $stations], 200);
+        //return response()->json(['stations' => $stations], 200);
+        return response(json_encode(App::make('TranslaterController')->iterative($stations)));
     }
 }
