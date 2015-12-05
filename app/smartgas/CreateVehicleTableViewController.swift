@@ -19,6 +19,10 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Solution for keyboard problem
+        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 232, 0)
+        self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(5, 0, 100, 0)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
