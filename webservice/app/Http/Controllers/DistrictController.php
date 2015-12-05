@@ -24,6 +24,7 @@ class DistrictController extends Controller
     {
         $districts = app('db')->table('district')->get();
 
-        return response()->json(['districts' => $districts], 200);
+        return response()->json(['districts' => $districts], 200, [], JSON_NUMERIC
+_CHECK);
     }
 }

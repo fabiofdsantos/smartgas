@@ -25,8 +25,8 @@ class CreateStationsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('address');
-            $table->float('latitude');
-            $table->float('longitude');
+            $table->double('latitude', 17, 14);
+            $table->double('longitude', 17, 14);
 
             $table->integer('brand_id')->unsigned();
             $table->foreign('brand_id')->references('id')->on('brands');

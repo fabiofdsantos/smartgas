@@ -11,8 +11,8 @@ import Foundation
 class FuelStation: NSObject, NSCoding {
     var title: String
     var address: String
-    var latitude: Float?
-    var longitude: Float?
+    var latitude: Double?
+    var longitude: Double?
     var brandId: Int?
     var districtId: Int?
     var municipalityId: Int?
@@ -24,7 +24,7 @@ class FuelStation: NSObject, NSCoding {
         self.address = address
     }
     
-    init(title: String, address: String, latitude: Float, longitude: Float, brandId: Int, districtId: Int, municipalityId: Int){
+    init(title: String, address: String, latitude: Double, longitude: Double, brandId: Int, districtId: Int, municipalityId: Int){
         self.title = title
         self.address = address
         self.latitude = latitude
@@ -45,8 +45,8 @@ class FuelStation: NSObject, NSCoding {
     required init?(coder decoder: NSCoder) {
         title = decoder.decodeObjectForKey("title") as! String
         address = decoder.decodeObjectForKey("address") as! String
-        latitude = decoder.decodeObjectForKey("latitude") as? Float ?? 0.0
-        longitude = decoder.decodeObjectForKey("longitude") as? Float ?? 0.0
+        latitude = decoder.decodeObjectForKey("latitude") as? Double ?? 0.0
+        longitude = decoder.decodeObjectForKey("longitude") as? Double ?? 0.0
         brandId = decoder.decodeObjectForKey("brandId") as? Int ?? 0
         districtId = decoder.decodeObjectForKey("districtId") as? Int ?? 0
         municipalityId = decoder.decodeObjectForKey("municipalityId") as? Int ?? 0
@@ -55,8 +55,8 @@ class FuelStation: NSObject, NSCoding {
     func encodeWithCoder(coder: NSCoder) {
         coder.encodeObject(title, forKey: "title")
         coder.encodeObject(address, forKey: "address")
-        coder.encodeFloat(latitude ?? 0.0, forKey: "latitude")
-        coder.encodeFloat(longitude ?? 0.0, forKey: "longitude")
+        coder.encodeDouble(latitude ?? 0.0, forKey: "latitude")
+        coder.encodeDouble(longitude ?? 0.0, forKey: "longitude")
         coder.encodeInteger(brandId ?? 0, forKey: "brandId")
         coder.encodeInteger(districtId ?? 0, forKey: "districtId")
         coder.encodeInteger(municipalityId ?? 0, forKey: "municipalityId")

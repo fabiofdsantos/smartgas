@@ -35,8 +35,8 @@ class FuelStationClient {
                         if let jsonFuelStation = jsonSearch.objectAtIndex(i) as? NSDictionary {
                             let title = jsonFuelStation.objectForKey("title") as! String
                             let address = jsonFuelStation.objectForKey("address") as! String
-                            let latitude = jsonFuelStation.objectForKey("latitude") as! Float
-                            let longitude = jsonFuelStation.objectForKey("longitude") as! Float
+                            let latitude = jsonFuelStation.objectForKey("latitude") as! Double
+                            let longitude = jsonFuelStation.objectForKey("longitude") as! Double
                             let brandId = jsonFuelStation.objectForKey("brand_id") as! Int
                             let districtId = jsonFuelStation.objectForKey("district_id") as! Int
                             let municipalityId  = jsonFuelStation.objectForKey("municipality_id") as! Int
