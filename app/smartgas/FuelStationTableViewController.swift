@@ -18,13 +18,14 @@ class FuelStationTableViewController: UITableViewController, CLLocationManagerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-            
         FuelStationClient.getAllFuelStations({ (fuelStations) -> Void in
             self.fuelStations = fuelStations
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 self.tableView.reloadData()
             })
         })
+        
+        locationInit()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -62,6 +63,7 @@ class FuelStationTableViewController: UITableViewController, CLLocationManagerDe
     func locationInit() {
         locationManager.delegate = self
         UIDevice.currentDevice().batteryMonitoringEnabled = true
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "batteryStateDidChange:", name: UIDeviceBatteryStateDidChangeNotification, object: nil)
         if UIDevice.currentDevice().batteryState == UIDeviceBatteryState.Charging || UIDevice.currentDevice().batteryState == UIDeviceBatteryState.Full {
             locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         } else {
@@ -70,6 +72,32 @@ class FuelStationTableViewController: UITableViewController, CLLocationManagerDe
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.requestWhenInUseAuthorization()
     }
+    
+    func batteryStateDidChange(notification: NSNotification) {
+        print("BATTERY STATE CHANGE")
+    }
+    
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print ("NEW LOCATION")
+        let locationObj = locations.last
+        let coord = locationObj?.coordinate
+        if let c = coord {
+            currentLocation = c
+            print("lat: \(c.latitude) long:\(c.longitude)")
+            //defaults.setDouble(currentLocation.latitude, forKey: "latitude")
+            //defaults.setDouble(currentLocation.longitude, forKey: "longitude")
+        }
+        
+    }
+    
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        
+        locationManager.startUpdatingLocation()
+        
+    }
+    
+    
     
     
     /*
