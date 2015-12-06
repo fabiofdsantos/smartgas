@@ -26,4 +26,18 @@ class DistrictController extends Controller
 
         return response()->json(['districts' => $districts], 200, [], JSON_NUMERIC_CHECK);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function show($id)
+    {
+        $district = app('db')->table('districts')->where('id', $id)->first();
+
+        return response()->json(['district' => $district], 200, [], JSON_NUMERIC_CHECK);
+    }
 }

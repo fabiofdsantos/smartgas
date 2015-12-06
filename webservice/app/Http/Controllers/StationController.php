@@ -26,4 +26,18 @@ class StationController extends Controller
 
         return response()->json(['stations' => $stations], 200, [], JSON_NUMERIC_CHECK);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function show($id)
+    {
+        $station = app('db')->table('stations')->where('id', $id)->first();
+
+        return response()->json(['station' => $station], 200, [], JSON_NUMERIC_CHECK);
+    }
 }
