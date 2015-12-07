@@ -23,6 +23,7 @@
 		69954E021C0FC393000B4778 /* FuelStationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69954E011C0FC393000B4778 /* FuelStationTableViewController.swift */; };
 		69954E041C0FC58B000B4778 /* FuelStationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69954E031C0FC58B000B4778 /* FuelStationTableViewCell.swift */; };
 		699A3D9A1C0A3797006917D0 /* FuelTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699A3D991C0A3796006917D0 /* FuelTypeTableViewController.swift */; };
+		69AE25411C1638C100467288 /* MathClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AE25401C1638C100467288 /* MathClient.swift */; };
 		69EBD7E71C0F73620078B9E1 /* FuelTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EBD7E61C0F73620078B9E1 /* FuelTypes.swift */; };
 		69EBD7E91C0F77710078B9E1 /* FuelTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EBD7E81C0F77710078B9E1 /* FuelTypeTableViewCell.swift */; };
 		69EBD7EC1C0F98810078B9E1 /* FuelStationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EBD7EB1C0F98810078B9E1 /* FuelStationClient.swift */; };
@@ -69,6 +70,7 @@
 		69954E011C0FC393000B4778 /* FuelStationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelStationTableViewController.swift; sourceTree = "<group>"; };
 		69954E031C0FC58B000B4778 /* FuelStationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelStationTableViewCell.swift; sourceTree = "<group>"; };
 		699A3D991C0A3796006917D0 /* FuelTypeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelTypeTableViewController.swift; sourceTree = "<group>"; };
+		69AE25401C1638C100467288 /* MathClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathClient.swift; sourceTree = "<group>"; };
 		69EBD7E61C0F73620078B9E1 /* FuelTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelTypes.swift; sourceTree = "<group>"; };
 		69EBD7E81C0F77710078B9E1 /* FuelTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelTypeTableViewCell.swift; sourceTree = "<group>"; };
 		69EBD7EB1C0F98810078B9E1 /* FuelStationClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelStationClient.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				69EBD7EB1C0F98810078B9E1 /* FuelStationClient.swift */,
+				69AE25401C1638C100467288 /* MathClient.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				6936481F1BFCEB8E00C7EC8F /* AppDelegate.swift in Sources */,
 				69EBD7EE1C0F9C170078B9E1 /* FuelStation.swift in Sources */,
 				69EBD7EC1C0F98810078B9E1 /* FuelStationClient.swift in Sources */,
+				69AE25411C1638C100467288 /* MathClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

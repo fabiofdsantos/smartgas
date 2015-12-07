@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateVehicleTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CreateVehicleTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var makeTextField: UITextField!
     @IBOutlet weak var modelTextField: UITextField!
@@ -21,12 +21,24 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
         super.viewDidLoad()
 
         self.setKeyboardHelper()
+        self.keyboardDismisser()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    func keyboardDismisser () {
+        makeTextField.delegate = self
+        modelTextField.delegate = self
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("dismissKeyboard")))
+    }
+    
+    func dismissKeyboard () {
+        makeTextField.resignFirstResponder()
+        modelTextField.resignFirstResponder()
     }
     
     func setKeyboardHelper() {
@@ -46,8 +58,6 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
     }
     
     func animateToKeyboardHeight(kbHeight: CGFloat, duration: Double) {
-        //print("HEIGHT: \(kbHeight)\nDURANTION: \(duration)")
-        //print("TOP: \(self.tableView.contentInset.top)\nBOTTOM: \(self.tableView.contentInset.bottom)\nLEFT: \(self.tableView.contentInset.left)\nRIGHT: \(self.tableView.contentInset.left)\n")
         UIView.animateWithDuration(duration, animations: {
             self.tableView.contentInset = UIEdgeInsetsMake(self.tableView.contentInset.top, self.tableView.contentInset.left, kbHeight, self.tableView.contentInset.left)
             self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(self.tableView.contentInset.top, self.tableView.contentInset.left, kbHeight, self.tableView.contentInset.left)
