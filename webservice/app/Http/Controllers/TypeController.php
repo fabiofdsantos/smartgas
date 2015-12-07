@@ -26,4 +26,18 @@ class TypeController extends Controller
 
         return response()->json(['types' => $types], 200, [], JSON_NUMERIC_CHECK);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function show($id)
+    {
+        $type = app('db')->table('types')->where('id', $id)->first();
+
+        return response()->json(['type' => $type], 200, [], JSON_NUMERIC_CHECK);
+    }
 }

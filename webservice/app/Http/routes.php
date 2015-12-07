@@ -17,15 +17,20 @@ $app->get('/', function () use ($app) {
 
 /* Brands */
 $app->get('brands', 'BrandController@index');
+$app->get('brands/{id}', 'BrandController@show');
 
 /* Districts */
 $app->get('districts', 'DistrictController@index');
+$app->get('districts/{id}', 'DistrictController@show');
 
 /* Municipalities */
 $app->get('municipalities', 'MunicipalityController@index');
+$app->get('municipalities/{id}', 'MunicipalityController@show');
 
 /* Stations */
 $app->get('stations', 'StationController@index');
+$app->get('stations/{id}', 'StationController@show');
 
 /* Types */
 $app->get('types', 'TypeController@index');
+$app->get('types/{id}', 'TypeController@show');

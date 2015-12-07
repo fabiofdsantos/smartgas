@@ -26,4 +26,18 @@ class BrandController extends Controller
 
         return response()->json(['brands' => $brands], 200, [], JSON_NUMERIC_CHECK);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function show($id)
+    {
+        $brand = app('db')->table('brands')->where('id', $id)->first();
+
+        return response()->json(['brand' => $brand], 200, [], JSON_NUMERIC_CHECK);
+    }
 }

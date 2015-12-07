@@ -26,4 +26,18 @@ class MunicipalityController extends Controller
 
         return response()->json(['municipalities' => $municipalities], 200, [], JSON_NUMERIC_CHECK);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function show($id)
+    {
+        $municipality = app('db')->table('municipalities')->where('id', $id)->first();
+
+        return response()->json(['municipality' => $municipality], 200, [], JSON_NUMERIC_CHECK);
+    }
 }
