@@ -19,10 +19,8 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //Solution for keyboard problem
-        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 232, 0)
-        self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(5, 0, 100, 0)
+
+        self.setKeyboardHelper()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -30,6 +28,33 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
+    func setKeyboardHelper() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        guard let keyboard = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue else { return }
+        guard let animationDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber else { return }
+        animateToKeyboardHeight(keyboard.CGRectValue().height, duration: animationDuration.doubleValue)
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        guard let animationDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber else { return }
+        animateToKeyboardHeight(0, duration: animationDuration.doubleValue)
+    }
+    
+    func animateToKeyboardHeight(kbHeight: CGFloat, duration: Double) {
+        //print("HEIGHT: \(kbHeight)\nDURANTION: \(duration)")
+        //print("TOP: \(self.tableView.contentInset.top)\nBOTTOM: \(self.tableView.contentInset.bottom)\nLEFT: \(self.tableView.contentInset.left)\nRIGHT: \(self.tableView.contentInset.left)\n")
+        UIView.animateWithDuration(duration, animations: {
+            self.tableView.contentInset = UIEdgeInsetsMake(self.tableView.contentInset.top, self.tableView.contentInset.left, kbHeight, self.tableView.contentInset.left)
+            self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(self.tableView.contentInset.top, self.tableView.contentInset.left, kbHeight, self.tableView.contentInset.left)
+        })
+    }
+
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -100,7 +125,7 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
             }
         }
     }
-    
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let nextView:FuelTypeTableViewController = segue.destinationViewController as! FuelTypeTableViewController {
             nextView.vehicle = vehicle
