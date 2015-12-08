@@ -33,21 +33,21 @@ class FuelStationClient {
         
         do {
             if let jsonResponse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary {
+                
+                for station in (jsonResponse.objectForKey("stations") as! NSArray) {
                     
-                    for station in (jsonResponse.objectForKey("stations") as! NSArray) {
-                        
-                        fuelStations.append(
-                            FuelStation(
-                                title: station.objectForKey("title") as! String,
-                                address: station.objectForKey("address") as! String,
-                                latitude: station.objectForKey("latitude") as! Double,
-                                longitude: station.objectForKey("longitude") as! Double,
-                                brandId: station.objectForKey("brand_id") as! Int,
-                                districtId: station.objectForKey("district_id") as! Int,
-                                municipalityId: station.objectForKey("municipality_id") as! Int
-                            )
+                    fuelStations.append(
+                        FuelStation(
+                            title: station.objectForKey("title") as! String,
+                            address: station.objectForKey("address") as! String,
+                            latitude: station.objectForKey("latitude") as! Double,
+                            longitude: station.objectForKey("longitude") as! Double,
+                            brandId: station.objectForKey("brand_id") as! Int,
+                            districtId: station.objectForKey("district_id") as! Int,
+                            municipalityId: station.objectForKey("municipality_id") as! Int
                         )
-                    }
+                    )
+                }
             }
         } catch {
             print (error)
