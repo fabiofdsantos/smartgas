@@ -101,7 +101,7 @@
                     <navigationItem key="navigationItem" title="Vehicle" id="VqE-E9-fxl">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="dfU-1T-aIT">
                             <connections>
-                                <segue destination="vAN-2E-JJ5" kind="show" id="ZlQ-H0-boK"/>
+                                <segue destination="vAN-2E-JJ5" kind="presentation" id="rwP-Pp-Vxd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

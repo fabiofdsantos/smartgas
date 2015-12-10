@@ -15,13 +15,19 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
     @IBOutlet weak var carImageView: UIImageView!
     @IBOutlet weak var fuelTypeLabel: UILabel!
     
+    var tapGesture: UITapGestureRecognizer?
+    var textFieldHelper: UITextField?
+    
     var vehicle: Vehicle = Vehicle()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.setKeyboardHelper()
-        self.keyboardDismisser()
+        
+        makeTextField.delegate = self
+        modelTextField.delegate = self
+        tapGesture = UITapGestureRecognizer(target: self, action: Selector("dismissKeyboard:"))
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -30,15 +36,30 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
-    func keyboardDismisser () {
-        makeTextField.delegate = self
-        modelTextField.delegate = self
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("dismissKeyboard")))
+    
+    //METHODS TO MAKE CONTROLS FLUID
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == modelTextField {
+            textField.resignFirstResponder()
+            return true
+        }
+        modelTextField.becomeFirstResponder()
+        return false
     }
     
-    func dismissKeyboard () {
-        makeTextField.resignFirstResponder()
-        modelTextField.resignFirstResponder()
+    func textFieldDidBeginEditing(textField: UITextField) {
+        textFieldHelper = textField
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        textFieldHelper = nil
+    }
+    
+    func dismissKeyboard (recognizer: UITapGestureRecognizer) {
+        if let textF = textFieldHelper {
+            textF.resignFirstResponder()
+        }
     }
     
     func setKeyboardHelper() {
@@ -50,11 +71,17 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
         guard let keyboard = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue else { return }
         guard let animationDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber else { return }
         animateToKeyboardHeight(keyboard.CGRectValue().height, duration: animationDuration.doubleValue)
+        if let gesture = tapGesture {
+            self.view.addGestureRecognizer(gesture)
+        }
     }
     
     func keyboardWillHide(notification: NSNotification) {
         guard let animationDuration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber else { return }
         animateToKeyboardHeight(0, duration: animationDuration.doubleValue)
+        if let gesture = tapGesture {
+            self.view.removeGestureRecognizer(gesture)
+        }
     }
     
     func animateToKeyboardHeight(kbHeight: CGFloat, duration: Double) {
@@ -63,8 +90,8 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
             self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(self.tableView.contentInset.top, self.tableView.contentInset.left, kbHeight, self.tableView.contentInset.left)
         })
     }
-
     
+    //END
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -131,13 +158,13 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
             
         for view in tableCell!.contentView.subviews {
             if let textField = view as? UITextField {
-                textField.select(textField)
+                textField.becomeFirstResponder()
             }
         }
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let nextView:FuelTypeTableViewController = segue.destinationViewController as! FuelTypeTableViewController {
+        if let nextView:FuelTypeTableViewController = segue.destinationViewController as? FuelTypeTableViewController {
             nextView.vehicle = vehicle
         }
     }
