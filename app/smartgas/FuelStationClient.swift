@@ -16,40 +16,43 @@ class FuelStationClient {
         }
         
         let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithURL(url) { (data, response, erro) -> Void in
+        
+        let task = session.dataTaskWithURL(url) { (data, response, error) -> Void in
             if let d = data {
-                let fuelStations = FuelStationClient.parseFuelStations(d)
-                completionHandler(fuelStations)
+                completionHandler(self.parseFuelStations(d))
+            } else {
+                print("Can't connect to webservice.")
             }
         }
+        
         task.resume()
     }
     
-    static func parseFuelStations(data:NSData) -> [FuelStation]? {
+    static func parseFuelStations(data:NSData) -> [FuelStation]! {
+        var fuelStations = [FuelStation]()
+        
         do {
             if let jsonResponse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary {
-                var fuelStations = [FuelStation]()
                 
-                if let jsonSearch = jsonResponse.objectForKey("stations") as? NSArray {
-                    for (var i = 0; i < jsonSearch.count; i++) {
-                        if let jsonFuelStation = jsonSearch.objectAtIndex(i) as? NSDictionary {
-                            let title = jsonFuelStation.objectForKey("title") as! String
-                            let address = jsonFuelStation.objectForKey("address") as! String
-                            let latitude = jsonFuelStation.objectForKey("latitude") as! Double
-                            let longitude = jsonFuelStation.objectForKey("longitude") as! Double
-                            let brandId = jsonFuelStation.objectForKey("brand_id") as! Int
-                            let districtId = jsonFuelStation.objectForKey("district_id") as! Int
-                            let municipalityId  = jsonFuelStation.objectForKey("municipality_id") as! Int
-                            let fuelStation = FuelStation(title: title, address: address, latitude: latitude, longitude: longitude, brandId: brandId, districtId: districtId, municipalityId: municipalityId)
-                            fuelStations.append(fuelStation)
-                        }
-                    }
+                for station in (jsonResponse.objectForKey("stations") as! NSArray) {
+                    
+                    fuelStations.append(
+                        FuelStation(
+                            title: station.objectForKey("title") as! String,
+                            address: station.objectForKey("address") as! String,
+                            latitude: station.objectForKey("latitude") as! Double,
+                            longitude: station.objectForKey("longitude") as! Double,
+                            brandId: station.objectForKey("brand_id") as! Int,
+                            districtId: station.objectForKey("district_id") as! Int,
+                            municipalityId: station.objectForKey("municipality_id") as! Int
+                        )
+                    )
                 }
-                return fuelStations
             }
         } catch {
             print (error)
         }
-        return nil
+        
+        return fuelStations
     }
 }
