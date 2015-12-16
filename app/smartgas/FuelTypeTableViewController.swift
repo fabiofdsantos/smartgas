@@ -8,9 +8,16 @@
 
 import UIKit
 
+protocol FuelTypeTableViewControllerDelegate
+{
+    func sendFuel(fuel: String)
+}
+
 class FuelTypeTableViewController: UITableViewController {
     
-    var vehicle:Vehicle?
+    var vehicleFuel: String?
+    
+    var delegate:CreateVehicleTableViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +54,8 @@ class FuelTypeTableViewController: UITableViewController {
                 cell.accessoryType = row == indexPath.row ? .Checkmark : .None
                 if cell.accessoryType == .Checkmark {
                     if let fuelText = cell.textLabel?.text {
-                        vehicle?.fuel = fuelText
+                        vehicleFuel = fuelText
+                        self.delegate?.sendFuel(fuelText)
                     }
                 }
             }
@@ -60,13 +68,14 @@ class FuelTypeTableViewController: UITableViewController {
         
         let fuelType = FuelTypes.allValues()[indexPath.row]
         cell.setFuel(fuelType)
-        if vehicle?.fuel == FuelTypes.allValues()[indexPath.row] {
+        print(vehicleFuel)
+        if vehicleFuel == FuelTypes.allValues()[indexPath.row] {
             cell.accessoryType = .Checkmark
         }
         
         return cell
     }
-
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

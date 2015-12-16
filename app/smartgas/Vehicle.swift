@@ -6,7 +6,6 @@
 //  Copyright © 2015 Mateus Silva. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 
@@ -16,32 +15,41 @@ class Vehicle: NSObject, NSCoding {
     var mileageKm: Float?
     var consume: Float?
     var fuel: String?
-    var image: UIImage
     
+    var image: UIImage?
+    
+    var imageName: String
 
     //Constructors
-    init(make: String, model: String, image: UIImage){
+    /*init(make: String, model: String, image: UIImage){
         self.make = make
         self.model = model
         self.image = image
-    }
+        
+        super.init()
+    }*/
     
-    override init() {
-        make = ""
-        model = ""
-        image = UIImage()
+    init(make: String, model: String, imageName: String){
+        self.make = make
+        self.model = model
+        self.imageName = imageName
+        
+        super.init()
     }
-    
     
     
     // MARK: NSCoding
-    required init?(coder decoder: NSCoder) {
-        make = decoder.decodeObjectForKey("make") as! String
-        model = decoder.decodeObjectForKey("model") as! String
-        mileageKm = decoder.decodeObjectForKey("mileageKm") as? Float ?? 0.0
-        consume = decoder.decodeObjectForKey("consume") as? Float ?? 0.0
-        fuel = decoder.decodeObjectForKey("fuel") as? String ?? "Diesel"
-        image = decoder.decodeObjectForKey("image") as! UIImage
+    required init(coder decoder: NSCoder) {
+        self.make = decoder.decodeObjectForKey("make") as! String
+        self.model = decoder.decodeObjectForKey("model") as! String
+        self.mileageKm = decoder.decodeObjectForKey("mileageKm") as? Float ?? 0.0
+        self.consume = decoder.decodeObjectForKey("consume") as? Float ?? 0.0
+        self.fuel = decoder.decodeObjectForKey("fuel") as? String ?? "Diesel"
+        self.imageName = decoder.decodeObjectForKey("imageName") as! String
+        //self.image = UIImage(contentsOfFile: loadImageFileName(imageName!))!
+        //print(loadImageFileName(imageName!))
+        
+        super.init()
     }
     
     func encodeWithCoder(coder: NSCoder) {
@@ -50,7 +58,7 @@ class Vehicle: NSObject, NSCoding {
         coder.encodeFloat(mileageKm ?? 0.0, forKey: "mileageKm")
         coder.encodeFloat(consume ?? 0.0, forKey: "consume")
         coder.encodeObject(fuel ?? "Diesel", forKey: "fuel")
-        coder.encodeObject(image, forKey: "image")
+        coder.encodeObject(imageName, forKey: "imageName")
     }
-
+    
 }

@@ -15,7 +15,8 @@ class VehicleTableViewCell: UITableViewCell {
     @IBOutlet weak var consumeLabel: UILabel!
     
     func setVehicle (vehicle:Vehicle) {
-        self.vehicleImageView.image = vehicle.image
+        let imagePath = fileInDocumentsDirectory(vehicle.imageName)
+        self.vehicleImageView.image = UIImage(contentsOfFile: imagePath)
         self.makeModelLabel.text = vehicle.make + " " + vehicle.model
         self.fuelLabel.text = vehicle.fuel
         self.consumeLabel.text = "\(vehicle.consume)"
@@ -29,7 +30,7 @@ class VehicleTableViewCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
 

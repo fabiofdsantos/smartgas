@@ -8,3 +8,6 @@
 
 import Foundation
 
+/*func getDistance(myLocation: CLLocation, destination: CLLocation) -> CLLocationDistance {
+    return myLocation.distanceFromLocation(destination)
+}*/

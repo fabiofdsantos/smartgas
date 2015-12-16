@@ -10,10 +10,17 @@ import UIKit
 
 class VehicleTableViewController: UITableViewController {
     
-    var vehicles:[Vehicle]?
+    var vehiclesList: VehiclesList!
+    var vehiclesPath: String!
+    
+    let addVehicleSegueIdentifier = "addVehicle"
+    let editVehicleSegueIdentifier = "editVehicle"
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        vehiclesPath = fileInDocumentsDirectory("vehicles.list")
+        loadVehicles()
         
         //Add working edit button to the left of the navigation bar
         navigationItem.leftBarButtonItem = editButtonItem()
@@ -31,12 +38,7 @@ class VehicleTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.vehicles = Archiver().readVehicle()
-        
-        //Review
-        NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-            self.tableView.reloadData()
-        })
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -48,46 +50,80 @@ class VehicleTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return vehicles?.count ?? 0
+        return vehiclesList.vehicles.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("vehicleCell", forIndexPath: indexPath) as! VehicleTableViewCell
 
-        let vehicle = vehicles![indexPath.row]
+        let vehicle = vehiclesList.vehicles[indexPath.row]
         cell.setVehicle(vehicle)
 
         return cell
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        switch editingStyle {
-            case .Delete:
-                // remove the deleted item from the model
-                self.vehicles!.removeAtIndex(indexPath.row)
-                
-                // remove the deleted item from the `UITableView`
-                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        if editingStyle == .Delete {
+            // remove the deleted item from the model
+            self.vehiclesList.vehicles.removeAtIndex(indexPath.row)
             
-            default:
-                return
+            // remove the deleted item from the `UITableView`
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            saveVehicles(vehiclesList, toPath: vehiclesPath)
         }
     }
     
     override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
         // remove the dragged row's model
-        let val = self.vehicles!.removeAtIndex(sourceIndexPath.row)
+        let moved = self.vehiclesList.vehicles.removeAtIndex(sourceIndexPath.row)
         
         // insert it into the new position
-        self.vehicles!.insert(val, atIndex: destinationIndexPath.row)
+        self.vehiclesList.vehicles.insert(moved, atIndex: destinationIndexPath.row)
+        
+        saveVehicles(vehiclesList, toPath: vehiclesPath)
     }
-
     
-    
-    //Review
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        Archiver().updateVehicle(vehicles!)
+        let identifier = segue.identifier!
+        
+        if identifier == addVehicleSegueIdentifier {
+            if let nextController = segue.destinationViewController.childViewControllers[0] as? CreateVehicleTableViewController {
+                nextController.vehiclesPath = self.vehiclesPath
+                nextController.vehiclesList = self.vehiclesList
+            }
+        } else if identifier == editVehicleSegueIdentifier {
+            if let vehicle = sender as? Vehicle {
+                if let nextController = segue.destinationViewController.childViewControllers[0] as? CreateVehicleTableViewController {
+                    nextController.vehiclesPath = self.vehiclesPath
+                    nextController.vehiclesList = self.vehiclesList
+                    nextController.vehicle = vehicle
+                }
+            }
+        }
+        
+        
+    }
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let vehicle = getVehicleFromIndexPath(indexPath)
+        
+        performSegueWithIdentifier(editVehicleSegueIdentifier, sender: vehicle)
+    }
+    
+    func getVehicleFromIndexPath(indexPath: NSIndexPath) -> Vehicle {
+        return vehiclesList.vehicles[indexPath.row]
+    }
+    
+    
+    
+    func loadVehicles() {
+        if let vehicles = loadVehiclesFromPath(vehiclesPath) {
+            self.vehiclesList = vehicles
+        } else {
+            self.vehiclesList = VehiclesList()
+        }
     }
 
     /*

@@ -70,7 +70,12 @@ class FuelStationTableViewController: UITableViewController, CLLocationManagerDe
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
         }
         locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.requestWhenInUseAuthorization()
+        if #available(iOS 8.0, *) {
+            locationManager.requestWhenInUseAuthorization()
+        } else {
+            // Fallback on earlier versions
+        }
+
     }
     
     func batteryStateDidChange(notification: NSNotification) {
@@ -85,6 +90,13 @@ class FuelStationTableViewController: UITableViewController, CLLocationManagerDe
         if let c = coord {
             currentLocation = c
             print("lat: \(c.latitude) long:\(c.longitude)")
+            
+            if let fuelStations = self.fuelStations {
+                let stationLocation = CLLocation(latitude: fuelStations[0].latitude!, longitude: fuelStations[0].longitude!)
+                print("DISTANCE: \(getDistance(locationObj!, destination: stationLocation))")
+            }
+            
+            
             //defaults.setDouble(currentLocation.latitude, forKey: "latitude")
             //defaults.setDouble(currentLocation.longitude, forKey: "longitude")
         }
@@ -94,16 +106,43 @@ class FuelStationTableViewController: UITableViewController, CLLocationManagerDe
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         
         locationManager.startUpdatingLocation()
-        
     }
-    
-    
-    
     
     /*
     *Criar evento para trocar tipo de localizaçao consoante a mudança do estado de bateria
     */
     
+    
+    @IBAction func filterButton(sender: UIBarButtonItem) {
+        /*let actionSheet = UIAlertController(title: "", message: "Choose filter", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        let distance = UIAlertAction(title: "Sort by distance", style: UIAlertActionStyle.Default){(action) -> Void in
+
+        }
+        
+        let cheapest = UIAlertAction(title: "Sort by cheapest", style: UIAlertActionStyle.Default){(action) -> Void in
+
+        }
+        
+        let cheapestByDistance = UIAlertAction(title: "Sort by cheapest based on distance", style: UIAlertActionStyle.Default){(action) -> Void in
+            
+        }
+        
+        let dismissAction = UIAlertAction(title: "Close", style: UIAlertActionStyle.Cancel){(action) -> Void in
+            
+        }
+        
+        actionSheet.addAction(distance)
+        actionSheet.addAction(cheapest)
+        actionSheet.addAction(cheapestByDistance)
+        actionSheet.addAction(dismissAction)
+        presentViewController(actionSheet, animated: true, completion: nil)*/
+
+    }
+    
+    func getDistance(myLocation: CLLocation, destination: CLLocation) -> CLLocationDistance {
+        return myLocation.distanceFromLocation(destination)
+    }
     
 
     /*

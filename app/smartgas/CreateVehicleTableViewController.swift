@@ -8,26 +8,41 @@
 
 import UIKit
 
-class CreateVehicleTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class CreateVehicleTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, FuelTypeTableViewControllerDelegate {
     
     @IBOutlet weak var makeTextField: UITextField!
     @IBOutlet weak var modelTextField: UITextField!
     @IBOutlet weak var carImageView: UIImageView!
     @IBOutlet weak var fuelTypeLabel: UILabel!
+    @IBOutlet weak var imageLabel: UILabel!
     
     var tapGesture: UITapGestureRecognizer?
     var textFieldHelper: UITextField?
+    var imagePickerController: UIImagePickerController!
     
-    var vehicle: Vehicle = Vehicle()
+    var vehicle: Vehicle?
+    var vehiclesList: VehiclesList!
+    var vehiclesPath: String?
+    var vehicleFuel: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.setKeyboardHelper()
+        self.createInputsFromVehicle()
         
         makeTextField.delegate = self
         modelTextField.delegate = self
+        
+        imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        
         tapGesture = UITapGestureRecognizer(target: self, action: Selector("dismissKeyboard:"))
+        
+        //Make image clicable
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("addCarImage:"))
+        carImageView.userInteractionEnabled = true
+        carImageView.addGestureRecognizer(tapGestureRecognizer)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -38,6 +53,19 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
     
     
     //METHODS TO MAKE CONTROLS FLUID
+    
+    func createInputsFromVehicle() {
+        guard let vehicle = self.vehicle else {
+            return
+        }
+        
+        makeTextField.text = vehicle.make
+        modelTextField.text = vehicle.model
+        carImageView.image = UIImage(contentsOfFile: fileInDocumentsDirectory(vehicle.imageName))
+        fuelTypeLabel.text = vehicle.fuel
+        vehicleFuel = vehicle.fuel
+        imageLabel.text = ""
+    }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if textField == modelTextField {
@@ -119,36 +147,77 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
     }
     
     @IBAction func saveBarButton(sender: UIBarButtonItem) {
-        if let makeTF = makeTextField.text {
-            vehicle.make = makeTF
-        }
-        
-        if let modelTF = modelTextField.text {
-            vehicle.model = modelTF
-        }
-        
-        if let imageIV = carImageView.image {
-            vehicle.image = imageIV
-        }
-        
-        Archiver().writeVehicle(vehicle)
+        addOrReplaceVehicle()
+        saveVehicles(vehiclesList, toPath: vehiclesPath!)
         
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     
-    @IBAction func addCarImage(sender: UIButton) {
-        let picker = UIImagePickerController()
-        picker.sourceType = .PhotoLibrary
-        picker.allowsEditing = false
-        picker.delegate = self
-        presentViewController(picker, animated: true, completion: nil)
+    func addOrReplaceVehicle() {
+        if let newVehicle = createVehicleFromInputs() {
+            if vehicle == nil {
+                vehiclesList.vehicles.append(newVehicle)
+            } else {
+                /*if let delegate = self.delegate {
+                    delegate.setEditedItem(newItem)
+                }*/
+                
+                for var i = 0; i < vehiclesList.vehicles.count; i++ {
+                    if vehicle!.make == vehiclesList!.vehicles[i].make {
+                        vehiclesList!.vehicles[i] = newVehicle
+                    }
+                }
+            }
+        }
     }
-
+    
+    func createVehicleFromInputs() -> Vehicle? {
+        var vehicle: Vehicle? = nil
+        guard let make = makeTextField.text else {
+            return vehicle
+        }
+        
+        guard let model = modelTextField.text else {
+            return vehicle
+        }
+        
+        guard let image = carImageView.image else {
+            return vehicle
+        }
+        
+        var imageName = randomImageName()+".jpg"
+        
+        for var i = 0; i < vehiclesList.vehicles.count; i++ {
+            if imageName == vehiclesList.vehicles[i].imageName {
+                imageName = randomImageName()+".jpg"
+                i = 0
+            }
+        }
+        
+        vehicle = Vehicle(make: make, model: model, imageName: imageName)
+        vehicle!.image = image
+        
+        if let fuel = vehicleFuel {
+            vehicle!.fuel = fuel
+        } else {
+            vehicle!.fuel = "None"
+        }
+        
+        return vehicle
+    }
+    
+    
+    func addCarImage(recognizer: UITapGestureRecognizer) {
+        imagePickerController.sourceType = .PhotoLibrary
+        imagePickerController.allowsEditing = true
+        presentViewController(imagePickerController, animated: true, completion: nil)
+    }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         carImageView.image = image
+        imageLabel.text = ""
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -165,14 +234,20 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let nextView:FuelTypeTableViewController = segue.destinationViewController as? FuelTypeTableViewController {
-            nextView.vehicle = vehicle
+            nextView.vehicleFuel = vehicleFuel
+            nextView.delegate = self
         }
     }
     
+    func sendFuel(fuel: String) {
+        fuelTypeLabel.text = fuel
+        vehicleFuel = fuel
+    }
+    
+    
+    //Do not delete
     override func viewWillAppear(animated: Bool) {
-        if let fuelTL = vehicle.fuel {
-            fuelTypeLabel.text = fuelTL
-        }
+        
     }
 
     /*

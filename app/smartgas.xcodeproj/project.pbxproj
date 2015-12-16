@@ -16,6 +16,7 @@
 		693648261BFCEB8E00C7EC8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 693648251BFCEB8E00C7EC8F /* Assets.xcassets */; };
 		693648341BFCEB8E00C7EC8F /* smartgasTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693648331BFCEB8E00C7EC8F /* smartgasTests.swift */; };
 		6936483F1BFCEB8E00C7EC8F /* smartgasUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6936483E1BFCEB8E00C7EC8F /* smartgasUITests.swift */; };
+		693D30551C1B88900041A292 /* VehiclesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693D30541C1B88900041A292 /* VehiclesList.swift */; };
 		69563DAC1C10CC6A0082ABBB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69563DAB1C10CC6A0082ABBB /* CoreLocation.framework */; };
 		698849261C00CC4700B7247B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 698849241C00CC4700B7247B /* LaunchScreen.storyboard */; };
 		698849281C00CC9500B7247B /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698849271C00CC9500B7247B /* Vehicle.swift */; };
@@ -63,6 +64,7 @@
 		6936483A1BFCEB8E00C7EC8F /* smartgasUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = smartgasUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6936483E1BFCEB8E00C7EC8F /* smartgasUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = smartgasUITests.swift; sourceTree = "<group>"; };
 		693648401BFCEB8E00C7EC8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		693D30541C1B88900041A292 /* VehiclesList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehiclesList.swift; sourceTree = "<group>"; };
 		69563DAB1C10CC6A0082ABBB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		698849251C00CC4700B7247B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		698849271C00CC9500B7247B /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
@@ -162,7 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				698849271C00CC9500B7247B /* Vehicle.swift */,
-				69087FEA1C07B6AA007DAD29 /* Archiver.swift */,
+				693D30541C1B88900041A292 /* VehiclesList.swift */,
 				69EBD7E61C0F73620078B9E1 /* FuelTypes.swift */,
 				69EBD7ED1C0F9C170078B9E1 /* FuelStation.swift */,
 			);
@@ -194,6 +196,7 @@
 		69EBD7EA1C0F96D70078B9E1 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				69087FEA1C07B6AA007DAD29 /* Archiver.swift */,
 				69EBD7EB1C0F98810078B9E1 /* FuelStationClient.swift */,
 				69AE25401C1638C100467288 /* MathClient.swift */,
 			);
@@ -344,6 +347,7 @@
 				6988492F1C00DA8600B7247B /* CreateVehicleTableViewController.swift in Sources */,
 				69954E021C0FC393000B4778 /* FuelStationTableViewController.swift in Sources */,
 				6936481F1BFCEB8E00C7EC8F /* AppDelegate.swift in Sources */,
+				693D30551C1B88900041A292 /* VehiclesList.swift in Sources */,
 				69EBD7EE1C0F9C170078B9E1 /* FuelStation.swift in Sources */,
 				69EBD7EC1C0F98810078B9E1 /* FuelStationClient.swift in Sources */,
 				69AE25411C1638C100467288 /* MathClient.swift in Sources */,
@@ -491,7 +495,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = smartgas/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ipleiria.estg.mei.smartgas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -506,7 +510,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = smartgas/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ipleiria.estg.mei.smartgas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
