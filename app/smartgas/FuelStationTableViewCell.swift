@@ -12,13 +12,16 @@ class FuelStationTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var districtLabel: UILabel!
-    
+    @IBOutlet weak var distanceLabel: UILabel!
     
     func setFuelStation (fuelStation: FuelStation) {
         self.titleLabel.text = fuelStation.title
         self.addressLabel.text = fuelStation.address
-        self.districtLabel.text = "\(fuelStation.districtId)"
+        self.distanceLabel.text = "...Km"
+    }
+    
+    func setDistance (distance: String) {
+        self.distanceLabel.text = distance + "km"
     }
 
     override func awakeFromNib() {
