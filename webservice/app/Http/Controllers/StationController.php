@@ -36,6 +36,10 @@ class StationController extends Controller
                 if (!empty($request->input('municipality'))) {
                     $query->where('municipality_id', $request->input('municipality'));
                 }
+
+                if (!empty($request->input('brand'))) {
+                    $query->whereIn('brand_id', explode(',', $request->input('brand')));
+                }
             })->get();
 
         return response()->json(['stations' => $stations], 200, [], JSON_NUMERIC_CHECK);
