@@ -16,13 +16,10 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
     var currentLocation = CLLocationCoordinate2D()
     
     @IBOutlet weak var fuelStationTableView: UITableView!
-    @IBOutlet weak var subFiltersSegment: UISegmentedControl!
-    @IBOutlet weak var brandButton: UIButton!
-    @IBOutlet weak var fuelButton: UIButton!
-    @IBOutlet weak var priceButton: UIButton!
+    @IBOutlet weak var filterBar: UITabBar!
     
     
-    override func viewDidLoad() {
+    override func viewDidLoad() {						
         super.viewDidLoad()
         
         fuelStationTableView.delegate = self
@@ -36,6 +33,9 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
         })
         
         locationInit()
+
+        self.fuelStationTableView.contentInset = UIEdgeInsetsMake(filterBar.frame.height, self.fuelStationTableView.contentInset.left, self.fuelStationTableView.contentInset.bottom, self.fuelStationTableView.contentInset.right)
+        self.fuelStationTableView.scrollIndicatorInsets = UIEdgeInsetsMake(filterBar.frame.height, self.fuelStationTableView.contentInset.left, self.fuelStationTableView.contentInset.bottom, self.fuelStationTableView.contentInset.right)
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -80,11 +80,8 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
         }
         locationManager.distanceFilter = kCLDistanceFilterNone
-        if #available(iOS 8.0, *) {
-            locationManager.requestWhenInUseAuthorization()
-        } else {
-            // Fallback on earlier versions
-        }
+        
+        locationManager.requestWhenInUseAuthorization()
         
     }
     
@@ -123,7 +120,6 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        
         locationManager.startUpdatingLocation()
     }
     
@@ -133,34 +129,37 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
     func getDistance(myLocation: CLLocation, destination: CLLocation) -> CLLocationDistance {
         return myLocation.distanceFromLocation(destination)
     }
+    
+    
+    
+/*    @IBAction func segmentFilter(sender: UISegmentedControl) {
+        let actionSheet = UIAlertController(title: "", message: "Choose filter", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        let distance = UIAlertAction(title: "Sort by distance", style: UIAlertActionStyle.Default){(action) -> Void in
+            
+        }
+        
+        let cheapest = UIAlertAction(title: "Sort by cheapest", style: UIAlertActionStyle.Default){(action) -> Void in
+            
+        }
+        
+        let cheapestByDistance = UIAlertAction(title: "Sort by cheapest based on distance", style: UIAlertActionStyle.Default){(action) -> Void in
+            
+        }
+        
+        let dismissAction = UIAlertAction(title: "Close", style: UIAlertActionStyle.Cancel){(action) -> Void in
+            
+        }
+        
+        actionSheet.addAction(distance)
+        actionSheet.addAction(cheapest)
+        actionSheet.addAction(cheapestByDistance)
+        actionSheet.addAction(dismissAction)
+        presentViewController(actionSheet, animated: true, completion: nil)
+        
+    }*/
+    
 
-    @IBAction func brandTypeButton(sender: UIButton) {
-        sender.setImage(UIImage(named: "shopFilled"), forState: UIControlState.Normal)
-        subFiltersSegment.setTitle("MARCA1", forSegmentAtIndex: 0)
-        subFiltersSegment.setTitle("MARCA2", forSegmentAtIndex: 1)
-        subFiltersSegment.setTitle("MARCA3", forSegmentAtIndex: 2)
-        self.fuelButton.setImage(UIImage(named: "oilIndustry"), forState: UIControlState.Normal)
-        self.priceButton.setImage(UIImage(named: "discount"), forState: UIControlState.Normal)
-    }
-    
-    @IBAction func fuelTypeButton(sender: UIButton) {
-        sender.setImage(UIImage(named: "oilIndustryFilled"), forState: UIControlState.Normal)
-        subFiltersSegment.setTitle("FUEL1", forSegmentAtIndex: 0)
-        subFiltersSegment.setTitle("FUEL2", forSegmentAtIndex: 1)
-        subFiltersSegment.setTitle("FUEL3", forSegmentAtIndex: 2)
-        self.brandButton.setImage(UIImage(named: "shop"), forState: UIControlState.Normal)
-        self.priceButton.setImage(UIImage(named: "discount"), forState: UIControlState.Normal)
-    }
-    
-    @IBAction func filterPriceButton(sender: UIButton) {
-        sender.setImage(UIImage(named: "discountFilled"), forState: UIControlState.Normal)
-        subFiltersSegment.setTitle("PRICE1", forSegmentAtIndex: 0)
-        subFiltersSegment.setTitle("PRICE2", forSegmentAtIndex: 1)
-        subFiltersSegment.setTitle("PRICE3", forSegmentAtIndex: 2)
-        self.brandButton.setImage(UIImage(named: "shop"), forState: UIControlState.Normal)
-        self.fuelButton.setImage(UIImage(named: "oilIndustry"), forState: UIControlState.Normal)
-    }
-    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
