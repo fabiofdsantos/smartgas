@@ -13,16 +13,34 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class StationController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
+     *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $stations = app('db')->table('stations')->get();
+        $stations = app('db')->table('stations')
+            ->where(function ($query) use ($request) {
+
+                if (!empty($request->input('district'))) {
+                    $query->where('district_id', $request->input('district'));
+                }
+
+                if (!empty($request->input('municipality'))) {
+                    $query->where('municipality_id', $request->input('municipality'));
+                }
+
+                if (!empty($request->input('brand'))) {
+                    $query->whereIn('brand_id', explode(',', $request->input('brand')));
+                }
+            })->get();
 
         return response()->json(['stations' => $stations], 200, [], JSON_NUMERIC_CHECK);
     }
