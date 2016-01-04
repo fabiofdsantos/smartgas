@@ -377,7 +377,7 @@
             </objects>
             <point key="canvasLocation" x="-31" y="1207"/>
         </scene>
-        <!--Main Fuel Station View Controller-->
+        <!--Fuel Stations-->
         <scene sceneID="CRg-RT-8cW">
             <objects>
                 <viewController id="u6Q-Pz-pjC" customClass="MainFuelStationViewController" customModule="smartgas" customModuleProvider="target" sceneMemberID="viewController">
@@ -389,27 +389,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IvC-rQ-MRg">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
-                                <animations/>
-                                <items>
-                                    <navigationItem id="BAb-xs-CJB">
-                                        <nil key="title"/>
-                                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Z8u-TH-auT">
-                                            <rect key="frame" x="20" y="7" width="560" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <animations/>
-                                            <segments>
-                                                <segment title="First"/>
-                                                <segment title="Second"/>
-                                                <segment title="Third"/>
-                                            </segments>
-                                        </segmentedControl>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="105" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xmK-0K-Q8Q">
-                                <rect key="frame" x="0.0" y="108" width="600" height="443"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -434,13 +415,6 @@
                                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hCb-2g-6hP" userLabel="AddressDetail">
-                                                    <rect key="frame" x="151" y="45" width="33" height="15"/>
-                                                    <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Distance" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="00j-86-EaZ">
                                                     <rect key="frame" x="96" y="66" width="50" height="15"/>
                                                     <animations/>
@@ -448,7 +422,7 @@
                                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Ft-ly-aRy">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="carIconFilled" translatesAutoresizingMaskIntoConstraints="NO" id="1Ft-ly-aRy">
                                                     <rect key="frame" x="8" y="13" width="78" height="78"/>
                                                     <animations/>
                                                     <constraints>
@@ -457,6 +431,13 @@
                                                 </imageView>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCp-FU-ZmN" userLabel="DistanceDetail">
                                                     <rect key="frame" x="151" y="66" width="33" height="15"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hCb-2g-6hP" userLabel="AddressDetail">
+                                                    <rect key="frame" x="151" y="45" width="33" height="15"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -490,83 +471,45 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="SE4-4u-SNv">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <animations/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ITo-Kx-VpX">
+                                <rect key="frame" x="0.0" y="64" width="600" height="49"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <tabBarItem systemItem="favorites" id="bjM-kx-O3z"/>
+                                    <tabBarItem systemItem="more" id="tXl-vQ-4KL"/>
+                                </items>
+                            </tabBar>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="EuX-jV-Yd1" firstAttribute="top" secondItem="xmK-0K-Q8Q" secondAttribute="bottom" id="I2W-Dh-srC"/>
-                            <constraint firstItem="IvC-rQ-MRg" firstAttribute="leading" secondItem="Trr-ZH-ySa" secondAttribute="leadingMargin" constant="-20" id="JDE-63-kvg"/>
-                            <constraint firstItem="xmK-0K-Q8Q" firstAttribute="top" secondItem="IvC-rQ-MRg" secondAttribute="bottom" id="Q8c-Sq-gLC"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="IvC-rQ-MRg" secondAttribute="trailing" constant="-20" id="Zc2-8x-rQk"/>
+                            <constraint firstItem="ITo-Kx-VpX" firstAttribute="leading" secondItem="Trr-ZH-ySa" secondAttribute="leadingMargin" constant="-20" id="T0T-mH-GGK"/>
                             <constraint firstAttribute="trailing" secondItem="xmK-0K-Q8Q" secondAttribute="trailing" id="c8Z-kw-LvZ"/>
-                            <constraint firstItem="xmK-0K-Q8Q" firstAttribute="top" secondItem="IvC-rQ-MRg" secondAttribute="bottom" id="ht3-7V-boo"/>
-                            <constraint firstItem="IvC-rQ-MRg" firstAttribute="top" secondItem="Knx-Oo-gHH" secondAttribute="bottom" id="lMv-w9-aZx"/>
+                            <constraint firstItem="xmK-0K-Q8Q" firstAttribute="top" secondItem="ITo-Kx-VpX" secondAttribute="top" id="coG-qd-fGh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ITo-Kx-VpX" secondAttribute="trailing" constant="-20" id="dFb-qi-2Em"/>
+                            <constraint firstItem="SE4-4u-SNv" firstAttribute="leading" secondItem="Trr-ZH-ySa" secondAttribute="leadingMargin" constant="-20" id="k5j-7G-0KS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="SE4-4u-SNv" secondAttribute="trailing" constant="-20" id="phe-qf-7eO"/>
+                            <constraint firstItem="ITo-Kx-VpX" firstAttribute="top" secondItem="SE4-4u-SNv" secondAttribute="bottom" id="qP7-3y-zeY"/>
+                            <constraint firstItem="SE4-4u-SNv" firstAttribute="top" secondItem="Knx-Oo-gHH" secondAttribute="bottom" id="zFZ-sl-0R9"/>
                             <constraint firstItem="xmK-0K-Q8Q" firstAttribute="leading" secondItem="Trr-ZH-ySa" secondAttribute="leading" id="zVe-tq-YT1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ZbH-WF-Is9">
-                        <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="1cC-qQ-zOf">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0TV-kP-fIw">
-                                <rect key="frame" x="20" y="9" width="25" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <animations/>
-                                <state key="normal" image="shop"/>
-                                <connections>
-                                    <action selector="brandTypeButton:" destination="u6Q-Pz-pjC" eventType="touchUpInside" id="sqG-o2-XHA"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="e1U-rT-cgZ">
-                            <rect key="frame" x="288" y="10" width="25" height="25"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <animations/>
-                            <state key="normal" image="oilIndustry"/>
-                            <connections>
-                                <action selector="fuelTypeButton:" destination="u6Q-Pz-pjC" eventType="touchUpInside" id="URA-sz-amb"/>
-                            </connections>
-                        </button>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="l0f-0n-Oab">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tZB-Ys-XZU">
-                                <rect key="frame" x="555" y="9" width="25" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <animations/>
-                                <state key="normal" image="discount"/>
-                                <connections>
-                                    <action selector="filterPriceButton:" destination="u6Q-Pz-pjC" eventType="touchUpInside" id="X9e-QJ-v8F"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
+                    <tabBarItem key="tabBarItem" title="Fuel Stations" image="fuelIcon" selectedImage="fuelIconFilled" id="UJg-ZA-UAU"/>
                     <connections>
-                        <outlet property="brandButton" destination="0TV-kP-fIw" id="ssU-nq-0qr"/>
-                        <outlet property="fuelButton" destination="e1U-rT-cgZ" id="bzy-Ya-bkN"/>
+                        <outlet property="filterBar" destination="ITo-Kx-VpX" id="FMk-Lg-D1r"/>
                         <outlet property="fuelStationTableView" destination="xmK-0K-Q8Q" id="Ukf-pf-1iW"/>
-                        <outlet property="priceButton" destination="tZB-Ys-XZU" id="9Rn-xo-A6V"/>
-                        <outlet property="subFiltersSegment" destination="Z8u-TH-auT" id="7b4-gK-fTw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c0c-Or-e3G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-31" y="-499"/>
-        </scene>
-        <!--Fuel Stations-->
-        <scene sceneID="mFH-Sh-xfX">
-            <objects>
-                <navigationController id="hXp-dc-GKK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Fuel Stations" image="fuelIcon" selectedImage="fuelIconFilled" id="41R-kZ-6VP"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="h8k-VY-wIz">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="u6Q-Pz-pjC" kind="relationship" relationship="rootViewController" id="aMO-Qj-Z3Z"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hJI-d8-pVc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-835" y="-499"/>
+            <point key="canvasLocation" x="-835" y="-479"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="IQI-1U-Tvh">
@@ -579,7 +522,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="hXp-dc-GKK" kind="relationship" relationship="viewControllers" id="QFK-Vl-cNe"/>
+                        <segue destination="u6Q-Pz-pjC" kind="relationship" relationship="viewControllers" id="MW5-WW-iVV"/>
                         <segue destination="uOd-dm-x1j" kind="relationship" relationship="viewControllers" id="nov-0S-lgM"/>
                     </connections>
                 </tabBarController>
@@ -610,11 +553,8 @@
     <resources>
         <image name="carIcon" width="25" height="25"/>
         <image name="carIconFilled" width="25" height="25"/>
-        <image name="discount" width="25" height="25"/>
         <image name="fuelIcon" width="25" height="25"/>
         <image name="fuelIconFilled" width="25" height="25"/>
-        <image name="oilIndustry" width="25" height="25"/>
-        <image name="shop" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jSG-pI-lj5"/>

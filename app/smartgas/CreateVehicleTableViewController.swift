@@ -114,8 +114,8 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
     
     func animateToKeyboardHeight(kbHeight: CGFloat, duration: Double) {
         UIView.animateWithDuration(duration, animations: {
-            self.tableView.contentInset = UIEdgeInsetsMake(self.tableView.contentInset.top, self.tableView.contentInset.left, kbHeight, self.tableView.contentInset.left)
-            self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(self.tableView.contentInset.top, self.tableView.contentInset.left, kbHeight, self.tableView.contentInset.left)
+            self.tableView.contentInset = UIEdgeInsetsMake(self.tableView.contentInset.top, self.tableView.contentInset.left, kbHeight, self.tableView.contentInset.right)
+            self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(self.tableView.contentInset.top, self.tableView.contentInset.left, kbHeight, self.tableView.contentInset.right)
         })
     }
     
