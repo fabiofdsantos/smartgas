@@ -1,33 +1,32 @@
 //
-//  VehiclesList.swift
+//  FuelTypeList.swift
 //  smartgas
 //
-//  Created by Mateus Silva on 11/12/15.
+//  Created by Mateus Silva on 30/12/15.
 //  Copyright © 2015 Mateus Silva. All rights reserved.
 //
 
 import UIKit
 
-class VehiclesList: NSObject, NSCoding {
+class FuelTypeList: NSObject, NSCoding {
     
-    var vehicles: [Vehicle]
-    let vehiclesKey = "vehicles"
+    var fuelTypes: [FuelType]
+    let fuelTypesKey = "fuelTypes"
     
     // MARK: - Initializers
     
     override init() {
-        vehicles = [Vehicle]()
+        fuelTypes = [FuelType]()
         super.init()
     }
     
     // MARK: - NSCoding
     required init(coder decoder: NSCoder) {
-        vehicles = decoder.decodeObjectForKey(vehiclesKey) as! [Vehicle]
+        fuelTypes = decoder.decodeObjectForKey(fuelTypesKey) as! [FuelType]
         super.init()
     }
     
     func encodeWithCoder(coder: NSCoder) {
-        coder.encodeObject(vehicles, forKey: vehiclesKey)
+        coder.encodeObject(fuelTypes, forKey: fuelTypesKey)
     }
 }
-

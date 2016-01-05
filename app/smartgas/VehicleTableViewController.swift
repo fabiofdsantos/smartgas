@@ -101,22 +101,14 @@ class VehicleTableViewController: UITableViewController {
                 }
             }
         }
-        
-        
     }
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let vehicle = getVehicleFromIndexPath(indexPath)
+        let vehicle = vehiclesList.vehicles[indexPath.row]
         
         performSegueWithIdentifier(editVehicleSegueIdentifier, sender: vehicle)
     }
-    
-    func getVehicleFromIndexPath(indexPath: NSIndexPath) -> Vehicle {
-        return vehiclesList.vehicles[indexPath.row]
-    }
-    
-    
     
     func loadVehicles() {
         if let vehicles = loadVehiclesFromPath(vehiclesPath) {

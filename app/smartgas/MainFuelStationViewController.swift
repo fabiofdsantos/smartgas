@@ -15,9 +15,11 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
     let locationManager = CLLocationManager()
     var currentLocation = CLLocationCoordinate2D()
     
-    @IBOutlet weak var fuelStationTableView: UITableView!
-    @IBOutlet weak var filterBar: UITabBar!
+    let showFuelStationSegueIdentifier = "showFuelStation"
+    let editVehicleSegueIdentifier = "editVehicle"
     
+    
+    @IBOutlet weak var fuelStationTableView: UITableView!
     
     override func viewDidLoad() {						
         super.viewDidLoad()
@@ -25,7 +27,7 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
         fuelStationTableView.delegate = self
         fuelStationTableView.dataSource = self
         
-        FuelStationClient.getAllFuelStations({ (fuelStations) -> Void in
+        WebServiceClient.getAllFuelStations({ (fuelStations) -> Void in
             self.fuelStations = fuelStations
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 self.fuelStationTableView.reloadData()
@@ -33,9 +35,6 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
         })
         
         locationInit()
-
-        self.fuelStationTableView.contentInset = UIEdgeInsetsMake(filterBar.frame.height, self.fuelStationTableView.contentInset.left, self.fuelStationTableView.contentInset.bottom, self.fuelStationTableView.contentInset.right)
-        self.fuelStationTableView.scrollIndicatorInsets = UIEdgeInsetsMake(filterBar.frame.height, self.fuelStationTableView.contentInset.left, self.fuelStationTableView.contentInset.bottom, self.fuelStationTableView.contentInset.right)
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -130,34 +129,32 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
         return myLocation.distanceFromLocation(destination)
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let fuelStation = fuelStations![indexPath.row]
+        
+        performSegueWithIdentifier(showFuelStationSegueIdentifier, sender: fuelStation)
+    }
     
     
-/*    @IBAction func segmentFilter(sender: UISegmentedControl) {
-        let actionSheet = UIAlertController(title: "", message: "Choose filter", preferredStyle: UIAlertControllerStyle.ActionSheet)
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        let identifier = segue.identifier!
         
-        let distance = UIAlertAction(title: "Sort by distance", style: UIAlertActionStyle.Default){(action) -> Void in
-            
+        if identifier == showFuelStationSegueIdentifier {
+            if let nextController = segue.destinationViewController.childViewControllers[0] as? ShowFuelStationTableViewController {
+                /*nextController.vehiclesPath = self.vehiclesPath
+                nextController.vehiclesList = self.vehiclesList*/
+            }
+        }/* else if identifier == editVehicleSegueIdentifier {
+        if let vehicle = sender as? Vehicle {
+        if let nextController = segue.destinationViewController.childViewControllers[0] as? CreateVehicleTableViewController {
+        nextController.vehiclesPath = self.vehiclesPath
+        nextController.vehiclesList = self.vehiclesList
+        nextController.vehicle = vehicle
         }
-        
-        let cheapest = UIAlertAction(title: "Sort by cheapest", style: UIAlertActionStyle.Default){(action) -> Void in
-            
         }
-        
-        let cheapestByDistance = UIAlertAction(title: "Sort by cheapest based on distance", style: UIAlertActionStyle.Default){(action) -> Void in
-            
-        }
-        
-        let dismissAction = UIAlertAction(title: "Close", style: UIAlertActionStyle.Cancel){(action) -> Void in
-            
-        }
-        
-        actionSheet.addAction(distance)
-        actionSheet.addAction(cheapest)
-        actionSheet.addAction(cheapestByDistance)
-        actionSheet.addAction(dismissAction)
-        presentViewController(actionSheet, animated: true, completion: nil)
-        
-    }*/
+        }*/
+    }
+    
     
 
     /*

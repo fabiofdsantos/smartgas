@@ -1,27 +1,18 @@
 //
-//  FuelTypeTableViewController.swift
+//  ShowFuelStationTableViewController.swift
 //  smartgas
 //
-//  Created by Mateus Silva on 28/11/15.
-//  Copyright © 2015 Mateus Silva. All rights reserved.
+//  Created by Mateus Silva on 04/01/16.
+//  Copyright © 2016 Mateus Silva. All rights reserved.
 //
 
 import UIKit
 
-protocol FuelTypeTableViewControllerDelegate
-{
-    func sendFuel(fuel: String)
-}
-
-class FuelTypeTableViewController: UITableViewController {
-    
-    var vehicleFuel: String?
-    
-    var delegate:CreateVehicleTableViewController?
+class ShowFuelStationTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -36,47 +27,26 @@ class FuelTypeTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    /*override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
+        return 0
+    }*/
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    /*override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 5
-        //return FuelTypes.count()
-    }
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let section = indexPath.section
-        let numberOfRows = tableView.numberOfRowsInSection(section)
-        for row in 0..<numberOfRows {
-            if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: section)) {
-                cell.accessoryType = row == indexPath.row ? .Checkmark : .None
-                if cell.accessoryType == .Checkmark {
-                    if let fuelText = cell.textLabel?.text {
-                        vehicleFuel = fuelText
-                        self.delegate?.sendFuel(fuelText)
-                    }
-                }
-            }
-        }
-        tableView.reloadData();
-    }
+        return 0
+    }*/
 
+    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("fuelTypeCell", forIndexPath: indexPath) as! FuelTypeTableViewCell
-        
-        /*let fuelType = FuelTypes.allValues()[indexPath.row]
-        cell.setFuel(fuelType)
-        print(vehicleFuel)
-        if vehicleFuel == FuelTypes.allValues()[indexPath.row] {
-            cell.accessoryType = .Checkmark
-        }*/
-        
+        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+
+        // Configure the cell...
+
         return cell
     }
-    
+    */
+
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

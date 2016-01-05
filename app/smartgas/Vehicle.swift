@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class Vehicle: NSObject, NSCoding {
     var make: String
     var model: String

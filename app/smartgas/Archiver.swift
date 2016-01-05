@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 let vehiclesKey:String = "vehiclesList"
 
 
@@ -25,9 +24,6 @@ func randomImageName () -> String {
     
     return randomString
 }
-
-
-
 
 func documentsDirectory() -> String {
     let documentsFolderPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]

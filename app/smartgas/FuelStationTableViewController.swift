@@ -14,11 +14,15 @@ class FuelStationTableViewController: UITableViewController, CLLocationManagerDe
     var fuelStations:[FuelStation]?
     let locationManager = CLLocationManager()
     var currentLocation = CLLocationCoordinate2D()
+    
+    let showFuelStationSegueIdentifier = "showFuelStation"
+    let editVehicleSegueIdentifier = "editVehicle"
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        FuelStationClient.getAllFuelStations({ (fuelStations) -> Void in
+        WebServiceClient.getAllFuelStations({ (fuelStations) -> Void in
             self.fuelStations = fuelStations
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 self.tableView.reloadData()
@@ -70,12 +74,7 @@ class FuelStationTableViewController: UITableViewController, CLLocationManagerDe
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
         }
         locationManager.distanceFilter = kCLDistanceFilterNone
-        if #available(iOS 8.0, *) {
-            locationManager.requestWhenInUseAuthorization()
-        } else {
-            // Fallback on earlier versions
-        }
-
+        locationManager.requestWhenInUseAuthorization()
     }
     
     func batteryStateDidChange(notification: NSNotification) {
@@ -113,7 +112,6 @@ class FuelStationTableViewController: UITableViewController, CLLocationManagerDe
     }
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        
         locationManager.startUpdatingLocation()
     }
     
@@ -122,35 +120,38 @@ class FuelStationTableViewController: UITableViewController, CLLocationManagerDe
     */
     
     
-    @IBAction func filterButton(sender: UIBarButtonItem) {
-        /*let actionSheet = UIAlertController(title: "", message: "Choose filter", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        
-        let distance = UIAlertAction(title: "Sort by distance", style: UIAlertActionStyle.Default){(action) -> Void in
-
-        }
-        
-        let cheapest = UIAlertAction(title: "Sort by cheapest", style: UIAlertActionStyle.Default){(action) -> Void in
-
-        }
-        
-        let cheapestByDistance = UIAlertAction(title: "Sort by cheapest based on distance", style: UIAlertActionStyle.Default){(action) -> Void in
-            
-        }
-        
-        let dismissAction = UIAlertAction(title: "Close", style: UIAlertActionStyle.Cancel){(action) -> Void in
-            
-        }
-        
-        actionSheet.addAction(distance)
-        actionSheet.addAction(cheapest)
-        actionSheet.addAction(cheapestByDistance)
-        actionSheet.addAction(dismissAction)
-        presentViewController(actionSheet, animated: true, completion: nil)*/
-
-    }
-    
     func getDistance(myLocation: CLLocation, destination: CLLocation) -> CLLocationDistance {
         return myLocation.distanceFromLocation(destination)
+    }
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let fuelStation = fuelStations![indexPath.row]
+        
+        performSegueWithIdentifier(showFuelStationSegueIdentifier, sender: fuelStation)
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        let identifier = segue.identifier!
+        
+        print("AAA")
+        if identifier == showFuelStationSegueIdentifier {
+            print("ASDASD")
+            if let nextController = segue.destinationViewController.childViewControllers[0] as? ShowFuelStationTableViewController {
+                print("TESTE")
+                /*nextController.vehiclesPath = self.vehiclesPath
+                nextController.vehiclesList = self.vehiclesList*/
+            }
+        }/* else if identifier == editVehicleSegueIdentifier {
+            if let vehicle = sender as? Vehicle {
+                if let nextController = segue.destinationViewController.childViewControllers[0] as? CreateVehicleTableViewController {
+                    nextController.vehiclesPath = self.vehiclesPath
+                    nextController.vehiclesList = self.vehiclesList
+                    nextController.vehicle = vehicle
+                }
+            }
+        }*/
     }
     
 
@@ -186,16 +187,6 @@ class FuelStationTableViewController: UITableViewController, CLLocationManagerDe
     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the item to be re-orderable.
         return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
     */
 
