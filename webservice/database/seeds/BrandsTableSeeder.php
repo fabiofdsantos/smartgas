@@ -23,9 +23,9 @@ class BrandsTableSeeder extends Seeder
             ['value' => 'Genérico'],
             ['value' => 'Repsol'],
             ['value' => 'Galp'],
-	    ['value' => 'BP'],
-	    ['value' => 'PRIO'],
-	    ['value' => 'CEPSA'],
+        ['value'     => 'BP'],
+        ['value'     => 'PRIO'],
+        ['value'     => 'CEPSA'],
         ];
 
         DB::table('brands')->insert($brands);

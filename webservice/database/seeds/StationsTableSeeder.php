@@ -32,7 +32,7 @@ class StationsTableSeeder extends Seeder
             'updated_at'      => \Carbon\Carbon::now(),
         ];
 
-	$stations[] = [
+        $stations[] = [
             'title'           => 'Galp Leiria Continente',
             'address'         => 'EN 1 2400-823 Parceiros-Alto de Vieiro',
             'latitude'        => '39.730700',
@@ -45,7 +45,7 @@ class StationsTableSeeder extends Seeder
             'updated_at'      => \Carbon\Carbon::now(),
         ];
 
-	$stations[] = [
+        $stations[] = [
             'title'           => 'BP Estrada da Estacao',
             'address'         => 'Estrada da Estacao 2400-281 Leiria',
             'latitude'        => '39.754264',
@@ -58,7 +58,7 @@ class StationsTableSeeder extends Seeder
             'updated_at'      => \Carbon\Carbon::now(),
         ];
 
-	$stations[] = [
+        $stations[] = [
             'title'           => 'PRIO Leiria',
             'address'         => 'Rua Capitão Mouzinho Albuquerque nº 70 2400-193 Leiria',
             'latitude'        => '39.747570',
@@ -70,8 +70,8 @@ class StationsTableSeeder extends Seeder
             'created_at'      => \Carbon\Carbon::now(),
             'updated_at'      => \Carbon\Carbon::now(),
         ];
-	
-	$stations[] = [
+
+        $stations[] = [
             'title'           => 'LEIRIA POUSOS',
             'address'         => 'R. Carolina Ferreira Ribeiro - Pousos 2400-092 Leiria',
             'latitude'        => '39.741122',
@@ -83,11 +83,9 @@ class StationsTableSeeder extends Seeder
             'created_at'      => \Carbon\Carbon::now(),
             'updated_at'      => \Carbon\Carbon::now(),
         ];
-		
-	foreach ($stations as $station){
-		DB::table('stations')->insert($station);
-	}
-	
 
+        foreach ($stations as $station) {
+            DB::table('stations')->insert($station);
+        }
     }
 }
