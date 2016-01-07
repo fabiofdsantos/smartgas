@@ -70,6 +70,7 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
         let cell = tableView.dequeueReusableCellWithIdentifier("fuelStationCell", forIndexPath: indexPath) as! FuelStationTableViewCell
         
         let fuelStation = fuelStations![indexPath.row]
+
         cell.setFuelStation(fuelStation, brands: brands)
         
         return cell
@@ -143,7 +144,9 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        let identifier = segue.identifier!
+        guard let identifier = segue.identifier else {
+            return;
+        }
         
         if identifier == showFuelStationSegueIdentifier {
             if let nextController = segue.destinationViewController.childViewControllers[0] as? ShowFuelStationTableViewController {

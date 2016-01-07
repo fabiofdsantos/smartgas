@@ -22,7 +22,7 @@ class DistrictController extends Controller
      */
     public function index()
     {
-        $districts = app('db')->table('district')->get();
+        $districts = app('db')->table('districts')->get();
 
         return response()->json(['districts' => $districts], 200, [], JSON_NUMERIC_CHECK);
     }
