@@ -21,7 +21,7 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
     var imagePickerController: UIImagePickerController!
     
     var vehicle: Vehicle?
-    var vehiclesList: VehiclesList!
+    var vehiclesList: [Vehicle]!
     var vehiclesPath: String?
     var vehicleFuel: String?
 
@@ -148,7 +148,7 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
     
     @IBAction func saveBarButton(sender: UIBarButtonItem) {
         addOrReplaceVehicle()
-        saveVehicles(vehiclesList, toPath: vehiclesPath!)
+        Vehicle.saveMany(vehiclesList)
         
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -157,15 +157,15 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
     func addOrReplaceVehicle() {
         if let newVehicle = createVehicleFromInputs() {
             if vehicle == nil {
-                vehiclesList.vehicles.append(newVehicle)
+                vehiclesList.append(newVehicle)
             } else {
                 /*if let delegate = self.delegate {
                     delegate.setEditedItem(newItem)
                 }*/
                 
-                for var i = 0; i < vehiclesList.vehicles.count; i++ {
-                    if vehicle!.make == vehiclesList!.vehicles[i].make {
-                        vehiclesList!.vehicles[i] = newVehicle
+                for var i = 0; i < vehiclesList.count; i++ {
+                    if vehicle!.make == vehiclesList[i].make {
+                        vehiclesList[i] = newVehicle
                     }
                 }
             }
@@ -188,8 +188,8 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
         
         var imageName = randomImageName()+".jpg"
         
-        for var i = 0; i < vehiclesList.vehicles.count; i++ {
-            if imageName == vehiclesList.vehicles[i].imageName {
+        for var i = 0; i < vehiclesList.count; i++ {
+            if imageName == vehiclesList[i].imageName {
                 imageName = randomImageName()+".jpg"
                 i = 0
             }

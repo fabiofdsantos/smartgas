@@ -18,46 +18,71 @@ class Vehicle: NSObject, NSCoding {
     var image: UIImage?
     
     var imageName: String
-
-    //Constructors
-    /*init(make: String, model: String, image: UIImage){
-        self.make = make
-        self.model = model
-        self.image = image
-        
-        super.init()
-    }*/
     
     init(make: String, model: String, imageName: String){
         self.make = make
         self.model = model
         self.imageName = imageName
-        
-        super.init()
     }
     
+    struct Const {
+        static let make = "make"
+        static let model = "model"
+        static let mileageKm = "mileageKm"
+        static let consume = "consume"
+        static let fuel = "fuel"
+        static let image = "image"
+        static let imageName = "imageName"
+    }
     
     // MARK: NSCoding
-    required init(coder decoder: NSCoder) {
-        self.make = decoder.decodeObjectForKey("make") as! String
-        self.model = decoder.decodeObjectForKey("model") as! String
-        self.mileageKm = decoder.decodeObjectForKey("mileageKm") as? Float ?? 0.0
-        self.consume = decoder.decodeObjectForKey("consume") as? Float ?? 0.0
-        self.fuel = decoder.decodeObjectForKey("fuel") as? String ?? "Diesel"
-        self.imageName = decoder.decodeObjectForKey("imageName") as! String
-        //self.image = UIImage(contentsOfFile: loadImageFileName(imageName!))!
-        //print(loadImageFileName(imageName!))
-        
-        super.init()
+    func encodeWithCoder(coder: NSCoder) {
+        coder.encodeObject(make, forKey: Const.make)
+        coder.encodeObject(model, forKey: Const.model)
+        coder.encodeFloat(mileageKm ?? 0.0, forKey: Const.mileageKm)
+        coder.encodeFloat(consume ?? 0.0, forKey: Const.consume)
+        coder.encodeObject(fuel ?? "Diesel", forKey: Const.fuel)
+        coder.encodeObject(imageName, forKey: Const.imageName)
     }
     
-    func encodeWithCoder(coder: NSCoder) {
-        coder.encodeObject(make, forKey: "make")
-        coder.encodeObject(model, forKey: "model")
-        coder.encodeFloat(mileageKm ?? 0.0, forKey: "mileageKm")
-        coder.encodeFloat(consume ?? 0.0, forKey: "consume")
-        coder.encodeObject(fuel ?? "Diesel", forKey: "fuel")
-        coder.encodeObject(imageName, forKey: "imageName")
+    required init?(coder decoder: NSCoder) {
+        self.make = decoder.decodeObjectForKey(Const.make) as! String
+        self.model = decoder.decodeObjectForKey(Const.model) as! String
+        self.mileageKm = decoder.decodeObjectForKey(Const.mileageKm) as? Float ?? 0.0
+        self.consume = decoder.decodeObjectForKey(Const.consume) as? Float ?? 0.0
+        self.fuel = decoder.decodeObjectForKey(Const.fuel) as? String ?? "Diesel"
+        self.imageName = decoder.decodeObjectForKey(Const.imageName) as! String
+        //self.image = UIImage(contentsOfFile: loadImageFileName(imageName!))!
+        //print(loadImageFileName(imageName!))
     }
+    
+    static func saveMany (brands: [Vehicle]) -> Bool {
+        let documentsPath = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])
+        
+        let filePath = documentsPath.URLByAppendingPathComponent("Vehicles.data")
+        
+        let path = filePath.path!
+        
+        if NSKeyedArchiver.archiveRootObject(brands, toFile: path) {
+            return true
+        }
+        
+        return false
+    }
+    
+    static func loadAll() -> [Vehicle] {
+        var dataToRetrieve = [Vehicle]()
+        
+        let documentsPath = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])
+        let filePath = documentsPath.URLByAppendingPathComponent("Vehicles.data", isDirectory: false)
+        
+        let path = filePath.path!
+        
+        if let newData = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? [Vehicle] {
+            dataToRetrieve = newData
+        }
+        return dataToRetrieve
+    }
+
     
 }

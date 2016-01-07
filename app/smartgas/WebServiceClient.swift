@@ -134,7 +134,7 @@ class WebServiceClient {
                     fuelTypes.append(
                         FuelType(
                             id: brand.objectForKey("id") as! Int,
-                            type: brand.objectForKey("value") as! String
+                            name: brand.objectForKey("value") as! String
                         )
                     )
                 }

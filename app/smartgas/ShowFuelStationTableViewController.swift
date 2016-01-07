@@ -22,7 +22,7 @@ class ShowFuelStationTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setFuelStationView()
+        //setFuelStationView()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -35,12 +35,12 @@ class ShowFuelStationTableViewController: UITableViewController {
         guard let fuelStation = self.fuelStation else {
             return
         }
-        brandLabel.text = fuelStation.make
-        nameLabel.text = fuelStation.model
-        fuelStationImageView.image = UIImage(contentsOfFile: fileInDocumentsDirectory(fuelStation.imageName))
-        addressLabel.text = fuelStation.fuel
-        districtLabel = fuelStation.fuel
-        distanceLabel.text = ""
+        //brandLabel.text = fuelStation.make
+        //nameLabel.text = fuelStation.model
+        //fuelStationImageView.image = UIImage(contentsOfFile: fileInDocumentsDirectory(fuelStation.imageName))
+        //addressLabel.text = fuelStation.fuel
+        //districtLabel = fuelStation.fuel
+        //distanceLabel.text = ""
     }
 
     override func didReceiveMemoryWarning() {
