@@ -17,7 +17,6 @@ class FuelStation: NSObject, NSCoding {
     var districtId: Int?
     var municipalityId: Int?
     
-    
     //Constructors
     init(title: String, address: String){
         self.title = title
