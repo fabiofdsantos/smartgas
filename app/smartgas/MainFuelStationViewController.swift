@@ -11,6 +11,7 @@ import CoreLocation
 
 class MainFuelStationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
     
+    var brands:[Brand]!
     var fuelStations:[FuelStation]?
     let locationManager = CLLocationManager()
     var currentLocation = CLLocationCoordinate2D()
@@ -27,10 +28,15 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
         fuelStationTableView.delegate = self
         fuelStationTableView.dataSource = self
         
-        WebServiceClient.getAllFuelStations({ (fuelStations) -> Void in
-            self.fuelStations = fuelStations
-            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                self.fuelStationTableView.reloadData()
+        WebServiceClient.getAllBrands({ (brands) -> Void in
+            self.brands = brands
+            
+            WebServiceClient.getAllFuelStations({ (fuelStations) -> Void in
+                self.fuelStations = fuelStations
+                
+                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                    self.fuelStationTableView.reloadData()
+                })
             })
         })
         
@@ -64,8 +70,8 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
         let cell = tableView.dequeueReusableCellWithIdentifier("fuelStationCell", forIndexPath: indexPath) as! FuelStationTableViewCell
         
         let fuelStation = fuelStations![indexPath.row]
-        
-        cell.setFuelStation(fuelStation)
+
+        cell.setFuelStation(fuelStation, brands: brands)
         
         return cell
     }

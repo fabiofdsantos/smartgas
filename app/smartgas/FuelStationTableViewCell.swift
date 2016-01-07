@@ -13,11 +13,18 @@ class FuelStationTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var brandImage: UIImageView!
     
-    func setFuelStation (fuelStation: FuelStation) {
+    func setFuelStation (fuelStation: FuelStation, brands: [Brand]) {
         self.titleLabel.text = fuelStation.title
         self.addressLabel.text = fuelStation.address
         self.distanceLabel.text = "...Km"
+        
+        for brand in brands {
+            if(brand.id == fuelStation.brandId) {
+                self.brandImage.image = brand.image
+            }
+        }
     }
     
     func setDistance (distance: String) {

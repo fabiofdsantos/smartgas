@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class WebServiceClient {
     
@@ -82,10 +83,14 @@ class WebServiceClient {
             if let jsonResponse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary {
                 
                 for brand in (jsonResponse.objectForKey("brands") as! NSArray) {
+                    let base64Image = brand.objectForKey("image") as! String
+                    let decodedData = NSData(base64EncodedString: base64Image, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
+                    
                     brands.append(
                         Brand(
                             id: brand.objectForKey("id") as! Int,
-                            name: brand.objectForKey("value") as! String
+                            name: brand.objectForKey("value") as! String,
+                            image: UIImage(data: decodedData!)!
                         )
                     )
                 }
@@ -94,7 +99,11 @@ class WebServiceClient {
             print (error)
         }
         
-        return brands
+        if (Brand.saveMany(brands)) {
+            return brands
+        }
+        
+        return [Brand]()
     }
     
     static func getAllFuelTypes(completionHandler: ([FuelType]?) -> Void) {

@@ -26,7 +26,7 @@ class BrandController extends Controller
 
         foreach ($brands as $brand) {
             $data = file_get_contents(storage_path('app/brands/').$brand->id.'.jpg');
-            $brand->image = 'data:image/jpg;base64,'.base64_encode($data);
+            $brand->image = base64_encode($data);
         }
 
         return response()->json(['brands' => $brands], 200, [], JSON_NUMERIC_CHECK);
