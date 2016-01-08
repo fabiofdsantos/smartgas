@@ -13,16 +13,14 @@ class Vehicle: NSObject, NSCoding {
     var model: String
     var mileageKm: Float?
     var consume: Float?
-    var fuel: String?
-    
     var image: UIImage?
+    var fuel_id: Int
     
-    var imageName: String
-    
-    init(make: String, model: String, imageName: String){
+    init(make: String, model: String, image: UIImage, fuel_id: Int){
         self.make = make
         self.model = model
-        self.imageName = imageName
+        self.image = image
+        self.fuel_id = fuel_id
     }
     
     struct Const {
@@ -30,9 +28,8 @@ class Vehicle: NSObject, NSCoding {
         static let model = "model"
         static let mileageKm = "mileageKm"
         static let consume = "consume"
-        static let fuel = "fuel"
         static let image = "image"
-        static let imageName = "imageName"
+        static let fuel_id = "fuel_id"
     }
     
     // MARK: NSCoding
@@ -41,8 +38,8 @@ class Vehicle: NSObject, NSCoding {
         coder.encodeObject(model, forKey: Const.model)
         coder.encodeFloat(mileageKm ?? 0.0, forKey: Const.mileageKm)
         coder.encodeFloat(consume ?? 0.0, forKey: Const.consume)
-        coder.encodeObject(fuel ?? "Diesel", forKey: Const.fuel)
-        coder.encodeObject(imageName, forKey: Const.imageName)
+        coder.encodeObject(image, forKey: Const.image)
+        coder.encodeInteger(fuel_id, forKey: Const.fuel_id)
     }
     
     required init?(coder decoder: NSCoder) {
@@ -50,10 +47,8 @@ class Vehicle: NSObject, NSCoding {
         self.model = decoder.decodeObjectForKey(Const.model) as! String
         self.mileageKm = decoder.decodeObjectForKey(Const.mileageKm) as? Float ?? 0.0
         self.consume = decoder.decodeObjectForKey(Const.consume) as? Float ?? 0.0
-        self.fuel = decoder.decodeObjectForKey(Const.fuel) as? String ?? "Diesel"
-        self.imageName = decoder.decodeObjectForKey(Const.imageName) as! String
-        //self.image = UIImage(contentsOfFile: loadImageFileName(imageName!))!
-        //print(loadImageFileName(imageName!))
+        self.fuel_id = decoder.decodeIntegerForKey(Const.fuel_id)
+        self.image = decoder.decodeObjectForKey(Const.image) as? UIImage
     }
     
     static func saveMany (brands: [Vehicle]) -> Bool {

@@ -61,9 +61,8 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
         
         makeTextField.text = vehicle.make
         modelTextField.text = vehicle.model
-        carImageView.image = UIImage(contentsOfFile: fileInDocumentsDirectory(vehicle.imageName))
-        fuelTypeLabel.text = vehicle.fuel
-        vehicleFuel = vehicle.fuel
+        carImageView.image = vehicle.image
+        fuelTypeLabel.text = "\(vehicle.fuel_id)"
         imageLabel.text = ""
     }
     
@@ -186,22 +185,13 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
             return vehicle
         }
         
-        var imageName = randomImageName()+".jpg"
-        
-        for var i = 0; i < vehiclesList.count; i++ {
-            if imageName == vehiclesList[i].imageName {
-                imageName = randomImageName()+".jpg"
-                i = 0
-            }
-        }
-        
-        vehicle = Vehicle(make: make, model: model, imageName: imageName)
+        vehicle = Vehicle(make: make, model: model, image: image)
         vehicle!.image = image
         
         if let fuel = vehicleFuel {
-            vehicle!.fuel = fuel
+            vehicle!.fuel_id = fuel_id
         } else {
-            vehicle!.fuel = "None"
+            vehicle!.fuel_id = "None"
         }
         
         return vehicle

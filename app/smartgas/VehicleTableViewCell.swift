@@ -15,10 +15,9 @@ class VehicleTableViewCell: UITableViewCell {
     @IBOutlet weak var consumeLabel: UILabel!
     
     func setVehicle (vehicle:Vehicle) {
-        let imagePath = fileInDocumentsDirectory(vehicle.imageName)
-        self.vehicleImageView.image = UIImage(contentsOfFile: imagePath)
+        self.vehicleImageView.image = vehicle.image
         self.makeModelLabel.text = vehicle.make + " " + vehicle.model
-        self.fuelLabel.text = vehicle.fuel
+        self.fuelLabel.text = "\(vehicle.fuel_id)"
         self.consumeLabel.text = "\(vehicle.consume)"
     }
     
