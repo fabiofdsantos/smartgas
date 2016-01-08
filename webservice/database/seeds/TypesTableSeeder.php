@@ -20,17 +20,61 @@ class TypesTableSeeder extends Seeder
         DB::table('types')->delete();
 
         $types = [
-            ['value' => 'Diesel simple'],
-            ['value' => 'Diesel'],
-            ['value' => 'Diesel special'],
-            ['value' => 'Diesel colorful'],
-            ['value' => 'Gasoline simple 95'],
-            ['value' => 'Gasoline 95'],
-            ['value' => 'Gasoline special 95'],
-            ['value' => 'Gasoline 98'],
-            ['value' => 'Gasoline special 98'],
-            ['value' => 'LPG'],
-            ['value' => 'LNG'],
+            [
+                'value' => 'Diesel simple',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
+            [
+                'value' => 'Diesel',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
+            [
+                'value' => 'Diesel special',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
+            [
+                'value' => 'Diesel colorful',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
+            [
+                'value' => 'Gasoline simple 95',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
+            [
+                'value' => 'Gasoline 95',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
+            [
+                'value' => 'Gasoline special 95',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
+            [
+                'value' => 'Gasoline 98',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
+            [
+                'value' => 'Gasoline special 98',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
+            [
+                'value' => 'LPG',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
+            [
+                'value' => 'LNG',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
         ];
 
         DB::table('types')->insert($types);

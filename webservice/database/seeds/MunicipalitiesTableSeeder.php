@@ -22,7 +22,12 @@ class MunicipalitiesTableSeeder extends Seeder
         $leiria_district_id = app('db')->table('districts')->where('value', 'Leiria')->pluck('id');
 
         $municipalities = [
-            ['value' => 'Leiria', 'district_id' => $leiria_district_id],
+            [
+                'value' => 'Leiria',
+                'district_id' => $leiria_district_id,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
         ];
 
         DB::table('municipalities')->insert($municipalities);

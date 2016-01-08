@@ -20,7 +20,11 @@ class DistrictsTableSeeder extends Seeder
         DB::table('districts')->delete();
 
         $districts = [
-            ['value' => 'Leiria'],
+            [
+                'value' => 'Leiria',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
         ];
 
         DB::table('districts')->insert($districts);
