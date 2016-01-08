@@ -40,7 +40,11 @@ class StationController extends Controller
                 if (!empty($request->input('brand'))) {
                     $query->whereIn('brand_id', explode(',', $request->input('brand')));
                 }
-            })->get();
+            })->get([
+                    'id', 'title', 'address', 'latitude', 'longitude',
+                    'brand_id', 'schedule_id', 'district_id', 'municipality_id',
+                    'updated_at',
+                ]);
 
         return response()->json(['stations' => $stations], 200, [], JSON_NUMERIC_CHECK);
     }
@@ -54,7 +58,10 @@ class StationController extends Controller
      */
     public function show($id)
     {
-        $station = app('db')->table('stations')->where('id', $id)->first();
+        $station = app('db')->table('stations')->where('id', $id)->first([
+                'id', 'title', 'address', 'latitude', 'longitude', 'brand_id',
+                'schedule_id', 'district_id', 'municipality_id', 'updated_at',
+            ]);
 
         return response()->json(['station' => $station], 200, [], JSON_NUMERIC_CHECK);
     }

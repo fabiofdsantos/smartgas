@@ -22,7 +22,9 @@ class DistrictController extends Controller
      */
     public function index()
     {
-        $districts = app('db')->table('districts')->get();
+        $districts = app('db')->table('districts')->get([
+                'id', 'value', 'updated_at',
+            ]);
 
         return response()->json(['districts' => $districts], 200, [], JSON_NUMERIC_CHECK);
     }
@@ -36,7 +38,9 @@ class DistrictController extends Controller
      */
     public function show($id)
     {
-        $district = app('db')->table('districts')->where('id', $id)->first();
+        $district = app('db')->table('districts')->where('id', $id)->first([
+                'id', 'value', 'updated_at',
+            ]);
 
         return response()->json(['district' => $district], 200, [], JSON_NUMERIC_CHECK);
     }
