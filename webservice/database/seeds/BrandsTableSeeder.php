@@ -20,12 +20,36 @@ class BrandsTableSeeder extends Seeder
         DB::table('brands')->delete();
 
         $brands = [
-            ['value' => 'Genérico'],
-            ['value' => 'Repsol'],
-            ['value' => 'Galp'],
-        ['value'     => 'BP'],
-        ['value'     => 'PRIO'],
-        ['value'     => 'CEPSA'],
+            [
+                'value'      => 'Genérico',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
+            [
+                'value'      => 'Repsol',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
+            [
+                'value'      => 'Galp',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
+            [
+                'value'      => 'BP',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
+            [
+                'value'      => 'PRIO',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
+            [
+                'value'      => 'CEPSA',
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
         ];
 
         DB::table('brands')->insert($brands);

@@ -22,7 +22,8 @@ class MunicipalityController extends Controller
      */
     public function index()
     {
-        $municipalities = app('db')->table('municipalities')->get();
+        $municipalities = app('db')->table('municipalities')
+            ->get(['id', 'value', 'district_id', 'updated_at']);
 
         return response()->json(['municipalities' => $municipalities], 200, [], JSON_NUMERIC_CHECK);
     }
@@ -36,7 +37,8 @@ class MunicipalityController extends Controller
      */
     public function show($id)
     {
-        $municipality = app('db')->table('municipalities')->where('id', $id)->first();
+        $municipality = app('db')->table('municipalities')->where('id', $id)
+            ->first(['id', 'value', 'district_id', 'updated_at']);
 
         return response()->json(['municipality' => $municipality], 200, [], JSON_NUMERIC_CHECK);
     }

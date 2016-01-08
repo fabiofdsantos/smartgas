@@ -22,7 +22,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands = app('db')->table('brands')->get();
+        $brands = app('db')->table('brands')->get(['id', 'value', 'updated_at']);
 
         foreach ($brands as $brand) {
             $data = file_get_contents(storage_path('app/brands/').$brand->id.'.jpg');
@@ -41,7 +41,7 @@ class BrandController extends Controller
      */
     public function show($id)
     {
-        $brand = app('db')->table('brands')->where('id', $id)->first();
+        $brand = app('db')->table('brands')->where('id', $id)->first(['id', 'value', 'updated_at']);
 
         $data = file_get_contents(storage_path('app/brands/').$brand->id.'.jpg');
         $brand->image = 'data:image/jpg;base64,'.base64_encode($data);
