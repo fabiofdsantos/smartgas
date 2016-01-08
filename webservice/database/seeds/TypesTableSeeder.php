@@ -20,78 +20,78 @@ class TypesTableSeeder extends Seeder
         DB::table('types')->delete();
 
         $types[] = [
-            'value' => 'Gasóleo',
-            'parent_id' => null,
+            'value'      => 'Gasóleo',
+            'parent_id'  => null,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
         ];
 
         $types[] = [
-            'value' => 'Gasóleo simples',
-            'parent_id' => app('db')->table('types')->where('value', 'Gasóleo')->pluck('id'),
+            'value'      => 'Gasóleo simples',
+            'parent_id'  => app('db')->table('types')->where('value', 'Gasóleo')->pluck('id'),
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
         ];
 
         $types[] = [
-            'value' => 'Gasóleo especial',
-            'parent_id' => app('db')->table('types')->where('value', 'Gasóleo')->pluck('id'),
+            'value'      => 'Gasóleo especial',
+            'parent_id'  => app('db')->table('types')->where('value', 'Gasóleo')->pluck('id'),
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
         ];
 
         $types[] = [
-            'value' => 'Gasóleo colorido',
-            'parent_id' => app('db')->table('types')->where('value', 'Gasóleo')->pluck('id'),
+            'value'      => 'Gasóleo colorido',
+            'parent_id'  => app('db')->table('types')->where('value', 'Gasóleo')->pluck('id'),
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
         ];
 
         $types[] = [
-            'value' => 'Gasolina 95',
-            'parent_id' => null,
+            'value'      => 'Gasolina 95',
+            'parent_id'  => null,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
         ];
 
         $types[] = [
-            'value' => 'Gasolina simples 95',
-            'parent_id' => app('db')->table('types')->where('value', 'Gasolina 95')->pluck('id'),
+            'value'      => 'Gasolina simples 95',
+            'parent_id'  => app('db')->table('types')->where('value', 'Gasolina 95')->pluck('id'),
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
         ];
 
         $types[] = [
-            'value' => 'Gasolina especial 95',
-            'parent_id' => app('db')->table('types')->where('value', 'Gasolina 95')->pluck('id'),
+            'value'      => 'Gasolina especial 95',
+            'parent_id'  => app('db')->table('types')->where('value', 'Gasolina 95')->pluck('id'),
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
         ];
 
         $types[] = [
-            'value' => 'Gasolina 98',
-            'parent_id' => null,
+            'value'      => 'Gasolina 98',
+            'parent_id'  => null,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
         ];
 
         $types[] = [
-            'value' => 'Gasolina especial 98',
-            'parent_id' => app('db')->table('types')->where('value', 'Gasolina 98')->pluck('id'),
+            'value'      => 'Gasolina especial 98',
+            'parent_id'  => app('db')->table('types')->where('value', 'Gasolina 98')->pluck('id'),
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
         ];
 
         $types[] = [
-            'value' => 'LPG',
-            'parent_id' => null,
+            'value'      => 'LPG',
+            'parent_id'  => null,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
         ];
 
         $tyoes[] = [
-            'value' => 'LNG',
-            'parent_id' => null,
+            'value'      => 'LNG',
+            'parent_id'  => null,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now(),
         ];

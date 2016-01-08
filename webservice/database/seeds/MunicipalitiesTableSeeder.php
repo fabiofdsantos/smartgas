@@ -23,10 +23,10 @@ class MunicipalitiesTableSeeder extends Seeder
 
         $municipalities = [
             [
-                'value' => 'Leiria',
+                'value'       => 'Leiria',
                 'district_id' => $leiria_district_id,
-                'created_at' => \Carbon\Carbon::now(),
-                'updated_at' => \Carbon\Carbon::now(),
+                'created_at'  => \Carbon\Carbon::now(),
+                'updated_at'  => \Carbon\Carbon::now(),
             ],
         ];
 
