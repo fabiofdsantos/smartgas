@@ -21,7 +21,7 @@ class DistrictsTableSeeder extends Seeder
 
         $districts = [
             [
-                'value' => 'Leiria',
+                'value'      => 'Leiria',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now(),
             ],

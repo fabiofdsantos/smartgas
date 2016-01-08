@@ -21,32 +21,32 @@ class BrandsTableSeeder extends Seeder
 
         $brands = [
             [
-                'value' => 'Genérico',
+                'value'      => 'Genérico',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now(),
             ],
             [
-                'value' => 'Repsol',
+                'value'      => 'Repsol',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now(),
             ],
             [
-                'value' => 'Galp',
+                'value'      => 'Galp',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now(),
             ],
             [
-                'value' => 'BP',
+                'value'      => 'BP',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now(),
             ],
             [
-                'value' => 'PRIO',
+                'value'      => 'PRIO',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now(),
             ],
             [
-                'value' => 'CEPSA',
+                'value'      => 'CEPSA',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now(),
             ],
