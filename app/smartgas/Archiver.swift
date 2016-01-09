@@ -20,6 +20,7 @@ func randomImageName () -> String {
     }
     
     return randomString
+    
 }
 
 func documentsDirectory() -> String {
