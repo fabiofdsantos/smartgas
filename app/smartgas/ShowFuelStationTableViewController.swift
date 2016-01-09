@@ -11,13 +11,7 @@ import Social
 
 class ShowFuelStationTableViewController: UITableViewController {
 
-    var fuelStation: FuelStation?
-    @IBOutlet weak var brandLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var districtLabel: UILabel!
-    @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var fuelStationImageView: UIImageView!
+    var fuelStation: FuelStation!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,15 +26,15 @@ class ShowFuelStationTableViewController: UITableViewController {
     }
     
     private func setFuelStationView() {
-        guard let fuelStation = self.fuelStation else {
+        /*guard let fuelStation = self.fuelStation else {
             return
-        }
-        brandLabel.text = fuelStation.make
-        nameLabel.text = fuelStation.model
-        fuelStationImageView.image = UIImage(contentsOfFile: fileInDocumentsDirectory(fuelStation.imageName))
-        addressLabel.text = fuelStation.fuel
-        districtLabel = fuelStation.fuel
-        distanceLabel.text = ""
+        }*/
+        //brandLabel.text = fuelStation.brandId
+        //nameLabel.text = fuelStation.title
+        //fuelStationImageView.image = UIImage(contentsOfFile: fileInDocumentsDirectory(fuelStation.imageName))
+        //addressLabel.text = fuelStation.fuel
+        //districtLabel = fuelStation.fuel
+        //distanceLabel.text = ""
     }
 
     override func didReceiveMemoryWarning() {
@@ -95,28 +89,36 @@ class ShowFuelStationTableViewController: UITableViewController {
         alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
         presentViewController(alertController, animated: true, completion: nil)
     }
+    
+    /*override func viewDidAppear(animated: Bool) {
+        setMapView()
+    }*/
 
     // MARK: - Table view data source
 
-    /*override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
-    }*/
+        return 3
+    }
 
-    /*override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
-    }*/
+        if section == 1 {
+            fuelStation
+        } else {
+            return 1
+        }
+    }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("fuelPriceCell", forIndexPath: indexPath)
 
-        // Configure the cell...
+        cell.textLabel?.text = "GAS";
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

@@ -19,7 +19,6 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
     let showFuelStationSegueIdentifier = "showFuelStation"
     let editVehicleSegueIdentifier = "editVehicle"
     
-    
     @IBOutlet weak var fuelStationTableView: UITableView!
     
     override func viewDidLoad() {						
@@ -57,12 +56,10 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
     // MARK: - Table view data source
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return fuelStations?.count ?? 0
     }
     
@@ -150,8 +147,9 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
         
         if identifier == showFuelStationSegueIdentifier {
             if let nextController = segue.destinationViewController.childViewControllers[0] as? ShowFuelStationTableViewController {
-                /*nextController.vehiclesPath = self.vehiclesPath
-                nextController.vehiclesList = self.vehiclesList*/
+                if let fuelStation = sender as? FuelStation {
+                    nextController.fuelStation = fuelStation
+                }
             }
         }/* else if identifier == editVehicleSegueIdentifier {
         if let vehicle = sender as? Vehicle {
