@@ -13,7 +13,7 @@ class FuelStationTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var brandImage: UIImageView!
+    @IBOutlet var brandImage: UIImageView!
     
     func setFuelStation (fuelStation: FuelStation, brands: [Brand]) {
         self.titleLabel.text = fuelStation.title

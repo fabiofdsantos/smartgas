@@ -16,7 +16,6 @@
 		693648261BFCEB8E00C7EC8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 693648251BFCEB8E00C7EC8F /* Assets.xcassets */; };
 		693648341BFCEB8E00C7EC8F /* smartgasTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693648331BFCEB8E00C7EC8F /* smartgasTests.swift */; };
 		6936483F1BFCEB8E00C7EC8F /* smartgasUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6936483E1BFCEB8E00C7EC8F /* smartgasUITests.swift */; };
-		693D30551C1B88900041A292 /* VehiclesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693D30541C1B88900041A292 /* VehiclesList.swift */; };
 		694F45991C29D6D3003AD118 /* MainFuelStationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694F45981C29D6D3003AD118 /* MainFuelStationViewController.swift */; };
 		69563DAC1C10CC6A0082ABBB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69563DAB1C10CC6A0082ABBB /* CoreLocation.framework */; };
 		698849261C00CC4700B7247B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 698849241C00CC4700B7247B /* LaunchScreen.storyboard */; };
@@ -30,8 +29,6 @@
 		69B44AFD1C347A49009DE724 /* FiltersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B44AFC1C347A49009DE724 /* FiltersList.swift */; };
 		69B44AFF1C347BC7009DE724 /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B44AFE1C347BC7009DE724 /* FilterTableViewCell.swift */; };
 		69B44B011C348CAA009DE724 /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B44B001C348CAA009DE724 /* Brand.swift */; };
-		69B44B031C348EDC009DE724 /* BrandList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B44B021C348EDC009DE724 /* BrandList.swift */; };
-		69B44B051C348EFC009DE724 /* FuelTypeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B44B041C348EFC009DE724 /* FuelTypeList.swift */; };
 		69B44B091C3B2532009DE724 /* ShowFuelStationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B44B081C3B2532009DE724 /* ShowFuelStationTableViewController.swift */; };
 		69B44B0B1C3B2BE2009DE724 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69B44B0A1C3B2BE2009DE724 /* MapKit.framework */; };
 		69C1B36C1C4086ED00327248 /* FuelStationPriceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C1B36B1C4086ED00327248 /* FuelStationPriceTableViewCell.swift */; };
@@ -43,6 +40,8 @@
 		69EBD7EC1C0F98810078B9E1 /* WebServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EBD7EB1C0F98810078B9E1 /* WebServiceClient.swift */; };
 		69EBD7EE1C0F9C170078B9E1 /* FuelStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EBD7ED1C0F9C170078B9E1 /* FuelStation.swift */; };
 		69FB1CC41C32D7E500A28688 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FB1CC31C32D7E500A28688 /* Social.framework */; };
+		C378C1DF1C3F1B7B0062938A /* District.swift in Sources */ = {isa = PBXBuildFile; fileRef = C378C1DE1C3F1B7B0062938A /* District.swift */; };
+		C378C1E11C3F20480062938A /* Municipality.swift in Sources */ = {isa = PBXBuildFile; fileRef = C378C1E01C3F20480062938A /* Municipality.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,7 +77,6 @@
 		6936483A1BFCEB8E00C7EC8F /* smartgasUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = smartgasUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6936483E1BFCEB8E00C7EC8F /* smartgasUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = smartgasUITests.swift; sourceTree = "<group>"; };
 		693648401BFCEB8E00C7EC8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		693D30541C1B88900041A292 /* VehiclesList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehiclesList.swift; sourceTree = "<group>"; };
 		694F45981C29D6D3003AD118 /* MainFuelStationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainFuelStationViewController.swift; sourceTree = "<group>"; };
 		69563DAB1C10CC6A0082ABBB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		698849251C00CC4700B7247B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -92,8 +90,6 @@
 		69B44AFC1C347A49009DE724 /* FiltersList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersList.swift; sourceTree = "<group>"; };
 		69B44AFE1C347BC7009DE724 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
 		69B44B001C348CAA009DE724 /* Brand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brand.swift; sourceTree = "<group>"; };
-		69B44B021C348EDC009DE724 /* BrandList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrandList.swift; sourceTree = "<group>"; };
-		69B44B041C348EFC009DE724 /* FuelTypeList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelTypeList.swift; sourceTree = "<group>"; };
 		69B44B081C3B2532009DE724 /* ShowFuelStationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowFuelStationTableViewController.swift; sourceTree = "<group>"; };
 		69B44B0A1C3B2BE2009DE724 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		69C1B36B1C4086ED00327248 /* FuelStationPriceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelStationPriceTableViewCell.swift; sourceTree = "<group>"; };
@@ -105,6 +101,8 @@
 		69EBD7EB1C0F98810078B9E1 /* WebServiceClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceClient.swift; sourceTree = "<group>"; };
 		69EBD7ED1C0F9C170078B9E1 /* FuelStation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelStation.swift; sourceTree = "<group>"; };
 		69FB1CC31C32D7E500A28688 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		C378C1DE1C3F1B7B0062938A /* District.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = District.swift; sourceTree = "<group>"; };
+		C378C1E01C3F20480062938A /* Municipality.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Municipality.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,10 +193,9 @@
 		698849291C00CC9F00B7247B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C378C1DE1C3F1B7B0062938A /* District.swift */,
+				C378C1E01C3F20480062938A /* Municipality.swift */,
 				698849271C00CC9500B7247B /* Vehicle.swift */,
-				693D30541C1B88900041A292 /* VehiclesList.swift */,
-				69B44B021C348EDC009DE724 /* BrandList.swift */,
-				69B44B041C348EFC009DE724 /* FuelTypeList.swift */,
 				69EBD7E61C0F73620078B9E1 /* FuelType.swift */,
 				69EBD7ED1C0F9C170078B9E1 /* FuelStation.swift */,
 				69B44AFC1C347A49009DE724 /* FiltersList.swift */,
@@ -387,23 +384,22 @@
 				69C1B3721C40876600327248 /* FuelStationMapTableViewCell.swift in Sources */,
 				698849281C00CC9500B7247B /* Vehicle.swift in Sources */,
 				69B44AFD1C347A49009DE724 /* FiltersList.swift in Sources */,
+				C378C1E11C3F20480062938A /* Municipality.swift in Sources */,
 				69EBD7E91C0F77710078B9E1 /* FuelTypeTableViewCell.swift in Sources */,
 				694F45991C29D6D3003AD118 /* MainFuelStationViewController.swift in Sources */,
 				69087FEB1C07B6AA007DAD29 /* Archiver.swift in Sources */,
 				693648211BFCEB8E00C7EC8F /* ViewController.swift in Sources */,
 				69954E041C0FC58B000B4778 /* FuelStationTableViewCell.swift in Sources */,
 				69EBD7E71C0F73620078B9E1 /* FuelType.swift in Sources */,
-				69B44B051C348EFC009DE724 /* FuelTypeList.swift in Sources */,
 				69B44B011C348CAA009DE724 /* Brand.swift in Sources */,
 				692EC6E91C07CB6500EEC1FA /* VehicleTableViewController.swift in Sources */,
 				69B44AFB1C346ACE009DE724 /* FilterDetailedTableViewController.swift in Sources */,
 				69B44AF91C346A8C009DE724 /* FilterTableViewController.swift in Sources */,
 				6988492F1C00DA8600B7247B /* CreateVehicleTableViewController.swift in Sources */,
 				6936481F1BFCEB8E00C7EC8F /* AppDelegate.swift in Sources */,
-				693D30551C1B88900041A292 /* VehiclesList.swift in Sources */,
+				C378C1DF1C3F1B7B0062938A /* District.swift in Sources */,
 				69EBD7EE1C0F9C170078B9E1 /* FuelStation.swift in Sources */,
 				69B44AFF1C347BC7009DE724 /* FilterTableViewCell.swift in Sources */,
-				69B44B031C348EDC009DE724 /* BrandList.swift in Sources */,
 				69EBD7EC1C0F98810078B9E1 /* WebServiceClient.swift in Sources */,
 				69AE25411C1638C100467288 /* MathClient.swift in Sources */,
 				69B44B091C3B2532009DE724 /* ShowFuelStationTableViewController.swift in Sources */,

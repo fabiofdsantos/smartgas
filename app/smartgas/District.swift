@@ -1,16 +1,17 @@
 //
-//  FuelTypes.swift
+//  District.swift
 //  smartgas
 //
-//  Created by Mateus Silva on 02/12/15.
-//  Copyright © 2015 Mateus Silva. All rights reserved.
+//  Created by Fábio Santos on 07/01/16.
+//  Copyright © 2016 Mateus Silva. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class FuelType: NSObject, NSCoding {
+class District: NSObject, NSCoding {
     var id: Int!
     var name: String!
+    var municipalityId: Int!
     
     init(id: Int, name: String) {
         self.id = id
@@ -33,10 +34,10 @@ class FuelType: NSObject, NSCoding {
         name = decoder.decodeObjectForKey(Const.name) as! String
     }
     
-    static func saveMany (brands: [FuelType]) -> Bool {
+    static func saveMany (brands: [District]) -> Bool {
         let documentsPath = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])
         
-        let filePath = documentsPath.URLByAppendingPathComponent("FuelTypes.data")
+        let filePath = documentsPath.URLByAppendingPathComponent("Districts.data")
         
         let path = filePath.path!
         
@@ -47,15 +48,15 @@ class FuelType: NSObject, NSCoding {
         return false
     }
     
-    static func loadAll() -> [FuelType] {
-        var dataToRetrieve = [FuelType]()
+    static func loadAll()  -> [District] {
+        var dataToRetrieve = [District]()
         
         let documentsPath = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])
-        let filePath = documentsPath.URLByAppendingPathComponent("FuelTypes.data", isDirectory: false)
+        let filePath = documentsPath.URLByAppendingPathComponent("Districts.data", isDirectory: false)
         
         let path = filePath.path!
         
-        if let newData = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? [FuelType] {
+        if let newData = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? [District] {
             dataToRetrieve = newData
         }
         return dataToRetrieve

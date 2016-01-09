@@ -22,7 +22,7 @@ class TypeController extends Controller
      */
     public function index()
     {
-        $types = app('db')->table('types')->get();
+        $types = app('db')->table('types')->get(['id', 'value', 'updated_at']);
 
         return response()->json(['types' => $types], 200, [], JSON_NUMERIC_CHECK);
     }
@@ -36,7 +36,8 @@ class TypeController extends Controller
      */
     public function show($id)
     {
-        $type = app('db')->table('types')->where('id', $id)->first();
+        $type = app('db')->table('types')->where('id', $id)
+            ->first(['id', 'value', 'updated_at']);
 
         return response()->json(['type' => $type], 200, [], JSON_NUMERIC_CHECK);
     }

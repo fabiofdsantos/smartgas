@@ -16,7 +16,7 @@ class ShowFuelStationTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setFuelStationView()
+        //setFuelStationView()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -28,9 +28,15 @@ class ShowFuelStationTableViewController: UITableViewController {
     private func setFuelStationView() {
         /*guard let fuelStation = self.fuelStation else {
             return
+<<<<<<< HEAD
         }*/
         //brandLabel.text = fuelStation.brandId
         //nameLabel.text = fuelStation.title
+=======
+        }
+        //brandLabel.text = fuelStation.make
+        //nameLabel.text = fuelStation.model
+>>>>>>> 95404a60ae12cd7ce40de8d9b599d528eec0f469
         //fuelStationImageView.image = UIImage(contentsOfFile: fileInDocumentsDirectory(fuelStation.imageName))
         //addressLabel.text = fuelStation.fuel
         //districtLabel = fuelStation.fuel

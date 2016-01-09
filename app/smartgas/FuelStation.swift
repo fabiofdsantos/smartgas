@@ -9,19 +9,13 @@
 import Foundation
 
 class FuelStation: NSObject, NSCoding {
-    var title: String
-    var address: String
-    var latitude: Double?
-    var longitude: Double?
-    var brandId: Int?
-    var districtId: Int?
-    var municipalityId: Int?
-    
-    //Constructors
-    init(title: String, address: String){
-        self.title = title
-        self.address = address
-    }
+    var title: String!
+    var address: String!
+    var latitude: Double!
+    var longitude: Double!
+    var brandId: Int!
+    var districtId: Int!
+    var municipalityId: Int!
     
     init(title: String, address: String, latitude: Double, longitude: Double, brandId: Int, districtId: Int, municipalityId: Int){
         self.title = title
@@ -33,31 +27,62 @@ class FuelStation: NSObject, NSCoding {
         self.municipalityId = municipalityId
     }
     
-    override init() {
-        title = ""
-        address = ""
+    struct Const {
+        static let title = "title"
+        static let address = "address"
+        static let latitude = "latitude"
+        static let longitude = "longitude"
+        static let brandId = "brandId"
+        static let districtId = "districtId"
+        static let municipalityId = "municipalityId"
     }
-    
-    
     
     // MARK: NSCoding
-    required init?(coder decoder: NSCoder) {
-        title = decoder.decodeObjectForKey("title") as! String
-        address = decoder.decodeObjectForKey("address") as! String
-        latitude = decoder.decodeObjectForKey("latitude") as? Double ?? 0.0
-        longitude = decoder.decodeObjectForKey("longitude") as? Double ?? 0.0
-        brandId = decoder.decodeObjectForKey("brandId") as? Int ?? 0
-        districtId = decoder.decodeObjectForKey("districtId") as? Int ?? 0
-        municipalityId = decoder.decodeObjectForKey("municipalityId") as? Int ?? 0
+    func encodeWithCoder(coder: NSCoder) {
+        coder.encodeObject(title, forKey: Const.title)
+        coder.encodeObject(address, forKey: Const.address)
+        coder.encodeDouble(latitude, forKey: Const.latitude)
+        coder.encodeDouble(longitude, forKey: Const.longitude)
+        coder.encodeInteger(brandId, forKey: Const.brandId)
+        coder.encodeInteger(districtId, forKey: Const.districtId)
+        coder.encodeInteger(municipalityId, forKey: Const.municipalityId)
     }
     
-    func encodeWithCoder(coder: NSCoder) {
-        coder.encodeObject(title, forKey: "title")
-        coder.encodeObject(address, forKey: "address")
-        coder.encodeDouble(latitude ?? 0.0, forKey: "latitude")
-        coder.encodeDouble(longitude ?? 0.0, forKey: "longitude")
-        coder.encodeInteger(brandId ?? 0, forKey: "brandId")
-        coder.encodeInteger(districtId ?? 0, forKey: "districtId")
-        coder.encodeInteger(municipalityId ?? 0, forKey: "municipalityId")
+    required init?(coder decoder: NSCoder) {
+        title = decoder.decodeObjectForKey(Const.title) as! String
+        address = decoder.decodeObjectForKey(Const.address) as! String
+        latitude = decoder.decodeDoubleForKey(Const.latitude) 
+        longitude = decoder.decodeDoubleForKey(Const.longitude) 
+        brandId = decoder.decodeIntegerForKey(Const.brandId) 
+        districtId = decoder.decodeIntegerForKey(Const.districtId)
+        municipalityId = decoder.decodeIntegerForKey(Const.municipalityId)
+    }
+    
+    static func saveMany (brands: [FuelStation]) -> Bool {
+        let documentsPath = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])
+        
+        let filePath = documentsPath.URLByAppendingPathComponent("FuelStations.data")
+        
+        let path = filePath.path!
+        
+        if NSKeyedArchiver.archiveRootObject(brands, toFile: path) {
+            return true
+        }
+        
+        return false
+    }
+    
+    static func loadAll()  -> [FuelStation] {
+        var dataToRetrieve = [FuelStation]()
+        
+        let documentsPath = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])
+        let filePath = documentsPath.URLByAppendingPathComponent("FuelStations.data", isDirectory: false)
+        
+        let path = filePath.path!
+        
+        if let newData = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? [FuelStation] {
+            dataToRetrieve = newData
+        }
+        return dataToRetrieve
     }
 }

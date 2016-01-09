@@ -21,7 +21,7 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
     var imagePickerController: UIImagePickerController!
     
     var vehicle: Vehicle?
-    var vehiclesList: VehiclesList!
+    var vehiclesList: [Vehicle]!
     var vehiclesPath: String?
     var vehicleFuel: String?
 
@@ -61,9 +61,8 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
         
         makeTextField.text = vehicle.make
         modelTextField.text = vehicle.model
-        carImageView.image = UIImage(contentsOfFile: fileInDocumentsDirectory(vehicle.imageName))
-        fuelTypeLabel.text = vehicle.fuel
-        vehicleFuel = vehicle.fuel
+        carImageView.image = vehicle.image
+        fuelTypeLabel.text = "\(vehicle.fuel_id)"
         imageLabel.text = ""
     }
     
@@ -148,7 +147,7 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
     
     @IBAction func saveBarButton(sender: UIBarButtonItem) {
         addOrReplaceVehicle()
-        saveVehicles(vehiclesList, toPath: vehiclesPath!)
+        Vehicle.saveMany(vehiclesList)
         
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -157,15 +156,15 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
     func addOrReplaceVehicle() {
         if let newVehicle = createVehicleFromInputs() {
             if vehicle == nil {
-                vehiclesList.vehicles.append(newVehicle)
+                vehiclesList.append(newVehicle)
             } else {
                 /*if let delegate = self.delegate {
                     delegate.setEditedItem(newItem)
                 }*/
                 
-                for var i = 0; i < vehiclesList.vehicles.count; i++ {
-                    if vehicle!.make == vehiclesList!.vehicles[i].make {
-                        vehiclesList!.vehicles[i] = newVehicle
+                for var i = 0; i < vehiclesList.count; i++ {
+                    if vehicle!.make == vehiclesList[i].make {
+                        vehiclesList[i] = newVehicle
                     }
                 }
             }
@@ -186,22 +185,13 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
             return vehicle
         }
         
-        var imageName = randomImageName()+".jpg"
-        
-        for var i = 0; i < vehiclesList.vehicles.count; i++ {
-            if imageName == vehiclesList.vehicles[i].imageName {
-                imageName = randomImageName()+".jpg"
-                i = 0
-            }
-        }
-        
-        vehicle = Vehicle(make: make, model: model, imageName: imageName)
+        vehicle = Vehicle(make: make, model: model, image: image)
         vehicle!.image = image
         
         if let fuel = vehicleFuel {
-            vehicle!.fuel = fuel
+            vehicle!.fuel_id = fuel_id
         } else {
-            vehicle!.fuel = "None"
+            vehicle!.fuel_id = "None"
         }
         
         return vehicle
