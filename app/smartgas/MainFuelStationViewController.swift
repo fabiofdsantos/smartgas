@@ -19,6 +19,8 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
     let locationManager = CLLocationManager()
     var currentLocation = CLLocationCoordinate2D()
     
+    var tableRows = 0
+    
     let showFuelStationSegueIdentifier = "showFuelStation"
     let editVehicleSegueIdentifier = "editVehicle"
     
@@ -64,7 +66,8 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fuelStations?.count ?? 0
+        tableRows = fuelStations?.count ?? 0
+        return tableRows
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -89,86 +92,29 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
         locationManager.distanceFilter = kCLDistanceFilterNone
         
         locationManager.requestWhenInUseAuthorization()
-        
     }
     
     func batteryStateDidChange(notification: NSNotification) {
         print("BATTERY STATE CHANGE")
     }
     
-    
-    /*func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("NEW LOCATION")
-        let locationObj = locations.last
-        let coord = locationObj?.coordinate
-        if let c = coord {
-            currentLocation = c
-            print("lat: \(c.latitude) long:\(c.longitude)")
-            
-            if let fuelStations = self.fuelStations {
-                //for station in fuelStations {
-                let stationLocation = CLLocation(latitude: fuelStations[0].latitude!, longitude: fuelStations[0].longitude!)
-                print("DISTANCE: \(getDistance(locationObj!, destination: stationLocation))")
-                let distance = String(format:"%.1f", getDistance(locationObj!, destination: stationLocation)/1000)
-                print("DISTANCE IN KM: " + distance)
-                
-                let cell = self.fuelStationTableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
-                if let cc = cell as? FuelStationTableViewCell {
-                    cc.setDistance(distance)
-                }
-                //}
-            }
-            
-            
-            //defaults.setDouble(currentLocation.latitude, forKey: "latitude")
-            //defaults.setDouble(currentLocation.longitude, forKey: "longitude")
-        }
-        
-    }*/
-    
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let coordinates = locations.last?.coordinate {
             currentLocation = coordinates
             
-            for fuelStation in fuelStations {
-                let stationLocation = CLLocation(latitude: fuelStation.latitude!, longitude: fuelStation.longitude!)
-                let distance = String(format:"%.1f", getDistance(locations.last!, destination: stationLocation)/1000)
-                fuelStationTableView.
-            }
-            
-            if let fuelStations = self.fuelStations {
-                //for station in fuelStations {
-                let stationLocation = CLLocation(latitude: fuelStations[0].latitude!, longitude: fuelStations[0].longitude!)
-                print("DISTANCE: \(getDistance(locationObj!, destination: stationLocation))")
-                let distance = String(format:"%.1f", getDistance(locationObj!, destination: stationLocation)/1000)
-                print("DISTANCE IN KM: " + distance)
-                
-                let cell = self.fuelStationTableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
-                if let cc = cell as? FuelStationTableViewCell {
-                    cc.setDistance(distance)
+            for var index = 0; index < tableRows; index++ {
+                let stationLocation = CLLocation(latitude: fuelStations[index].latitude!, longitude: fuelStations[index].longitude!)
+                let distance = String(format:"%.1f", locations.last!.distanceFromLocation(stationLocation)/1000)
+                let cell = fuelStationTableView.cellForRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0))
+                if let cellResult = cell as? FuelStationTableViewCell {
+                    cellResult.setDistance(distance)
                 }
-                //}
             }
-            
-            
-            //defaults.setDouble(currentLocation.latitude, forKey: "latitude")
-            //defaults.setDouble(currentLocation.longitude, forKey: "longitude")
         }
-        
     }
-    
-    
-    
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         locationManager.startUpdatingLocation()
-    }
-    
-    /*
-    *Criar evento para trocar tipo de localizaçao consoante a mudança do estado de bateria
-    */
-    func getDistance(myLocation: CLLocation, destination: CLLocation) -> CLLocationDistance {
-        return myLocation.distanceFromLocation(destination)
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

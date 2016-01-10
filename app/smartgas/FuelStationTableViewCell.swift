@@ -18,7 +18,7 @@ class FuelStationTableViewCell: UITableViewCell {
     func setFuelStation (fuelStation: FuelStation, brands: [Brand]) {
         self.titleLabel.text = fuelStation.title
         self.addressLabel.text = fuelStation.address
-        self.distanceLabel.text = "...Km"
+        self.distanceLabel.text = "...km"
         
         for brand in brands {
             if(brand.id == fuelStation.brandId) {

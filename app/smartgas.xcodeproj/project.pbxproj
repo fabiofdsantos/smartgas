@@ -224,7 +224,6 @@
 		6988492B1C00CCC600B7247B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				69B44B081C3B2532009DE724 /* ShowFuelStationTableViewController.swift */,
 				6988492E1C00DA8600B7247B /* CreateVehicleTableViewController.swift */,
 				69B44AF81C346A8C009DE724 /* FilterTableViewController.swift */,
 				69B44AFA1C346ACE009DE724 /* FilterDetailedTableViewController.swift */,
@@ -233,6 +232,7 @@
 				693648201BFCEB8E00C7EC8F /* ViewController.swift */,
 				69FC316C1C416D3100C0EB70 /* InitTabBarViewController.swift */,
 				694F45981C29D6D3003AD118 /* MainFuelStationViewController.swift */,
+				69B44B081C3B2532009DE724 /* ShowFuelStationTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";

@@ -13,6 +13,8 @@ class FuelStationMapTableViewCell: UITableViewCell, MKMapViewDelegate {
     @IBOutlet weak var fuelStationMapView: MKMapView!
     var latitude: Double!
     var longitude: Double!
+    var brandName: String!
+    var stationName: String!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,8 +35,8 @@ class FuelStationMapTableViewCell: UITableViewCell, MKMapViewDelegate {
         
         let annotation = MKPointAnnotation()
         annotation.coordinate = currentLocation
-        annotation.title = "Teste"
-        annotation.subtitle = "Whe?"
+        annotation.title = brandName
+        annotation.subtitle = stationName
         
         fuelStationMapView.addAnnotation(annotation)
     }
