@@ -17,7 +17,7 @@ class VehicleTableViewCell: UITableViewCell {
     func setVehicle (vehicle:Vehicle) {
         self.vehicleImageView.image = vehicle.image
         self.makeModelLabel.text = vehicle.make + " " + vehicle.model
-        self.fuelLabel.text = "\(vehicle.fuel_id)"
+        self.fuelLabel.text = "\(vehicle.fuelId)"
         self.consumeLabel.text = "\(vehicle.consume)"
     }
     

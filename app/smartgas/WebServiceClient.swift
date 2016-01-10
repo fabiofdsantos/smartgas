@@ -36,6 +36,7 @@ class WebServiceClient {
             if let jsonResponse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary {
                 
                 for station in (jsonResponse.objectForKey("stations") as! NSArray) {
+                    let prices = getPrices(station.objectForKey("prices") as! NSArray) as [Int:Double]
                     
                     fuelStations.append(
                         FuelStation(
@@ -45,7 +46,8 @@ class WebServiceClient {
                             longitude: station.objectForKey("longitude") as! Double,
                             brandId: station.objectForKey("brand_id") as! Int,
                             districtId: station.objectForKey("district_id") as! Int,
-                            municipalityId: station.objectForKey("municipality_id") as! Int
+                            municipalityId: station.objectForKey("municipality_id") as! Int,
+                            prices: prices
                         )
                     )
                 }
@@ -55,6 +57,14 @@ class WebServiceClient {
         }
         
         return fuelStations
+    }
+    
+    static func getPrices(stationPrices: NSArray) -> [Int:Double]! {
+        var prices = [Int:Double]()
+        for price in stationPrices {
+            prices[price.objectForKey("type_id") as! Int] = price.objectForKey("value") as? Double
+        }
+        return prices
     }
     
     
@@ -145,6 +155,86 @@ class WebServiceClient {
         
         return fuelTypes
     }
+    
+    static func getAllDistricts(completionHandler: ([District]?) -> Void) {
+        guard let url = NSURL(string: "http://46.101.79.241/districts") else {
+            return
+        }
+        
+        let session = NSURLSession.sharedSession()
+        
+        let task = session.dataTaskWithURL(url) { (data, response, error) -> Void in
+            if let d = data {
+                completionHandler(self.parseDistricts(d))
+            } else {
+                print("Can't connect to webservice.")
+            }
+        }
+        
+        task.resume()
+    }
+    
+    static func parseDistricts(data:NSData) -> [District]! {
+        var districts = [District]()
+        
+        do {
+            if let jsonResponse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary {
+                
+                for district in (jsonResponse.objectForKey("districts") as! NSArray) {
+                    districts.append(
+                        District(
+                            id: district.objectForKey("id") as! Int,
+                            name: district.objectForKey("value") as! String
+                        )
+                    )
+                }
+            }
+        } catch {
+            print (error)
+        }
+        
+        return districts
+    }
 
-
+    
+    static func getAllMunicipalities(completionHandler: ([Municipality]?) -> Void) {
+        guard let url = NSURL(string: "http://46.101.79.241/municipalities") else {
+            return
+        }
+        
+        let session = NSURLSession.sharedSession()
+        
+        let task = session.dataTaskWithURL(url) { (data, response, error) -> Void in
+            if let d = data {
+                completionHandler(self.parseMunicipalities(d))
+            } else {
+                print("Can't connect to webservice.")
+            }
+        }
+        
+        task.resume()
+    }
+    
+    static func parseMunicipalities(data:NSData) -> [Municipality]! {
+        var municipalities = [Municipality]()
+        
+        do {
+            if let jsonResponse = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary {
+                
+                for municipality in (jsonResponse.objectForKey("municipalities") as! NSArray) {
+                    municipalities.append(
+                        Municipality(
+                            id: municipality.objectForKey("id") as! Int,
+                            name: municipality.objectForKey("value") as! String,
+                            districtId: municipality.objectForKey("district_id") as! Int
+                        )
+                    )
+                }
+            }
+        } catch {
+            print (error)
+        }
+        
+        return municipalities
+    }
 }

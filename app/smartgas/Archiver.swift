@@ -8,7 +8,7 @@
 
 import UIKit
 
-func randomImageName () -> String {
+/*func randomImageName () -> String {
     let charSet: String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
     let size: Int = 10
     let chars = Array(charSet.characters)
@@ -38,6 +38,6 @@ func saveImage(image: UIImage, toPath path: String) -> Bool {
 
 func loadImage(fromPath path: String) -> UIImage? {
     return UIImage(contentsOfFile: path)
-}
+}*/
 
 

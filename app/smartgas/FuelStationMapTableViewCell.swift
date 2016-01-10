@@ -17,16 +17,16 @@ class FuelStationMapTableViewCell: UITableViewCell, MKMapViewDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         fuelStationMapView.delegate = self
-        // Initialization code
-        setMapView()
     }
     
-    private func setMapView() {
+    func setMapView() {
         let latDelta:CLLocationDegrees = 0.002
         let lonDelta:CLLocationDegrees = 0.002
         
         let span:MKCoordinateSpan = MKCoordinateSpanMake(latDelta, lonDelta)
         
+        print(latitude)
+        print(longitude)
         let currentLocation = CLLocationCoordinate2DMake(latitude, longitude)
         let region:MKCoordinateRegion = MKCoordinateRegionMake(currentLocation, span)
         fuelStationMapView.setRegion(region, animated: true)

@@ -12,35 +12,19 @@ import Social
 class ShowFuelStationTableViewController: UITableViewController {
 
     var fuelStation: FuelStation!
+    var brand: Brand!
+    var district: District!
+    var municipality: Municipality!
+    var fuelTypes = [FuelType]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //setFuelStationView()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
-    
-    private func setFuelStationView() {
-        /*guard let fuelStation = self.fuelStation else {
-            return
-<<<<<<< HEAD
-        }*/
-        //brandLabel.text = fuelStation.brandId
-        //nameLabel.text = fuelStation.title
-=======
-        }
-        //brandLabel.text = fuelStation.make
-        //nameLabel.text = fuelStation.model
->>>>>>> 95404a60ae12cd7ce40de8d9b599d528eec0f469
-        //fuelStationImageView.image = UIImage(contentsOfFile: fileInDocumentsDirectory(fuelStation.imageName))
-        //addressLabel.text = fuelStation.fuel
-        //districtLabel = fuelStation.fuel
-        //distanceLabel.text = ""
     }
 
     override func didReceiveMemoryWarning() {
@@ -108,23 +92,89 @@ class ShowFuelStationTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         if section == 1 {
-            fuelStation
+            return fuelStation.prices.count
+        } else if section == 2 {
+            return 2
         } else {
             return 1
         }
     }
-
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("fuelPriceCell", forIndexPath: indexPath)
-
-        cell.textLabel?.text = "GAS";
-
-        return cell
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch (section) {
+        case 0:
+            return "Main Information"
+        case 1:
+            return "Prices"
+        default: //case 2:
+            return "Location"
+        }
     }
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        switch (indexPath.section, indexPath.row) {
+        case (0, 0):
+            let cell = tableView.dequeueReusableCellWithIdentifier("fuelStationInfo") as! FuelStationInfoTableViewCell
+            return cell.frame.height
+        case (1, _):
+            let cell = tableView.dequeueReusableCellWithIdentifier("fuelStationPrice") as! FuelStationPriceTableViewCell
+            return cell.frame.height
+        case (2, 0):
+            let cell = tableView.dequeueReusableCellWithIdentifier("fuelStationLocation") as! FuelStationLocationTableViewCell
+            return cell.frame.height
+        default: //= case (2, 1):
+            let cell = tableView.dequeueReusableCellWithIdentifier("fuelStationMap") as! FuelStationMapTableViewCell
+            return cell.frame.height
+        }
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        switch (indexPath.section, indexPath.row) {
+        case (0, 0):
+            let cell = tableView.dequeueReusableCellWithIdentifier("fuelStationInfo", forIndexPath: indexPath) as! FuelStationInfoTableViewCell
+            return cell
+        case (1, _):
+            let cell = tableView.dequeueReusableCellWithIdentifier("fuelStationPrice", forIndexPath: indexPath) as! FuelStationPriceTableViewCell
+            return cell
+        case (2, 0):
+            let cell = tableView.dequeueReusableCellWithIdentifier("fuelStationLocation", forIndexPath: indexPath) as! FuelStationLocationTableViewCell
+            return cell
+        default: //= case (2, 1):
+            let cell = tableView.dequeueReusableCellWithIdentifier("fuelStationMap", forIndexPath: indexPath) as! FuelStationMapTableViewCell
+            return cell
+        }
+    }
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if let result = cell as? FuelStationMapTableViewCell {
+            if result.latitude == nil && result.longitude == nil {
+                result.latitude = fuelStation.latitude
+                result.longitude = fuelStation.longitude
+                result.setMapView()
+            }
+        } else if let result = cell as? FuelStationInfoTableViewCell {
+            result.nameLabel.text = fuelStation.title
+            result.brandLabel.text = brand.name
+            result.fuelStationImageView.image = brand.image
+            result.addressLabel.text = fuelStation.address
+        } else if let result = cell as? FuelStationLocationTableViewCell {
+            result.districtLabel.text = "\(municipality.name), \(district.name)"
+        } else if let result = cell as? FuelStationPriceTableViewCell {
+            var index = 0
+            for (key, value) in fuelStation.prices {
+                if index == indexPath.row {
+                    result.priceLabel.text = "\(value)€"
+                    for fuelType in fuelTypes {
+                        if fuelType.id == key {
+                            result.typeLabel.text = fuelType.name
+                        }
+                    }
+                }
+                index++
+            }
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.

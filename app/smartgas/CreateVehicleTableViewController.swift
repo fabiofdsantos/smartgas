@@ -62,7 +62,7 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
         makeTextField.text = vehicle.make
         modelTextField.text = vehicle.model
         carImageView.image = vehicle.image
-        fuelTypeLabel.text = "\(vehicle.fuel_id)"
+        fuelTypeLabel.text = "\(vehicle.fuelId)"
         imageLabel.text = ""
     }
     
@@ -185,14 +185,14 @@ class CreateVehicleTableViewController: UITableViewController, UIImagePickerCont
             return vehicle
         }
         
-        vehicle = Vehicle(make: make, model: model, image: image)
-        vehicle!.image = image
-        
-        if let fuel = vehicleFuel {
-            vehicle!.fuel_id = fuel_id
+        /*if let fuel = vehicleFuel {
+            vehicle!.fuelId = fuelId
         } else {
-            vehicle!.fuel_id = "None"
-        }
+            vehicle!.fuelId = 0
+        }*/
+        
+        vehicle = Vehicle(make: make, model: model, image: image, fuelId: 1)
+        vehicle!.image = image
         
         return vehicle
     }

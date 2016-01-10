@@ -14,13 +14,13 @@ class Vehicle: NSObject, NSCoding {
     var mileageKm: Float?
     var consume: Float?
     var image: UIImage?
-    var fuel_id: Int
+    var fuelId: Int?
     
-    init(make: String, model: String, image: UIImage, fuel_id: Int){
+    init(make: String, model: String, image: UIImage, fuelId: Int){
         self.make = make
         self.model = model
         self.image = image
-        self.fuel_id = fuel_id
+        self.fuelId = fuelId
     }
     
     struct Const {
@@ -29,7 +29,7 @@ class Vehicle: NSObject, NSCoding {
         static let mileageKm = "mileageKm"
         static let consume = "consume"
         static let image = "image"
-        static let fuel_id = "fuel_id"
+        static let fuelId = "fuelId"
     }
     
     // MARK: NSCoding
@@ -39,7 +39,7 @@ class Vehicle: NSObject, NSCoding {
         coder.encodeFloat(mileageKm ?? 0.0, forKey: Const.mileageKm)
         coder.encodeFloat(consume ?? 0.0, forKey: Const.consume)
         coder.encodeObject(image, forKey: Const.image)
-        coder.encodeInteger(fuel_id, forKey: Const.fuel_id)
+        coder.encodeInteger(fuelId ?? 0, forKey: Const.fuelId)
     }
     
     required init?(coder decoder: NSCoder) {
@@ -47,7 +47,7 @@ class Vehicle: NSObject, NSCoding {
         self.model = decoder.decodeObjectForKey(Const.model) as! String
         self.mileageKm = decoder.decodeObjectForKey(Const.mileageKm) as? Float ?? 0.0
         self.consume = decoder.decodeObjectForKey(Const.consume) as? Float ?? 0.0
-        self.fuel_id = decoder.decodeIntegerForKey(Const.fuel_id)
+        self.fuelId = decoder.decodeIntegerForKey(Const.fuelId)
         self.image = decoder.decodeObjectForKey(Const.image) as? UIImage
     }
     

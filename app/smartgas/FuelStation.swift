@@ -16,8 +16,9 @@ class FuelStation: NSObject, NSCoding {
     var brandId: Int!
     var districtId: Int!
     var municipalityId: Int!
+    var prices: [Int:Double]!
     
-    init(title: String, address: String, latitude: Double, longitude: Double, brandId: Int, districtId: Int, municipalityId: Int){
+    init(title: String, address: String, latitude: Double, longitude: Double, brandId: Int, districtId: Int, municipalityId: Int, prices: [Int:Double]){
         self.title = title
         self.address = address
         self.latitude = latitude
@@ -25,6 +26,7 @@ class FuelStation: NSObject, NSCoding {
         self.brandId = brandId
         self.districtId = districtId
         self.municipalityId = municipalityId
+        self.prices = prices
     }
     
     struct Const {
@@ -35,6 +37,7 @@ class FuelStation: NSObject, NSCoding {
         static let brandId = "brandId"
         static let districtId = "districtId"
         static let municipalityId = "municipalityId"
+        static let prices = "prices"
     }
     
     // MARK: NSCoding
@@ -46,6 +49,7 @@ class FuelStation: NSObject, NSCoding {
         coder.encodeInteger(brandId, forKey: Const.brandId)
         coder.encodeInteger(districtId, forKey: Const.districtId)
         coder.encodeInteger(municipalityId, forKey: Const.municipalityId)
+        coder.encodeObject(prices, forKey: Const.prices)
     }
     
     required init?(coder decoder: NSCoder) {
@@ -56,6 +60,7 @@ class FuelStation: NSObject, NSCoding {
         brandId = decoder.decodeIntegerForKey(Const.brandId) 
         districtId = decoder.decodeIntegerForKey(Const.districtId)
         municipalityId = decoder.decodeIntegerForKey(Const.municipalityId)
+        prices = decoder.decodeObjectForKey(Const.prices) as! [Int:Double]
     }
     
     static func saveMany (brands: [FuelStation]) -> Bool {

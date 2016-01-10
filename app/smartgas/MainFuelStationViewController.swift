@@ -12,7 +12,10 @@ import CoreLocation
 class MainFuelStationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
     
     var brands:[Brand]!
-    var fuelStations:[FuelStation]?
+    var fuelStations:[FuelStation]!
+    var districts:[District]!
+    var municipalities:[Municipality]!
+    var fuelTypes:[FuelType]!
     let locationManager = CLLocationManager()
     var currentLocation = CLLocationCoordinate2D()
     
@@ -26,18 +29,8 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
         
         fuelStationTableView.delegate = self
         fuelStationTableView.dataSource = self
-        
-        WebServiceClient.getAllBrands({ (brands) -> Void in
-            self.brands = brands
-            
-            WebServiceClient.getAllFuelStations({ (fuelStations) -> Void in
-                self.fuelStations = fuelStations
-                
-                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                    self.fuelStationTableView.reloadData()
-                })
-            })
-        })
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "fuelStationLoad:", name:"fuelStationsReady", object: nil)
         
         locationInit()
         
@@ -46,6 +39,17 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    func fuelStationLoad(notification: NSNotification){
+        self.fuelStations = FuelStation.loadAll()
+        self.brands = Brand.loadAll()
+        self.districts = District.loadAll()
+        self.municipalities = Municipality.loadAll()
+        self.fuelTypes = FuelType.loadAll()
+        NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+            self.fuelStationTableView.reloadData()
+        })
     }
     
     override func didReceiveMemoryWarning() {
@@ -93,7 +97,7 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
     }
     
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    /*func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("NEW LOCATION")
         let locationObj = locations.last
         let coord = locationObj?.coordinate
@@ -120,7 +124,41 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
             //defaults.setDouble(currentLocation.longitude, forKey: "longitude")
         }
         
+    }*/
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let coordinates = locations.last?.coordinate {
+            currentLocation = coordinates
+            
+            for fuelStation in fuelStations {
+                let stationLocation = CLLocation(latitude: fuelStation.latitude!, longitude: fuelStation.longitude!)
+                let distance = String(format:"%.1f", getDistance(locations.last!, destination: stationLocation)/1000)
+                fuelStationTableView.
+            }
+            
+            if let fuelStations = self.fuelStations {
+                //for station in fuelStations {
+                let stationLocation = CLLocation(latitude: fuelStations[0].latitude!, longitude: fuelStations[0].longitude!)
+                print("DISTANCE: \(getDistance(locationObj!, destination: stationLocation))")
+                let distance = String(format:"%.1f", getDistance(locationObj!, destination: stationLocation)/1000)
+                print("DISTANCE IN KM: " + distance)
+                
+                let cell = self.fuelStationTableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
+                if let cc = cell as? FuelStationTableViewCell {
+                    cc.setDistance(distance)
+                }
+                //}
+            }
+            
+            
+            //defaults.setDouble(currentLocation.latitude, forKey: "latitude")
+            //defaults.setDouble(currentLocation.longitude, forKey: "longitude")
+        }
+        
     }
+    
+    
+    
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         locationManager.startUpdatingLocation()
@@ -135,7 +173,7 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let fuelStation = fuelStations![indexPath.row]
-        
+        print(fuelStation.title)
         performSegueWithIdentifier(showFuelStationSegueIdentifier, sender: fuelStation)
     }
     
@@ -149,17 +187,32 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
             if let nextController = segue.destinationViewController.childViewControllers[0] as? ShowFuelStationTableViewController {
                 if let fuelStation = sender as? FuelStation {
                     nextController.fuelStation = fuelStation
+                    for brand in brands {
+                        if brand.id == fuelStation.brandId {
+                            nextController.brand = brand
+                        }
+                    }
+                    
+                    for district in districts {
+                        if district.id == fuelStation.districtId {
+                            nextController.district = district
+                        }
+                    }
+                    
+                    for municipality in municipalities {
+                        if municipality.id == fuelStation.municipalityId {
+                            nextController.municipality = municipality
+                        }
+                    }
+                    
+                    for fuelType in fuelTypes {
+                        if fuelStation.prices[fuelType.id] != nil {
+                            nextController.fuelTypes.append(fuelType)
+                        }
+                    }
                 }
             }
-        }/* else if identifier == editVehicleSegueIdentifier {
-        if let vehicle = sender as? Vehicle {
-        if let nextController = segue.destinationViewController.childViewControllers[0] as? CreateVehicleTableViewController {
-        nextController.vehiclesPath = self.vehiclesPath
-        nextController.vehiclesList = self.vehiclesList
-        nextController.vehicle = vehicle
         }
-        }
-        }*/
     }
     
     
