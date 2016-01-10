@@ -46,6 +46,13 @@ class StationController extends Controller
                     'updated_at',
                 ]);
 
+        // Get prices
+        foreach ($stations as $station) {
+            $station->prices = app('db')->table('prices')
+                ->where('station_id', $station->id)
+                ->get(['type_id', 'value', 'updated_at']);
+        }
+
         return response()->json(['stations' => $stations], 200, [], JSON_NUMERIC_CHECK);
     }
 
@@ -62,6 +69,10 @@ class StationController extends Controller
                 'id', 'title', 'address', 'latitude', 'longitude', 'brand_id',
                 'schedule_id', 'district_id', 'municipality_id', 'updated_at',
             ]);
+
+        // Get prices
+        $station->prices = app('db')->table('prices')->where('station_id', $id)
+            ->get(['type_id', 'value', 'updated_at']);
 
         return response()->json(['station' => $station], 200, [], JSON_NUMERIC_CHECK);
     }

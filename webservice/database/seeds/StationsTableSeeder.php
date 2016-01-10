@@ -46,7 +46,7 @@ class StationsTableSeeder extends Seeder
         ];
 
         $stations[] = [
-            'title'           => 'BP Estrada da Estacao',
+            'title'           => 'BP Estrada da Estação',
             'address'         => 'Estrada da Estacao 2400-281 Leiria',
             'latitude'        => '39.754264',
             'longitude'       => '-8.812783',

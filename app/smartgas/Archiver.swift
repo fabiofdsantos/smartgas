@@ -25,6 +25,7 @@ import UIKit
 func documentsDirectory() -> String {
     let documentsFolderPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
     return documentsFolderPath
+    
 }
  
 func fileInDocumentsDirectory(filename: String) -> String {
