@@ -26,7 +26,7 @@
 		69AE25411C1638C100467288 /* MathClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AE25401C1638C100467288 /* MathClient.swift */; };
 		69B44AF91C346A8C009DE724 /* FilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B44AF81C346A8C009DE724 /* FilterTableViewController.swift */; };
 		69B44AFB1C346ACE009DE724 /* FilterDetailedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B44AFA1C346ACE009DE724 /* FilterDetailedTableViewController.swift */; };
-		69B44AFD1C347A49009DE724 /* FiltersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B44AFC1C347A49009DE724 /* FiltersList.swift */; };
+		69B44AFD1C347A49009DE724 /* FiltersTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B44AFC1C347A49009DE724 /* FiltersTypes.swift */; };
 		69B44AFF1C347BC7009DE724 /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B44AFE1C347BC7009DE724 /* FilterTableViewCell.swift */; };
 		69B44B011C348CAA009DE724 /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B44B001C348CAA009DE724 /* Brand.swift */; };
 		69B44B091C3B2532009DE724 /* ShowFuelStationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B44B081C3B2532009DE724 /* ShowFuelStationTableViewController.swift */; };
@@ -88,7 +88,7 @@
 		69AE25401C1638C100467288 /* MathClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathClient.swift; sourceTree = "<group>"; };
 		69B44AF81C346A8C009DE724 /* FilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableViewController.swift; sourceTree = "<group>"; };
 		69B44AFA1C346ACE009DE724 /* FilterDetailedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterDetailedTableViewController.swift; sourceTree = "<group>"; };
-		69B44AFC1C347A49009DE724 /* FiltersList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersList.swift; sourceTree = "<group>"; };
+		69B44AFC1C347A49009DE724 /* FiltersTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersTypes.swift; sourceTree = "<group>"; };
 		69B44AFE1C347BC7009DE724 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
 		69B44B001C348CAA009DE724 /* Brand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brand.swift; sourceTree = "<group>"; };
 		69B44B081C3B2532009DE724 /* ShowFuelStationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowFuelStationTableViewController.swift; sourceTree = "<group>"; };
@@ -200,7 +200,7 @@
 				698849271C00CC9500B7247B /* Vehicle.swift */,
 				69EBD7E61C0F73620078B9E1 /* FuelType.swift */,
 				69EBD7ED1C0F9C170078B9E1 /* FuelStation.swift */,
-				69B44AFC1C347A49009DE724 /* FiltersList.swift */,
+				69B44AFC1C347A49009DE724 /* FiltersTypes.swift */,
 				69B44B001C348CAA009DE724 /* Brand.swift */,
 			);
 			name = Model;
@@ -224,11 +224,11 @@
 		6988492B1C00CCC600B7247B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				692EC6E81C07CB6500EEC1FA /* VehicleTableViewController.swift */,
 				6988492E1C00DA8600B7247B /* CreateVehicleTableViewController.swift */,
+				699A3D991C0A3796006917D0 /* FuelTypeTableViewController.swift */,
 				69B44AF81C346A8C009DE724 /* FilterTableViewController.swift */,
 				69B44AFA1C346ACE009DE724 /* FilterDetailedTableViewController.swift */,
-				699A3D991C0A3796006917D0 /* FuelTypeTableViewController.swift */,
-				692EC6E81C07CB6500EEC1FA /* VehicleTableViewController.swift */,
 				693648201BFCEB8E00C7EC8F /* ViewController.swift */,
 				69FC316C1C416D3100C0EB70 /* InitTabBarViewController.swift */,
 				694F45981C29D6D3003AD118 /* MainFuelStationViewController.swift */,
@@ -386,7 +386,7 @@
 				699A3D9A1C0A3797006917D0 /* FuelTypeTableViewController.swift in Sources */,
 				69C1B3721C40876600327248 /* FuelStationMapTableViewCell.swift in Sources */,
 				698849281C00CC9500B7247B /* Vehicle.swift in Sources */,
-				69B44AFD1C347A49009DE724 /* FiltersList.swift in Sources */,
+				69B44AFD1C347A49009DE724 /* FiltersTypes.swift in Sources */,
 				C378C1E11C3F20480062938A /* Municipality.swift in Sources */,
 				69EBD7E91C0F77710078B9E1 /* FuelTypeTableViewCell.swift in Sources */,
 				694F45991C29D6D3003AD118 /* MainFuelStationViewController.swift in Sources */,

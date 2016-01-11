@@ -27,15 +27,15 @@ class FilterTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    /*override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 0
-    }
+    }*/
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    /*override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 0
-    }
+    }*/
 
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -89,7 +89,31 @@ class FilterTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        guard let identifier = segue.identifier else {
+            return;
+        }
         
+        var filter = [String:Bool]()
+        if identifier == "brandSegue" {
+            let brands = Brand.loadAll()
+            for brand in brands {
+                filter[brand.name] = brand.selected
+            }
+        } else if identifier == "fuelSegue" {
+            let fuelTypes = FuelType.loadAll()
+            for fuelType in fuelTypes {
+                filter[fuelType.name] = fuelType.selected
+            }
+        } else if identifier == "mainSegue" {
+            let filters = FilterTypes.allValues()
+            for filterItem in filters {
+                filter[filterItem] = false
+            }
+        }
+        
+        if let nextView = segue.destinationViewController as? FilterDetailedTableViewController {
+            nextView.filter = filter
+        }
         
     }
 

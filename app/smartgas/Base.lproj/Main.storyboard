@@ -237,7 +237,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Volkswagen" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jsA-8V-uPh">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Renault" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jsA-8V-uPh">
                                                     <rect key="frame" x="68" y="8" width="524" height="27"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -271,7 +271,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Golf" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hd4-Jh-vzt">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Clio" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hd4-Jh-vzt">
                                                     <rect key="frame" x="74" y="8" width="518" height="27"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -775,6 +775,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="fuelStationTableView" destination="xmK-0K-Q8Q" id="Ukf-pf-1iW"/>
+                        <outlet property="searchBar" destination="SE4-4u-SNv" id="aTE-op-nXC"/>
                         <segue destination="eKQ-AH-RIu" kind="presentation" identifier="showFuelStation" id="Flh-nW-H3z"/>
                     </connections>
                 </viewController>
@@ -782,10 +783,10 @@
             </objects>
             <point key="canvasLocation" x="-23" y="-479"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Filter Table View Controller-->
         <scene sceneID="bNm-ag-mfx">
             <objects>
-                <tableViewController id="PaR-vN-WBq" sceneMemberID="viewController">
+                <tableViewController id="PaR-vN-WBq" customClass="FilterTableViewController" customModule="smartgas" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="OZv-Ph-1Tz">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -794,7 +795,7 @@
                         <sections>
                             <tableViewSection headerTitle="Primary Filter" id="41a-uf-WMP">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="filterTypeCell" textLabel="DsS-9r-VwZ" detailTextLabel="8A1-CL-tcb" style="IBUITableViewCellStyleValue1" id="OrZ-BW-UGI">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="DsS-9r-VwZ" detailTextLabel="8A1-CL-tcb" style="IBUITableViewCellStyleValue1" id="OrZ-BW-UGI">
                                         <rect key="frame" x="0.0" y="114" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OrZ-BW-UGI" id="ljR-Iu-iLi">
@@ -822,7 +823,7 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                         <connections>
-                                            <segue destination="TF0-RX-ibh" kind="show" id="r0U-mZ-YSf"/>
+                                            <segue destination="TF0-RX-ibh" kind="show" identifier="mainSegue" id="r0U-mZ-YSf"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -857,7 +858,7 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                         <connections>
-                                            <segue destination="TF0-RX-ibh" kind="show" id="Dvu-a6-sjq"/>
+                                            <segue destination="TF0-RX-ibh" kind="show" identifier="brandSegue" id="Dvu-a6-sjq"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="N5Q-00-CiI" detailTextLabel="u8i-EY-64l" style="IBUITableViewCellStyleValue1" id="7JP-g6-LAS">
@@ -888,7 +889,7 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                         <connections>
-                                            <segue destination="TF0-RX-ibh" kind="show" id="d2c-u7-p69"/>
+                                            <segue destination="TF0-RX-ibh" kind="show" identifier="fuelSegue" id="d2c-u7-p69"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -1016,7 +1017,7 @@
         <image name="settings" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="d2c-u7-p69"/>
         <segue reference="rwP-Pp-Vxd"/>
-        <segue reference="r0U-mZ-YSf"/>
     </inferredMetricsTieBreakers>
 </document>

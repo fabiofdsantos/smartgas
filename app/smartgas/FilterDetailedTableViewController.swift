@@ -15,18 +15,10 @@ protocol FilterDetailedTableViewControllerDelegate
 
 class FilterDetailedTableViewController: UITableViewController {
     
-    var filter: [String]?
-    
-    //var delegate:CreateVehicleTableViewController?
+    var filter: [String:Bool]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     override func didReceiveMemoryWarning() {
@@ -43,37 +35,44 @@ class FilterDetailedTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return FilterTypes.count()
+        return filter.count
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let section = indexPath.section
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        
+        if cell!.accessoryType == .Checkmark {
+            cell!.accessoryType = .None
+        } else {
+            cell!.accessoryType = .Checkmark
+        }
+        /*let section = indexPath.section
         let numberOfRows = tableView.numberOfRowsInSection(section)
         for row in 0..<numberOfRows {
             if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: section)) {
                 cell.accessoryType = row == indexPath.row ? .Checkmark : .None
-                if cell.accessoryType == .Checkmark {
+                /*if cell.accessoryType == .Checkmark {
                     if let fuelText = cell.textLabel?.text {
-                        /*vehicleFuel = fuelText
-                        self.delegate?.sendFuel(fuelText)*/
+                        vehicleFuel = fuelText
+                        self.delegate?.sendFuel(fuelText)
                     }
-                }
+                }*/
             }
-        }
+        }*/
         tableView.reloadData();
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("filterTypeCell", forIndexPath: indexPath) as! FilterTableViewCell
-        
-        let filterType = FilterTypes.allValues()[indexPath.row]
-        
-        cell.setFilter(filterType)
-        /*print(vehicleFuel)
-        if vehicleFuel == FuelTypes.allValues()[indexPath.row] {
-            cell.accessoryType = .Checkmark
-        }*/
-        
+        for (index, entry) in filter.enumerate() {
+            if index == indexPath.row {
+                cell.setFilter(entry.0)
+                if entry.1 {
+                    cell.accessoryType = .Checkmark
+                }
+            }
+        }
+            
         return cell
     }
     

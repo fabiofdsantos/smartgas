@@ -11,26 +11,31 @@ import UIKit
 class FuelType: NSObject, NSCoding {
     var id: Int!
     var name: String!
+    var selected: Bool!
     
     init(id: Int, name: String) {
         self.id = id
         self.name = name
+        self.selected = false
     }
     
     struct Const {
         static let id = "id"
         static let name = "name"
+        static let selected = "selected"
     }
     
     // MARK: NSCoding
     func encodeWithCoder(coder: NSCoder) {
         coder.encodeInteger(id, forKey: Const.id)
         coder.encodeObject(name, forKey: Const.name)
+        coder.encodeBool(selected, forKey: Const.selected)
     }
     
     required init?(coder decoder: NSCoder) {
         id = decoder.decodeIntegerForKey(Const.id)
         name = decoder.decodeObjectForKey(Const.name) as! String
+        selected = decoder.decodeBoolForKey(Const.selected)
     }
     
     static func saveMany (brands: [FuelType]) -> Bool {

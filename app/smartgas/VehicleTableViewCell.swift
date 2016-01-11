@@ -17,8 +17,13 @@ class VehicleTableViewCell: UITableViewCell {
     func setVehicle (vehicle:Vehicle) {
         self.vehicleImageView.image = vehicle.image
         self.makeModelLabel.text = vehicle.make + " " + vehicle.model
-        self.fuelLabel.text = "\(vehicle.fuelId)"
-        self.consumeLabel.text = "\(vehicle.consume)"
+        let allFuels = FuelType.loadAll()
+        for fuel in allFuels {
+            if vehicle.fuelId == fuel.id {
+                self.fuelLabel.text = "\(fuel.name)"
+            }
+        }
+        self.consumeLabel.text = "0"
     }
     
     

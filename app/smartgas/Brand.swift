@@ -12,17 +12,20 @@ class Brand: NSObject, NSCoding {
     var id: Int!
     var name: String!
     var image: UIImage!
+    var selected: Bool!
     
     init(id: Int, name: String, image: UIImage){
         self.id = id
         self.name = name
         self.image = image
+        self.selected = false
     }
     
     struct Const {
         static let id = "id"
         static let name = "name"
         static let image = "image"
+        static let selected = "selected"
     }
     
     // MARK: NSCoding
@@ -30,12 +33,14 @@ class Brand: NSObject, NSCoding {
         coder.encodeObject(id, forKey: Const.id)
         coder.encodeObject(name, forKey: Const.name)
         coder.encodeObject(image, forKey: Const.image)
+        coder.encodeBool(selected, forKey: Const.selected)
     }
     
     required init?(coder decoder: NSCoder) {
         id = decoder.decodeObjectForKey(Const.id) as! Int
         name = decoder.decodeObjectForKey(Const.name) as! String
         image = decoder.decodeObjectForKey(Const.image) as! UIImage
+        selected = decoder.decodeBoolForKey(Const.selected)
     }
     
     static func saveMany (brands: [Brand]) -> Bool {

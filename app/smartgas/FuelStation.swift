@@ -17,6 +17,7 @@ class FuelStation: NSObject, NSCoding {
     var districtId: Int!
     var municipalityId: Int!
     var prices: [Int:Double]!
+    var active = true
     
     init(title: String, address: String, latitude: Double, longitude: Double, brandId: Int, districtId: Int, municipalityId: Int, prices: [Int:Double]){
         self.title = title
