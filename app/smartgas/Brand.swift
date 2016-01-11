@@ -18,7 +18,7 @@ class Brand: NSObject, NSCoding {
         self.id = id
         self.name = name
         self.image = image
-        self.selected = false
+        self.selected = true
     }
     
     struct Const {

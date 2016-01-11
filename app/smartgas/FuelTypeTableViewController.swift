@@ -40,7 +40,6 @@ class FuelTypeTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.delegate?.sendFuelId(fuelTypes[indexPath.row].id)
         vehicleFuelId = fuelTypes[indexPath.row].id
         tableView.reloadData();
     }
@@ -58,4 +57,15 @@ class FuelTypeTableViewController: UITableViewController {
         
         return cell
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if (self.isMovingFromParentViewController()){
+            if let fuelId = vehicleFuelId {
+                self.delegate?.sendFuelId(fuelId)
+            }
+        }
+    }
+    
 }

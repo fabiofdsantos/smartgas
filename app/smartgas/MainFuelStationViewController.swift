@@ -46,11 +46,11 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func fuelStationLoad(notification: NSNotification){
-        self.fuelStations = FuelStation.loadAll()
         self.brands = Brand.loadAll()
         self.districts = District.loadAll()
         self.municipalities = Municipality.loadAll()
         self.fuelTypes = FuelType.loadAll()
+        self.fuelStations = FuelStation.loadAll()
         NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
             self.fuelStationTableView.reloadData()
         })
@@ -192,5 +192,39 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        applyfilters()
+    }
+    
+    func applyfilters() {
+        if let stations = fuelStations {
+            let allBrands = Brand.loadAll()
+            let allFuelTypes = FuelType.loadAll()
+            
+            var brandIdSelect = [Int:Bool]()
+            for brand in allBrands {
+                brandIdSelect[brand.id] = brand.selected
+            }
+            
+            var fuelTypeIdSelect = [Int:Bool]()
+            for fuelType in allFuelTypes {
+                fuelTypeIdSelect[fuelType.id] = fuelType.selected
+            }
+            
+            for station in stations {
+                station.active = false
+                if brandIdSelect[station.brandId] == false {
+                    for (_, content) in station.prices.enumerate() {
+                        if fuelTypeIdSelect[content.0] == true {
+                            station.active = true
+                        }
+                    }
+                } else {
+                    station.active = true
+                }
+            }
+            self.fuelStationTableView.reloadData()
+        }
+    }
 
 }

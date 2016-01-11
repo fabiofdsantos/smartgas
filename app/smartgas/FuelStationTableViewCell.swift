@@ -14,11 +14,13 @@ class FuelStationTableViewCell: UITableViewCell {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet var brandImage: UIImageView!
+    @IBOutlet weak var priceLabel: UILabel!
     
     func setFuelStation (fuelStation: FuelStation, brands: [Brand]) {
         self.titleLabel.text = fuelStation.title
         self.addressLabel.text = fuelStation.address
         self.distanceLabel.text = "...km"
+        self.priceLabel.text = "\(fuelStation.prices.values.first!)€"
         
         for brand in brands {
             if(brand.id == fuelStation.brandId) {

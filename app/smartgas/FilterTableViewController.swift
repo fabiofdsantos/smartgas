@@ -8,10 +8,27 @@
 
 import UIKit
 
-class FilterTableViewController: UITableViewController {
+class FilterTableViewController: UITableViewController, FilterDetailedTableViewControllerDelegate {
+    var filterFuelType = [String:Bool]()
+    var filterBrand = [String:Bool]()
+    var filterMain = [String:Bool]()
+    var lastType: String!
+    let brands = Brand.loadAll()
+    let fuelTypes = FuelType.loadAll()
+    let filters = FilterTypes.allValues()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        for brand in brands {
+            filterBrand[brand.name] = brand.selected
+        }
+        for fuelType in fuelTypes {
+            filterFuelType[fuelType.name] = fuelType.selected
+        }
+        for filterItem in filters {
+            filterMain[filterItem] = false
+        }
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -25,96 +42,61 @@ class FilterTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
-    /*override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }*/
-
-    /*override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }*/
-
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
         guard let identifier = segue.identifier else {
             return;
         }
         
         var filter = [String:Bool]()
         if identifier == "brandSegue" {
-            let brands = Brand.loadAll()
-            for brand in brands {
-                filter[brand.name] = brand.selected
-            }
+            filter = filterBrand
         } else if identifier == "fuelSegue" {
-            let fuelTypes = FuelType.loadAll()
-            for fuelType in fuelTypes {
-                filter[fuelType.name] = fuelType.selected
-            }
+            filter = filterFuelType
         } else if identifier == "mainSegue" {
-            let filters = FilterTypes.allValues()
-            for filterItem in filters {
-                filter[filterItem] = false
-            }
+            filter = filterMain
         }
+        
+        lastType = identifier
         
         if let nextView = segue.destinationViewController as? FilterDetailedTableViewController {
             nextView.filter = filter
+            nextView.delegate = self
         }
         
+    }
+    
+    
+    func sendFilter(filter: [String:Bool]) {
+        if lastType == "brandSegue" {
+            for (_, content) in filter.enumerate() {
+                filterBrand[content.0] = content.1
+            }
+        } else if lastType == "fuelSegue" {
+            for (_, content) in filter.enumerate() {
+                filterFuelType[content.0] = content.1
+            }
+        } else if lastType == "mainSegue" {
+            for (_, content) in filter.enumerate() {
+                filterMain[content.0] = content.1
+            }
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if (self.isMovingFromParentViewController()){
+            for brand in brands {
+                brand.selected = filterBrand[brand.name]
+            }
+            Brand.saveMany(brands)
+            
+            for fuelType in fuelTypes {
+                fuelType.selected = filterFuelType[fuelType.name]
+            }
+            FuelType.saveMany(fuelTypes)
+        }
     }
 
 

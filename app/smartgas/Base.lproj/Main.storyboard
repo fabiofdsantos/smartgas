@@ -687,36 +687,54 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCp-FU-ZmN" userLabel="DistanceDetail">
-                                                    <rect key="frame" x="156" y="71" width="33" height="15"/>
+                                                    <rect key="frame" x="151" y="71" width="33" height="15"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hCb-2g-6hP" userLabel="AddressDetail">
-                                                    <rect key="frame" x="156" y="45" width="33" height="15"/>
+                                                    <rect key="frame" x="151" y="45" width="33" height="15"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rEW-tl-E0f" userLabel="PriceDetail">
+                                                    <rect key="frame" x="521" y="71" width="33" height="15"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0QV-5Q-gNU">
+                                                    <rect key="frame" x="487" y="71" width="29" height="15"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <animations/>
                                             <constraints>
+                                                <constraint firstItem="0QV-5Q-gNU" firstAttribute="trailing" secondItem="rEW-tl-E0f" secondAttribute="leading" constant="-5" id="1lD-iA-dBq"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="00j-86-EaZ" secondAttribute="bottom" constant="10" id="410-BH-lTL"/>
                                                 <constraint firstItem="Yki-Sn-gkJ" firstAttribute="trailing" secondItem="00j-86-EaZ" secondAttribute="trailing" id="8lM-DB-AbH"/>
                                                 <constraint firstItem="jmL-IB-g1m" firstAttribute="leading" secondItem="1Ft-ly-aRy" secondAttribute="trailing" constant="10" id="LBk-Da-1Wq"/>
                                                 <constraint firstItem="hCb-2g-6hP" firstAttribute="leading" secondItem="fCp-FU-ZmN" secondAttribute="leading" id="LM1-qx-nmd"/>
                                                 <constraint firstItem="1Ft-ly-aRy" firstAttribute="leading" secondItem="iyI-da-kDo" secondAttribute="leadingMargin" id="NU3-fI-Vbg"/>
+                                                <constraint firstItem="0QV-5Q-gNU" firstAttribute="top" secondItem="rEW-tl-E0f" secondAttribute="top" id="Q9u-Mg-eLH"/>
                                                 <constraint firstItem="00j-86-EaZ" firstAttribute="leading" secondItem="1Ft-ly-aRy" secondAttribute="trailing" constant="10" id="XdC-GE-H7i"/>
-                                                <constraint firstItem="fCp-FU-ZmN" firstAttribute="leading" secondItem="00j-86-EaZ" secondAttribute="trailing" constant="10" id="fHf-VD-Cks"/>
+                                                <constraint firstItem="fCp-FU-ZmN" firstAttribute="leading" secondItem="00j-86-EaZ" secondAttribute="trailing" constant="5" id="fHf-VD-Cks"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="fCp-FU-ZmN" secondAttribute="trailing" id="gG1-Da-fas"/>
+                                                <constraint firstItem="rEW-tl-E0f" firstAttribute="top" secondItem="fCp-FU-ZmN" secondAttribute="top" id="hjH-0Q-nYQ"/>
                                                 <constraint firstItem="fCp-FU-ZmN" firstAttribute="top" secondItem="00j-86-EaZ" secondAttribute="top" id="iqB-bC-EAN"/>
                                                 <constraint firstItem="hCb-2g-6hP" firstAttribute="top" secondItem="Yki-Sn-gkJ" secondAttribute="top" id="n6F-1k-Dg8"/>
                                                 <constraint firstItem="1Ft-ly-aRy" firstAttribute="top" secondItem="iyI-da-kDo" secondAttribute="topMargin" constant="5" id="qv5-Cv-CGN"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="hCb-2g-6hP" secondAttribute="trailing" id="seq-Jk-VFU"/>
                                                 <constraint firstItem="Yki-Sn-gkJ" firstAttribute="centerY" secondItem="1Ft-ly-aRy" secondAttribute="centerY" id="tIg-cJ-aLt"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="1Ft-ly-aRy" secondAttribute="bottom" constant="5" id="wwN-hO-GbN"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="rEW-tl-E0f" secondAttribute="trailing" constant="5" id="yNQ-af-Enm"/>
                                                 <constraint firstItem="jmL-IB-g1m" firstAttribute="top" secondItem="1Ft-ly-aRy" secondAttribute="top" constant="10" id="yhx-0E-Sim"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -725,6 +743,7 @@
                                             <outlet property="addressLabel" destination="hCb-2g-6hP" id="eCT-Ok-8sy"/>
                                             <outlet property="brandImage" destination="1Ft-ly-aRy" id="zSr-la-827"/>
                                             <outlet property="distanceLabel" destination="fCp-FU-ZmN" id="Vfu-OV-bZu"/>
+                                            <outlet property="priceLabel" destination="rEW-tl-E0f" id="Jx0-Bb-M8N"/>
                                             <outlet property="titleLabel" destination="jmL-IB-g1m" id="v6V-lM-EVb"/>
                                         </connections>
                                     </tableViewCell>

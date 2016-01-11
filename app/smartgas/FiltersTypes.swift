@@ -9,6 +9,7 @@
 import Foundation
 
 enum FilterTypes: String {
+    
     case Distance = "Distance"
     case Price = "Price"
     case Smart = "Smart"

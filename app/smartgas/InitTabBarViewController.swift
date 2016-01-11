@@ -21,31 +21,43 @@ class InitTabBarViewController: UITabBarController {
     }
     
     private func getWSData() {
-        WebServiceClient.getAllDistricts({ (districts) -> Void in
-            self.districts = districts
-            District.saveMany(self.districts)
-        })
+        if District.loadAll().count == 0 {
+            WebServiceClient.getAllDistricts({ (districts) -> Void in
+                self.districts = districts
+                District.saveMany(self.districts)
+            })
+        }
         
-        WebServiceClient.getAllBrands({ (brands) -> Void in
-            self.brands = brands
-            Brand.saveMany(self.brands)
-        })
+        if Brand.loadAll().count == 0 {
+            WebServiceClient.getAllBrands({ (brands) -> Void in
+                self.brands = brands
+                Brand.saveMany(self.brands)
+            })
+        }
         
-        WebServiceClient.getAllFuelTypes({ (fuelTypes) -> Void in
-            self.fuelTypes = fuelTypes
-            FuelType.saveMany(self.fuelTypes)
-        })
+        if FuelType.loadAll().count == 0 {
+            WebServiceClient.getAllFuelTypes({ (fuelTypes) -> Void in
+                self.fuelTypes = fuelTypes
+                FuelType.saveMany(self.fuelTypes)
+            })
+        }
         
-        WebServiceClient.getAllMunicipalities({ (municipalities) -> Void in
-            self.municipalities = municipalities
-            Municipality.saveMany(self.municipalities)
-        })
+        if Municipality.loadAll().count == 0 {
+            WebServiceClient.getAllMunicipalities({ (municipalities) -> Void in
+                self.municipalities = municipalities
+                Municipality.saveMany(self.municipalities)
+            })
+        }
         
-        WebServiceClient.getAllFuelStations({ (fuelStations) -> Void in
-            self.fuelStations = fuelStations
-            FuelStation.saveMany(self.fuelStations)
+        //if FuelStation.loadAll().count == 0 {
+            WebServiceClient.getAllFuelStations({ (fuelStations) -> Void in
+                self.fuelStations = fuelStations
+                FuelStation.saveMany(self.fuelStations)
+                NSNotificationCenter.defaultCenter().postNotificationName("fuelStationsReady", object: nil)
+            })
+        /*} else {
             NSNotificationCenter.defaultCenter().postNotificationName("fuelStationsReady", object: nil)
-        })
+        }*/
     }
 
 

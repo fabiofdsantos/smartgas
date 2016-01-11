@@ -10,12 +10,14 @@ import UIKit
 
 protocol FilterDetailedTableViewControllerDelegate
 {
-    func sendFilter(filter: String)
+    func sendFilter(filter: [String:Bool])
 }
 
 class FilterDetailedTableViewController: UITableViewController {
     
     var filter: [String:Bool]!
+    
+    var delegate:FilterTableViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,26 +41,11 @@ class FilterDetailedTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        
-        if cell!.accessoryType == .Checkmark {
-            cell!.accessoryType = .None
-        } else {
-            cell!.accessoryType = .Checkmark
-        }
-        /*let section = indexPath.section
-        let numberOfRows = tableView.numberOfRowsInSection(section)
-        for row in 0..<numberOfRows {
-            if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: section)) {
-                cell.accessoryType = row == indexPath.row ? .Checkmark : .None
-                /*if cell.accessoryType == .Checkmark {
-                    if let fuelText = cell.textLabel?.text {
-                        vehicleFuel = fuelText
-                        self.delegate?.sendFuel(fuelText)
-                    }
-                }*/
+        for (index, entry) in filter.enumerate() {
+            if index == indexPath.row {
+                filter[entry.0] = !entry.1
             }
-        }*/
+        }
         tableView.reloadData();
     }
     
@@ -69,6 +56,8 @@ class FilterDetailedTableViewController: UITableViewController {
                 cell.setFilter(entry.0)
                 if entry.1 {
                     cell.accessoryType = .Checkmark
+                } else {
+                    cell.accessoryType = .None
                 }
             }
         }
@@ -76,50 +65,11 @@ class FilterDetailedTableViewController: UITableViewController {
         return cell
     }
     
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return false if you do not want the specified item to be editable.
-    return true
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if (self.isMovingFromParentViewController()){
+            self.delegate?.sendFilter(filter)
+        }
     }
-    */
-    
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-    if editingStyle == .Delete {
-    // Delete the row from the data source
-    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-    } else if editingStyle == .Insert {
-    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
-    }
-    */
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-    
-    }
-    */
-    
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return false if you do not want the item to be re-orderable.
-    return true
-    }
-    */
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
-    
-
 }

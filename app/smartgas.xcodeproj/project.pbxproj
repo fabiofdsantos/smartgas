@@ -7,11 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		69087FEB1C07B6AA007DAD29 /* Archiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69087FEA1C07B6AA007DAD29 /* Archiver.swift */; };
 		692EC6E91C07CB6500EEC1FA /* VehicleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692EC6E81C07CB6500EEC1FA /* VehicleTableViewController.swift */; };
 		692EC6EB1C07D24300EEC1FA /* VehicleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692EC6EA1C07D24300EEC1FA /* VehicleTableViewCell.swift */; };
 		6936481F1BFCEB8E00C7EC8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6936481E1BFCEB8E00C7EC8F /* AppDelegate.swift */; };
-		693648211BFCEB8E00C7EC8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693648201BFCEB8E00C7EC8F /* ViewController.swift */; };
 		693648241BFCEB8E00C7EC8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 693648221BFCEB8E00C7EC8F /* Main.storyboard */; };
 		693648261BFCEB8E00C7EC8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 693648251BFCEB8E00C7EC8F /* Assets.xcassets */; };
 		693648341BFCEB8E00C7EC8F /* smartgasTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693648331BFCEB8E00C7EC8F /* smartgasTests.swift */; };
@@ -23,7 +21,6 @@
 		6988492F1C00DA8600B7247B /* CreateVehicleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6988492E1C00DA8600B7247B /* CreateVehicleTableViewController.swift */; };
 		69954E041C0FC58B000B4778 /* FuelStationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69954E031C0FC58B000B4778 /* FuelStationTableViewCell.swift */; };
 		699A3D9A1C0A3797006917D0 /* FuelTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699A3D991C0A3796006917D0 /* FuelTypeTableViewController.swift */; };
-		69AE25411C1638C100467288 /* MathClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AE25401C1638C100467288 /* MathClient.swift */; };
 		69B44AF91C346A8C009DE724 /* FilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B44AF81C346A8C009DE724 /* FilterTableViewController.swift */; };
 		69B44AFB1C346ACE009DE724 /* FilterDetailedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B44AFA1C346ACE009DE724 /* FilterDetailedTableViewController.swift */; };
 		69B44AFD1C347A49009DE724 /* FiltersTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B44AFC1C347A49009DE724 /* FiltersTypes.swift */; };
@@ -63,12 +60,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		69087FEA1C07B6AA007DAD29 /* Archiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Archiver.swift; sourceTree = "<group>"; };
 		692EC6E81C07CB6500EEC1FA /* VehicleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleTableViewController.swift; sourceTree = "<group>"; };
 		692EC6EA1C07D24300EEC1FA /* VehicleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleTableViewCell.swift; sourceTree = "<group>"; };
 		6936481B1BFCEB8E00C7EC8F /* smartgas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = smartgas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6936481E1BFCEB8E00C7EC8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		693648201BFCEB8E00C7EC8F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		693648231BFCEB8E00C7EC8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		693648251BFCEB8E00C7EC8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6936482A1BFCEB8E00C7EC8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -85,7 +80,6 @@
 		6988492E1C00DA8600B7247B /* CreateVehicleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateVehicleTableViewController.swift; sourceTree = "<group>"; };
 		69954E031C0FC58B000B4778 /* FuelStationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelStationTableViewCell.swift; sourceTree = "<group>"; };
 		699A3D991C0A3796006917D0 /* FuelTypeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelTypeTableViewController.swift; sourceTree = "<group>"; };
-		69AE25401C1638C100467288 /* MathClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathClient.swift; sourceTree = "<group>"; };
 		69B44AF81C346A8C009DE724 /* FilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableViewController.swift; sourceTree = "<group>"; };
 		69B44AFA1C346ACE009DE724 /* FilterDetailedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterDetailedTableViewController.swift; sourceTree = "<group>"; };
 		69B44AFC1C347A49009DE724 /* FiltersTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersTypes.swift; sourceTree = "<group>"; };
@@ -229,7 +223,6 @@
 				699A3D991C0A3796006917D0 /* FuelTypeTableViewController.swift */,
 				69B44AF81C346A8C009DE724 /* FilterTableViewController.swift */,
 				69B44AFA1C346ACE009DE724 /* FilterDetailedTableViewController.swift */,
-				693648201BFCEB8E00C7EC8F /* ViewController.swift */,
 				69FC316C1C416D3100C0EB70 /* InitTabBarViewController.swift */,
 				694F45981C29D6D3003AD118 /* MainFuelStationViewController.swift */,
 				69B44B081C3B2532009DE724 /* ShowFuelStationTableViewController.swift */,
@@ -240,9 +233,7 @@
 		69EBD7EA1C0F96D70078B9E1 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				69087FEA1C07B6AA007DAD29 /* Archiver.swift */,
 				69EBD7EB1C0F98810078B9E1 /* WebServiceClient.swift */,
-				69AE25401C1638C100467288 /* MathClient.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -390,8 +381,6 @@
 				C378C1E11C3F20480062938A /* Municipality.swift in Sources */,
 				69EBD7E91C0F77710078B9E1 /* FuelTypeTableViewCell.swift in Sources */,
 				694F45991C29D6D3003AD118 /* MainFuelStationViewController.swift in Sources */,
-				69087FEB1C07B6AA007DAD29 /* Archiver.swift in Sources */,
-				693648211BFCEB8E00C7EC8F /* ViewController.swift in Sources */,
 				69954E041C0FC58B000B4778 /* FuelStationTableViewCell.swift in Sources */,
 				69EBD7E71C0F73620078B9E1 /* FuelType.swift in Sources */,
 				69B44B011C348CAA009DE724 /* Brand.swift in Sources */,
@@ -405,7 +394,6 @@
 				69EBD7EE1C0F9C170078B9E1 /* FuelStation.swift in Sources */,
 				69B44AFF1C347BC7009DE724 /* FilterTableViewCell.swift in Sources */,
 				69EBD7EC1C0F98810078B9E1 /* WebServiceClient.swift in Sources */,
-				69AE25411C1638C100467288 /* MathClient.swift in Sources */,
 				69B44B091C3B2532009DE724 /* ShowFuelStationTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
