@@ -1,16 +1,19 @@
 //
-//  MainFuelStationViewController.swift
-//  smartgas
+// This file is part of SmartGas, an iOS app to find the best gas station nearby.
 //
-//  Created by Mateus Silva on 22/12/15.
-//  Copyright © 2015 Mateus Silva. All rights reserved.
+// (c) Fábio Santos <ffsantos92@gmail.com>
+// (c) Mateus Silva <mateusgsilva_@hotmail.com>
+// (c) Fábio Marques <fabio1956.epo@gmail.com>
+//
+// For the full copyright and license information, please view the LICENSE
+// file that was distributed with this source code.
 //
 
 import UIKit
 import CoreLocation
 
 class MainFuelStationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate {
-    
+
     var brands:[Brand]!
     var fuelStations:[FuelStation]!
     var districts:[District]!
@@ -18,33 +21,33 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
     var fuelTypes:[FuelType]!
     let locationManager = CLLocationManager()
     var currentLocation = CLLocationCoordinate2D()
-    
+
     var tableRows = 0
-    
+
     let showFuelStationSegueIdentifier = "showFuelStation"
-    
+
     @IBOutlet weak var fuelStationTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
-    
-    override func viewDidLoad() {						
+
+    override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         fuelStationTableView.delegate = self
         fuelStationTableView.dataSource = self
-        
+
         searchBar.delegate = self
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "fuelStationLoad:", name:"fuelStationsReady", object: nil)
-        
+
         locationInit()
-        
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        
+
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-    
+
     func fuelStationLoad(notification: NSNotification){
         self.brands = Brand.loadAll()
         self.districts = District.loadAll()
@@ -55,18 +58,18 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
             self.fuelStationTableView.reloadData()
         })
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     // MARK: - Table view data source
-    
+
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         tableRows = 0
         if let stations = fuelStations {
@@ -78,10 +81,10 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
         }
         return tableRows
     }
-    
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("fuelStationCell", forIndexPath: indexPath) as! FuelStationTableViewCell
-        
+
         var cellIndex = 0
         if let stations = fuelStations {
             for station in stations {
@@ -93,10 +96,10 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
                 }
             }
         }
-        
+
         return cell
     }
-    
+
     func locationInit() {
         locationManager.delegate = self
         UIDevice.currentDevice().batteryMonitoringEnabled = true
@@ -107,18 +110,18 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
         }
         locationManager.distanceFilter = kCLDistanceFilterNone
-        
+
         locationManager.requestWhenInUseAuthorization()
     }
-    
+
     func batteryStateDidChange(notification: NSNotification) {
         print("BATTERY STATE CHANGE")
     }
-    
+
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let coordinates = locations.last?.coordinate {
             currentLocation = coordinates
-            
+
             for var index = 0; index < tableRows; index++ {
                 let stationLocation = CLLocation(latitude: fuelStations[index].latitude!, longitude: fuelStations[index].longitude!)
                 let distance = String(format:"%.1f", locations.last!.distanceFromLocation(stationLocation)/1000)
@@ -129,23 +132,23 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
             }
         }
     }
-    
+
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         locationManager.startUpdatingLocation()
     }
-    
+
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let fuelStation = fuelStations![indexPath.row]
         print(fuelStation.title)
         performSegueWithIdentifier(showFuelStationSegueIdentifier, sender: fuelStation)
     }
-    
-    
+
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         guard let identifier = segue.identifier else {
             return;
         }
-        
+
         if identifier == showFuelStationSegueIdentifier {
             if let nextController = segue.destinationViewController.childViewControllers[0] as? ShowFuelStationTableViewController {
                 if let fuelStation = sender as? FuelStation {
@@ -155,19 +158,19 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
                             nextController.brand = brand
                         }
                     }
-                    
+
                     for district in districts {
                         if district.id == fuelStation.districtId {
                             nextController.district = district
                         }
                     }
-                    
+
                     for municipality in municipalities {
                         if municipality.id == fuelStation.municipalityId {
                             nextController.municipality = municipality
                         }
                     }
-                    
+
                     for fuelType in fuelTypes {
                         if fuelStation.prices[fuelType.id] != nil {
                             nextController.fuelTypes.append(fuelType)
@@ -177,7 +180,7 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
             }
         }
     }
-    
+
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if let stations = fuelStations {
             for station in stations {
@@ -191,26 +194,26 @@ class MainFuelStationViewController: UIViewController, UITableViewDataSource, UI
             self.fuelStationTableView.reloadData()
         }
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         applyfilters()
     }
-    
+
     func applyfilters() {
         if let stations = fuelStations {
             let allBrands = Brand.loadAll()
             let allFuelTypes = FuelType.loadAll()
-            
+
             var brandIdSelect = [Int:Bool]()
             for brand in allBrands {
                 brandIdSelect[brand.id] = brand.selected
             }
-            
+
             var fuelTypeIdSelect = [Int:Bool]()
             for fuelType in allFuelTypes {
                 fuelTypeIdSelect[fuelType.id] = fuelType.selected
             }
-            
+
             for station in stations {
                 station.active = false
                 if brandIdSelect[station.brandId] == false {

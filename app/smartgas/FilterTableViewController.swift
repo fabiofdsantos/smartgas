@@ -1,9 +1,12 @@
 //
-//  FilterTableViewController.swift
-//  smartgas
+// This file is part of SmartGas, an iOS app to find the best gas station nearby.
 //
-//  Created by Mateus Silva on 30/12/15.
-//  Copyright © 2015 Mateus Silva. All rights reserved.
+// (c) Fábio Santos <ffsantos92@gmail.com>
+// (c) Mateus Silva <mateusgsilva_@hotmail.com>
+// (c) Fábio Marques <fabio1956.epo@gmail.com>
+//
+// For the full copyright and license information, please view the LICENSE
+// file that was distributed with this source code.
 //
 
 import UIKit
@@ -19,7 +22,7 @@ class FilterTableViewController: UITableViewController, FilterDetailedTableViewC
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         for brand in brands {
             filterBrand[brand.name] = brand.selected
         }
@@ -42,12 +45,12 @@ class FilterTableViewController: UITableViewController, FilterDetailedTableViewC
         // Dispose of any resources that can be recreated.
     }
 
-    
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         guard let identifier = segue.identifier else {
             return;
         }
-        
+
         var filter = [String:Bool]()
         if identifier == "brandSegue" {
             filter = filterBrand
@@ -56,17 +59,17 @@ class FilterTableViewController: UITableViewController, FilterDetailedTableViewC
         } else if identifier == "mainSegue" {
             filter = filterMain
         }
-        
+
         lastType = identifier
-        
+
         if let nextView = segue.destinationViewController as? FilterDetailedTableViewController {
             nextView.filter = filter
             nextView.delegate = self
         }
-        
+
     }
-    
-    
+
+
     func sendFilter(filter: [String:Bool]) {
         if lastType == "brandSegue" {
             for (_, content) in filter.enumerate() {
@@ -82,16 +85,16 @@ class FilterTableViewController: UITableViewController, FilterDetailedTableViewC
             }
         }
     }
-    
+
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        
+
         if (self.isMovingFromParentViewController()){
             for brand in brands {
                 brand.selected = filterBrand[brand.name]
             }
             Brand.saveMany(brands)
-            
+
             for fuelType in fuelTypes {
                 fuelType.selected = filterFuelType[fuelType.name]
             }

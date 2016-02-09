@@ -1,9 +1,12 @@
 //
-//  FilterDetailedTableViewController.swift
-//  smartgas
+// This file is part of SmartGas, an iOS app to find the best gas station nearby.
 //
-//  Created by Mateus Silva on 30/12/15.
-//  Copyright © 2015 Mateus Silva. All rights reserved.
+// (c) Fábio Santos <ffsantos92@gmail.com>
+// (c) Mateus Silva <mateusgsilva_@hotmail.com>
+// (c) Fábio Marques <fabio1956.epo@gmail.com>
+//
+// For the full copyright and license information, please view the LICENSE
+// file that was distributed with this source code.
 //
 
 import UIKit
@@ -14,32 +17,32 @@ protocol FilterDetailedTableViewControllerDelegate
 }
 
 class FilterDetailedTableViewController: UITableViewController {
-    
+
     var filter: [String:Bool]!
-    
+
     var delegate:FilterTableViewController?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     // MARK: - Table view data source
-    
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-    
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return filter.count
     }
-    
+
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         for (index, entry) in filter.enumerate() {
             if index == indexPath.row {
@@ -48,7 +51,7 @@ class FilterDetailedTableViewController: UITableViewController {
         }
         tableView.reloadData();
     }
-    
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("filterTypeCell", forIndexPath: indexPath) as! FilterTableViewCell
         for (index, entry) in filter.enumerate() {
@@ -61,13 +64,13 @@ class FilterDetailedTableViewController: UITableViewController {
                 }
             }
         }
-            
+
         return cell
     }
-    
+
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        
+
         if (self.isMovingFromParentViewController()){
             self.delegate?.sendFilter(filter)
         }

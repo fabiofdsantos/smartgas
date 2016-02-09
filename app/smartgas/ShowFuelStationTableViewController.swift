@@ -1,9 +1,12 @@
 //
-//  ShowFuelStationTableViewController.swift
-//  smartgas
+// This file is part of SmartGas, an iOS app to find the best gas station nearby.
 //
-//  Created by Mateus Silva on 04/01/16.
-//  Copyright © 2016 Mateus Silva. All rights reserved.
+// (c) Fábio Santos <ffsantos92@gmail.com>
+// (c) Mateus Silva <mateusgsilva_@hotmail.com>
+// (c) Fábio Marques <fabio1956.epo@gmail.com>
+//
+// For the full copyright and license information, please view the LICENSE
+// file that was distributed with this source code.
 //
 
 import UIKit
@@ -17,13 +20,13 @@ class ShowFuelStationTableViewController: UITableViewController, CLLocationManag
     var district: District!
     var municipality: Municipality!
     var fuelTypes = [FuelType]()
-    
+
     var distance = "..."
     var isMapSet = false
-    
+
     let locationManager = CLLocationManager()
     var currentLocation = CLLocationCoordinate2D()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         locationInit()
@@ -36,7 +39,7 @@ class ShowFuelStationTableViewController: UITableViewController, CLLocationManag
     @IBAction func cancelButton(sender: UIBarButtonItem) {
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
+
     @IBAction func shareButton(sender: UIBarButtonItem) {
         let actionSheet = UIAlertController(title: "", message: "Share this fuel station", preferredStyle: UIAlertControllerStyle.ActionSheet)
         let tweetAction = UIAlertAction(title: "Share on Twiter", style: UIAlertActionStyle.Default) { (action) -> Void in
@@ -47,31 +50,31 @@ class ShowFuelStationTableViewController: UITableViewController, CLLocationManag
             } else {
                 self.showAlert("You must first login to your Twitter account.")
             }
-            
+
         }
-        
+
         let facebookAction = UIAlertAction(title: "Share on Facebook", style: UIAlertActionStyle.Default) { (action) -> Void in
             if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) {
                 let facebookVC = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
                 facebookVC.setInitialText("I went to \(self.brand.name) called \(self.fuelStation.title) at \(self.municipality.name), \(self.district.name).")
                 self.presentViewController(facebookVC, animated: true, completion: nil)
-                
+
             }else{
                 self.showAlert("You must first login to your Facebook account.")
             }
         }
-        
+
         let navigationAlert = UIAlertAction(title: "Bring me to this station", style: UIAlertActionStyle.Default) { (action) -> Void in
-            
+
             let lat1 : NSString = String(self.fuelStation.latitude)
             let lng1 : NSString = String(self.fuelStation.longitude)
-            
+
             let latitute:CLLocationDegrees =  lat1.doubleValue
             let longitute:CLLocationDegrees =  lng1.doubleValue
-            
+
             let regionDistance:CLLocationDistance = 10000
             let coordinates = CLLocationCoordinate2DMake(latitute, longitute)
-            
+
             let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
             let options = [
                 MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
@@ -81,28 +84,28 @@ class ShowFuelStationTableViewController: UITableViewController, CLLocationManag
             let mapItem = MKMapItem(placemark: placemark)
             mapItem.name = self.brand.name
             mapItem.openInMapsWithLaunchOptions(options)
-            
+
         }
-        
+
         let dismissAction = UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Cancel) { (action) -> Void in
-            
+
         }
-        
+
         actionSheet.addAction(tweetAction)
         actionSheet.addAction(facebookAction)
         actionSheet.addAction(navigationAlert)
         actionSheet.addAction(dismissAction)
-        
+
         presentViewController(actionSheet, animated: true, completion: nil)
     }
-    
-    
+
+
     func showAlert (message:String)->Void{
         let alertController = UIAlertController(title: "Sharing error", message: message, preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
         presentViewController(alertController, animated: true, completion: nil)
     }
-    
+
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 3
@@ -117,7 +120,7 @@ class ShowFuelStationTableViewController: UITableViewController, CLLocationManag
             return 1
         }
     }
-    
+
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch (section) {
         case 0:
@@ -128,7 +131,7 @@ class ShowFuelStationTableViewController: UITableViewController, CLLocationManag
             return "Location"
         }
     }
-    
+
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
@@ -145,7 +148,7 @@ class ShowFuelStationTableViewController: UITableViewController, CLLocationManag
             return cell.frame.height
         }
     }
-    
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
@@ -162,7 +165,7 @@ class ShowFuelStationTableViewController: UITableViewController, CLLocationManag
             return cell
         }
     }
-    
+
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if let result = cell as? FuelStationMapTableViewCell {
             if result.latitude == nil && result.longitude == nil {
@@ -206,18 +209,18 @@ class ShowFuelStationTableViewController: UITableViewController, CLLocationManag
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
         }
         locationManager.distanceFilter = kCLDistanceFilterNone
-        
+
         locationManager.requestWhenInUseAuthorization()
     }
-    
+
     func batteryStateDidChange(notification: NSNotification) {
         print("BATTERY STATE CHANGE")
     }
-    
+
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let coordinates = locations.last?.coordinate {
             currentLocation = coordinates
-        
+
             let stationLocation = CLLocation(latitude: fuelStation.latitude!, longitude: fuelStation.longitude!)
             let distance = String(format:"%.1f", locations.last!.distanceFromLocation(stationLocation)/1000)
             self.distance = distance
@@ -226,7 +229,7 @@ class ShowFuelStationTableViewController: UITableViewController, CLLocationManag
             tableView.reloadRowsAtIndexPaths(paths, withRowAnimation: UITableViewRowAnimation.None)
         }
     }
-    
+
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         locationManager.startUpdatingLocation()
     }

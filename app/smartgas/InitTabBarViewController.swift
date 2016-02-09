@@ -1,9 +1,12 @@
 //
-//  InitTabBarViewController.swift
-//  smartgas
+// This file is part of SmartGas, an iOS app to find the best gas station nearby.
 //
-//  Created by Mateus Silva on 09/01/16.
-//  Copyright © 2016 Mateus Silva. All rights reserved.
+// (c) Fábio Santos <ffsantos92@gmail.com>
+// (c) Mateus Silva <mateusgsilva_@hotmail.com>
+// (c) Fábio Marques <fabio1956.epo@gmail.com>
+//
+// For the full copyright and license information, please view the LICENSE
+// file that was distributed with this source code.
 //
 
 import UIKit
@@ -19,7 +22,7 @@ class InitTabBarViewController: UITabBarController {
         super.viewDidLoad()
         getWSData()
     }
-    
+
     private func getWSData() {
         if District.loadAll().count == 0 {
             WebServiceClient.getAllDistricts({ (districts) -> Void in
@@ -27,28 +30,28 @@ class InitTabBarViewController: UITabBarController {
                 District.saveMany(self.districts)
             })
         }
-        
+
         if Brand.loadAll().count == 0 {
             WebServiceClient.getAllBrands({ (brands) -> Void in
                 self.brands = brands
                 Brand.saveMany(self.brands)
             })
         }
-        
+
         if FuelType.loadAll().count == 0 {
             WebServiceClient.getAllFuelTypes({ (fuelTypes) -> Void in
                 self.fuelTypes = fuelTypes
                 FuelType.saveMany(self.fuelTypes)
             })
         }
-        
+
         if Municipality.loadAll().count == 0 {
             WebServiceClient.getAllMunicipalities({ (municipalities) -> Void in
                 self.municipalities = municipalities
                 Municipality.saveMany(self.municipalities)
             })
         }
-        
+
         //if FuelStation.loadAll().count == 0 {
             WebServiceClient.getAllFuelStations({ (fuelStations) -> Void in
                 self.fuelStations = fuelStations
@@ -65,7 +68,7 @@ class InitTabBarViewController: UITabBarController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
 
     /*
     // MARK: - Navigation

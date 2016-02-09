@@ -1,9 +1,12 @@
 //
-//  FuelStationLocationTableViewCell.swift
-//  smartgas
+// This file is part of SmartGas, an iOS app to find the best gas station nearby.
 //
-//  Created by Mateus Silva on 09/01/16.
-//  Copyright © 2016 Mateus Silva. All rights reserved.
+// (c) Fábio Santos <ffsantos92@gmail.com>
+// (c) Mateus Silva <mateusgsilva_@hotmail.com>
+// (c) Fábio Marques <fabio1956.epo@gmail.com>
+//
+// For the full copyright and license information, please view the LICENSE
+// file that was distributed with this source code.
 //
 
 import UIKit
@@ -11,7 +14,7 @@ import UIKit
 class FuelStationLocationTableViewCell: UITableViewCell {
     @IBOutlet weak var districtLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

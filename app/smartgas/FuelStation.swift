@@ -1,9 +1,12 @@
 //
-//  FuelStation.swift
-//  smartgas
+// This file is part of SmartGas, an iOS app to find the best gas station nearby.
 //
-//  Created by Mateus Silva on 02/12/15.
-//  Copyright © 2015 Mateus Silva. All rights reserved.
+// (c) Fábio Santos <ffsantos92@gmail.com>
+// (c) Mateus Silva <mateusgsilva_@hotmail.com>
+// (c) Fábio Marques <fabio1956.epo@gmail.com>
+//
+// For the full copyright and license information, please view the LICENSE
+// file that was distributed with this source code.
 //
 
 import Foundation
@@ -18,7 +21,7 @@ class FuelStation: NSObject, NSCoding {
     var municipalityId: Int!
     var prices: [Int:Double]!
     var active = true
-    
+
     init(title: String, address: String, latitude: Double, longitude: Double, brandId: Int, districtId: Int, municipalityId: Int, prices: [Int:Double]){
         self.title = title
         self.address = address
@@ -29,7 +32,7 @@ class FuelStation: NSObject, NSCoding {
         self.municipalityId = municipalityId
         self.prices = prices
     }
-    
+
     struct Const {
         static let title = "title"
         static let address = "address"
@@ -40,7 +43,7 @@ class FuelStation: NSObject, NSCoding {
         static let municipalityId = "municipalityId"
         static let prices = "prices"
     }
-    
+
     // MARK: NSCoding
     func encodeWithCoder(coder: NSCoder) {
         coder.encodeObject(title, forKey: Const.title)
@@ -52,40 +55,40 @@ class FuelStation: NSObject, NSCoding {
         coder.encodeInteger(municipalityId, forKey: Const.municipalityId)
         coder.encodeObject(prices, forKey: Const.prices)
     }
-    
+
     required init?(coder decoder: NSCoder) {
         title = decoder.decodeObjectForKey(Const.title) as! String
         address = decoder.decodeObjectForKey(Const.address) as! String
-        latitude = decoder.decodeDoubleForKey(Const.latitude) 
-        longitude = decoder.decodeDoubleForKey(Const.longitude) 
-        brandId = decoder.decodeIntegerForKey(Const.brandId) 
+        latitude = decoder.decodeDoubleForKey(Const.latitude)
+        longitude = decoder.decodeDoubleForKey(Const.longitude)
+        brandId = decoder.decodeIntegerForKey(Const.brandId)
         districtId = decoder.decodeIntegerForKey(Const.districtId)
         municipalityId = decoder.decodeIntegerForKey(Const.municipalityId)
         prices = decoder.decodeObjectForKey(Const.prices) as! [Int:Double]
     }
-    
+
     static func saveMany (brands: [FuelStation]) -> Bool {
         let documentsPath = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])
-        
+
         let filePath = documentsPath.URLByAppendingPathComponent("FuelStations.data")
-        
+
         let path = filePath.path!
-        
+
         if NSKeyedArchiver.archiveRootObject(brands, toFile: path) {
             return true
         }
-        
+
         return false
     }
-    
+
     static func loadAll()  -> [FuelStation] {
         var dataToRetrieve = [FuelStation]()
-        
+
         let documentsPath = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0])
         let filePath = documentsPath.URLByAppendingPathComponent("FuelStations.data", isDirectory: false)
-        
+
         let path = filePath.path!
-        
+
         if let newData = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? [FuelStation] {
             dataToRetrieve = newData
         }
