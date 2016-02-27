@@ -3,7 +3,7 @@ Smart Gas is an iOS application which allows any vehicle driver to find the best
 
 The application needs to be "feeded" with data and DGEG – Direção-Geral de Energia e Geologia – is an entity that maintains a [website](http://www.precoscombustiveis.dgeg.pt/) dedicated to provide all information about existing stations: fuel prices, localization, available services, etc. Since 2012, DGEG provides a web service to integrate their data with any kind of applications.
 
-The web service mentioned above is based in SOAP (Simple Object Access Protocol) and has a critical design problem – limited-time availability – which is against the principal idea behind web services: facilitate the integration of different systems and applications.
+The web service mentioned above is based in SOAP (Simple Object Access Protocol) and has a critical design problem – limited-time availability – which is against the main idea behind web services: facilitate the integration of different systems and applications.
 
 ## System Architecture
 ![System Architecture](system-architecture.png)
